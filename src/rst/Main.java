@@ -1,8 +1,19 @@
 package rst;
 
+import javax.swing.SwingUtilities;
+
+import rst.window.MainWindow;
+
 public class Main {
 
 	public static void main(String[] args) {
-		System.out.println("100%");
+		createAndShowGUI();
+	}
+
+	private static void createAndShowGUI() {
+		SwingUtilities.invokeLater(() -> {
+			MainWindow window = new MainWindow();
+			window.show();
+		});
 	}
 }
