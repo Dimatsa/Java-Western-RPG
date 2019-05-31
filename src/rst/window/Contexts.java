@@ -13,6 +13,10 @@ public enum Contexts {
 		this.context = context;
 	}
 	
+	public Context getContext() {
+		return context;
+	}
+	
 	public void makeCurrent(JFrame frame) {
 		context.makeContextForFrame(frame);
 	}

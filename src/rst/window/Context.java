@@ -44,4 +44,8 @@ public abstract class Context extends JPanel {
 		
 		current = null;
 	}
+	
+	protected JFrame getCurrent() {
+		return current;
+	}
 }

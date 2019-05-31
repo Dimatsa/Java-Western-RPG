@@ -40,7 +40,7 @@ public abstract class AssetRegistry<T extends Asset> extends SwingWorker<T[],Str
 		T[] t = newArray(items.length);
 		
 		for(int i = 0; i < t.length; i++) {
-			String loc = "/resources/" + asset + "s/" + items[i] + "." + extension;
+			String loc = "/" + asset + "s/" + items[i] + "." + extension;
 			
 			t[i] = load(items[i], this.getClass().getResourceAsStream(loc));
 			publish(loc);

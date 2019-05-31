@@ -8,7 +8,10 @@ import javax.swing.JProgressBar;
 public class Textures extends AssetRegistry<Texture>{
 
 	private static final String[] names = {
-			
+			"icon16",
+			"icon32",
+			"icon64",
+			"icon128"
 	};
 	
 	public Textures(JProgressBar progress) {

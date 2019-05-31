@@ -9,6 +9,8 @@ public class MainWindow {
 	public MainWindow() {
 		frame = new JFrame("Shootout at Sweaty Post");
 		
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
 		Contexts.START.makeCurrent(frame);
 	}
 	
