@@ -6,6 +6,7 @@ import java.awt.Toolkit;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 
+import rst.assets.Fonts;
 import rst.assets.Sounds;
 import rst.assets.Textures;
 
@@ -15,6 +16,7 @@ public class MainContext extends Context {
 	
 	private final Textures textures;
 	private final Sounds sounds;
+	private final Fonts fonts;
 
 	public MainContext(StartContext start) {
 		super(true,
@@ -24,9 +26,11 @@ public class MainContext extends Context {
 		
 		this.textures = new Textures(start.getTexturesBar());
 		this.sounds = new Sounds(start.getSoundsBar());
+		this.fonts = new Fonts(start.getFontsBar());
 		
 		textures.execute();
 		sounds.execute();
+		fonts.execute();
 		
 		JButton exit = new JButton("Exit");
 		exit.addActionListener((event) -> System.exit(0));

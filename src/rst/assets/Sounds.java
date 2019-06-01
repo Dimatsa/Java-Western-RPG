@@ -8,7 +8,7 @@ import javax.swing.JProgressBar;
 public class Sounds extends AssetRegistry<Sound> {
 
 	private static final String[] names = {
-			"a", "b", "af", "efsd", "rdsf", "Fasfds"
+			"test"
 	};
 	
 	public Sounds(JProgressBar progress) {

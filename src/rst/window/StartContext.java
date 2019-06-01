@@ -25,7 +25,7 @@ public class StartContext extends Context {
 
 	private static final long serialVersionUID = 1L;
 
-	private final JProgressBar textures, sounds;
+	private final JProgressBar textures, sounds, fonts;
 	
 	public StartContext() {
 		super(false,
@@ -39,12 +39,15 @@ public class StartContext extends Context {
 		
 		sounds = new JProgressBar();
 		textures = new JProgressBar();
+		fonts = new JProgressBar();
 		
 		sounds.setBackground(Color.BLACK);
 		textures.setBackground(Color.BLACK);
+		fonts.setBackground(Color.BLACK);
 		
 		sounds.setForeground(Color.WHITE);
 		textures.setForeground(Color.WHITE);
+		fonts.setForeground(Color.WHITE);
 		
 		JLabel start = new JLabel("Click to Start");
 		start.setForeground(Color.WHITE);
@@ -94,7 +97,7 @@ public class StartContext extends Context {
 							t.get("icon128").getImage()));
 				}
 				
-				if(!sounds.isVisible() && !textures.isVisible()) {
+				if(!sounds.isVisible() && !textures.isVisible() && !fonts.isVisible()) {
 					canStart.set(true);
 					StartContext.this.setLayout(new BorderLayout());
 					add(start, BorderLayout.CENTER);
@@ -106,9 +109,11 @@ public class StartContext extends Context {
 		
 		sounds.addComponentListener(awaitDone);
 		textures.addComponentListener(awaitDone);
+		fonts.addComponentListener(awaitDone);
 		
 		sounds.setStringPainted(true);
 		textures.setStringPainted(true);
+		fonts.setStringPainted(true);
 		
 		TitledBorder soundBorder = BorderFactory.createTitledBorder("Sounds");
 		soundBorder.setTitleColor(Color.WHITE);
@@ -116,11 +121,16 @@ public class StartContext extends Context {
 		TitledBorder textureBorder = BorderFactory.createTitledBorder("Textures");
 		textureBorder.setTitleColor(Color.WHITE);
 		
+		TitledBorder fontBorder = BorderFactory.createTitledBorder("Fonts");
+		fontBorder.setTitleColor(Color.WHITE);
+		
 		sounds.setBorder(soundBorder);
 		textures.setBorder(textureBorder);
+		fonts.setBorder(fontBorder);
 		
 		add(sounds);
 		add(textures);
+		add(fonts);
 	}
 	
 	JProgressBar getSoundsBar() {
@@ -129,6 +139,10 @@ public class StartContext extends Context {
 	
 	JProgressBar getTexturesBar() {
 		return textures;
+	}
+	
+	JProgressBar getFontsBar() {
+		return fonts;
 	}
 
 }
