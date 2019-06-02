@@ -19,7 +19,7 @@ import javax.swing.JProgressBar;
 import javax.swing.SwingConstants;
 import javax.swing.border.TitledBorder;
 
-import rst.assets.Textures;
+import rst.assets.AssetRegistry;
 
 public class StartContext extends Context {
 
@@ -39,7 +39,11 @@ public class StartContext extends Context {
 		
 		sounds = new JProgressBar();
 		textures = new JProgressBar();
-		fonts = new JProgressBar();
+		fonts = new JProgressBar();	
+		
+		bindProgress(sounds, AssetRegistry.getSounds());
+		bindProgress(textures, AssetRegistry.getTextures());
+		bindProgress(fonts, AssetRegistry.getFonts());
 		
 		sounds.setBackground(Color.BLACK);
 		textures.setBackground(Color.BLACK);
@@ -86,17 +90,19 @@ public class StartContext extends Context {
 			}
 		});
 		
+		AssetRegistry.getTextures().onLoad(() -> this.getCurrent().setIconImages(Arrays.asList(
+			AssetRegistry.getTextures().get("icon16").getImage(),
+			AssetRegistry.getTextures().get("icon32").getImage(),
+			AssetRegistry.getTextures().get("icon64").getImage(),
+			AssetRegistry.getTextures().get("icon128").getImage())));
+		
+		AssetRegistry.getFonts().onLoad(() ->
+		start.setFont(AssetRegistry.getFonts().get("Montserrat-Regular").getFont()
+				.deriveFont((float)start.getFont().getSize())));
+		
 		ComponentAdapter awaitDone = new ComponentAdapter() {
 			@Override
-			public void componentHidden(ComponentEvent e) {
-				if(e.getComponent() == textures) {
-					Textures t = ((MainContext)Contexts.MAIN.getContext()).getTextures();
-					StartContext.this.getCurrent().setIconImages(Arrays.asList(t.get("icon16").getImage(),
-							t.get("icon32").getImage(),
-							t.get("icon64").getImage(),
-							t.get("icon128").getImage()));
-				}
-				
+			public void componentHidden(ComponentEvent e) {	
 				if(!sounds.isVisible() && !textures.isVisible() && !fonts.isVisible()) {
 					canStart.set(true);
 					StartContext.this.setLayout(new BorderLayout());
@@ -131,6 +137,19 @@ public class StartContext extends Context {
 		add(sounds);
 		add(textures);
 		add(fonts);
+	}
+	
+	private static void bindProgress(JProgressBar progress, AssetRegistry<?> registry) {
+		progress.setMinimum(0);
+		progress.setMaximum(100);
+		progress.setValue(0);
+		registry.addPropertyChangeListener((property) -> {
+			if(property.getPropertyName().equals("progress")) {
+				progress.setValue((Integer)property.getNewValue());
+			}
+		});
+		registry.onLoad(() -> progress.setVisible(false));
+		registry.onBatch(progress::setString);
 	}
 	
 	JProgressBar getSoundsBar() {

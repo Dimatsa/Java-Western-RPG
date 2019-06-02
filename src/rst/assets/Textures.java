@@ -3,8 +3,6 @@ package rst.assets;
 import java.io.IOException;
 import java.io.InputStream;
 
-import javax.swing.JProgressBar;
-
 public class Textures extends AssetRegistry<Texture>{
 
 	private static final String[] names = {
@@ -14,8 +12,8 @@ public class Textures extends AssetRegistry<Texture>{
 			"icon128"
 	};
 	
-	public Textures(JProgressBar progress) {
-		super(progress, "image", "png", names);
+	public Textures() {
+		super("image", "png", names);
 	}
 
 	@Override

@@ -1,27 +1,26 @@
 package rst.character;
 
-import com.sun.prism.Texture;
-
 import rst.assets.Sound;
+import rst.assets.Texture;
 
 public abstract class Character {
 	
-	final static int MALE = 0;
-	final static int FEMALE = 1;
+	public final static int MALE = 0;
+	public final static int FEMALE = 1;
 	
-	String firstName;
-	String lastName;
-	int gender;
-	Texture sprite;
-	int hp = 100;
-	int strength;
-	double speed;
-	int intelligence;
-	int drunkeness;
-	double gunSpeed;
-	int gunDamage;
-	Sound hurt1;
-	Sound hurt2;
+	private final String firstName;
+	private final String lastName;
+	private final int gender;
+	private final Texture sprite;
+	private int hp = 100;
+	private int strength;
+	private double speed;
+	private int intelligence;
+	private int drunkeness;
+	private double gunSpeed;
+	private int gunDamage;
+	private Sound hurt1;
+	private Sound hurt2;
 	
 	public Character (String firstName, String lastName, int gender, int strength, double speed, int intelligence, int drunkeness, double gunSpeed, int gunDamage)
 	{
@@ -33,6 +32,7 @@ public abstract class Character {
 		this.intelligence = intelligence;
 		this.gunSpeed = gunSpeed;
 		this.gunDamage = gunDamage;
+		this.sprite = null;
 		
 		if(gender == MALE)
 		{
@@ -71,6 +71,52 @@ public abstract class Character {
 	{
 		return gunDamage;
 	}
-	
-	
+
+	public String getFirstName() {
+		return firstName;
+	}
+
+	public String getLastName() {
+		return lastName;
+	}
+
+	public int getGender() {
+		return gender;
+	}
+
+	public Texture getSprite() {
+		return sprite;
+	}
+
+	public int getHp() {
+		return hp;
+	}
+
+	public int getStrength() {
+		return strength;
+	}
+
+	public double getSpeed() {
+		return speed;
+	}
+
+	public int getIntelligence() {
+		return intelligence;
+	}
+
+	public int getDrunkeness() {
+		return drunkeness;
+	}
+
+	public double getGunSpeed() {
+		return gunSpeed;
+	}
+
+	public Sound getHurt1() {
+		return hurt1;
+	}
+
+	public Sound getHurt2() {
+		return hurt2;
+	}
 }

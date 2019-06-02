@@ -5,16 +5,12 @@ import javax.swing.JFrame;
 public enum Contexts {
 
 	START(new StartContext()),
-	MAIN(new MainContext((StartContext) START.context));
+	MAIN(new MainContext());
 	
 	private final Context context;
 	
 	Contexts(Context context) {
 		this.context = context;
-	}
-	
-	public Context getContext() {
-		return context;
 	}
 	
 	public void makeCurrent(JFrame frame) {

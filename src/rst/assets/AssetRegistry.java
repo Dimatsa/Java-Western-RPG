@@ -4,35 +4,63 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.concurrent.ExecutionException;
+import java.util.function.Consumer;
 
-import javax.swing.JProgressBar;
 import javax.swing.SwingWorker;
 
 public abstract class AssetRegistry<T extends Asset> extends SwingWorker<T[],String> {
 
+	private static Textures textures;
+	private static Sounds sounds;
+	private static Fonts fonts;
+	
+	public static void init() {
+		if(textures == null && sounds == null && fonts == null) {
+			textures = new Textures();
+			sounds = new Sounds();
+			fonts = new Fonts();
+			
+			textures.execute();
+			sounds.execute();
+			fonts.execute();
+		}
+	}
+	
+	public static Textures getTextures() {
+		init();
+		return textures;
+	}
+
+	public static Sounds getSounds() {
+		init();
+		return sounds;
+	}
+
+	public static Fonts getFonts() {
+		init();
+		return fonts;
+	}
+
 	private final String asset, extension;
 	private final String[] items;
-	private final JProgressBar progress;
 	
 	private Map<String, T> assets;
 	
-	protected AssetRegistry(JProgressBar progress, String asset, String extension, String[] items) {
-		this.progress = progress;
+	private Set<Runnable> loadingCallbacks;
+	private Set<Consumer<String>> processCallbacks;
+	
+	protected AssetRegistry(String asset, String extension, String[] items) {
 		this.asset = asset;
 		this.extension = extension;
 		this.items = items;
 		
-		progress.setMinimum(0);
-		progress.setMaximum(100);
-		progress.setValue(0);
-		addPropertyChangeListener((property) -> {
-			if(property.getPropertyName().equals("progress")) {
-				progress.setValue((Integer)property.getNewValue());
-			}
-		});
+		this.loadingCallbacks = new HashSet<>();
+		this.processCallbacks = new HashSet<>();
 	}
 	
 	@Override
@@ -52,7 +80,8 @@ public abstract class AssetRegistry<T extends Asset> extends SwingWorker<T[],Str
 	
 	@Override
 	protected void process(List<String> chunks) {
-		progress.setString((chunks.get(chunks.size() - 1)));
+		String latest = chunks.get(chunks.size() - 1);
+		processCallbacks.forEach(callback -> callback.accept(latest));
 	}
 	
 	@Override
@@ -70,7 +99,8 @@ public abstract class AssetRegistry<T extends Asset> extends SwingWorker<T[],Str
 		}
 		
 		this.assets = Collections.unmodifiableMap(assets);
-		progress.setVisible(false);
+		
+		loadingCallbacks.forEach(Runnable::run);
 	}
 	
 	protected abstract T[] newArray(int length);
@@ -84,5 +114,13 @@ public abstract class AssetRegistry<T extends Asset> extends SwingWorker<T[],Str
 		}
 		
 		return result;
+	}
+	
+	public void onLoad(Runnable callback) {
+		loadingCallbacks.add(callback);
+	}
+	
+	public void onBatch(Consumer<String> callback) {
+		processCallbacks.add(callback);
 	}
 }

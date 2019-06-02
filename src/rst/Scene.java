@@ -1,8 +1,7 @@
 package rst;
 
-import com.sun.prism.Texture;
-
 import rst.assets.Sound;
+import rst.assets.Texture;
 
 public class Scene {
 	

@@ -3,16 +3,14 @@ package rst.assets;
 import java.io.IOException;
 import java.io.InputStream;
 
-import javax.swing.JProgressBar;
-
 public class Fonts extends AssetRegistry<Font> {
 
 	private static final String[] names = {
 			"Montserrat-Regular"
 	};
 	
-	public Fonts(JProgressBar progress) {
-		super(progress, "font", "ttf", names);
+	public Fonts() {
+		super("font", "ttf", names);
 	}
 
 	@Override
