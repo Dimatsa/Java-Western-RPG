@@ -3,7 +3,7 @@ package rst.character;
 import rst.assets.Sound;
 import rst.assets.Texture;
 
-public abstract class Character {
+public class Character {
 	
 	public final static int MALE = 0;
 	public final static int FEMALE = 1;
