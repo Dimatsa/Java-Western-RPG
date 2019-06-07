@@ -131,7 +131,7 @@ public abstract class Character implements SceneRenderable {
 		return hurt2;
 	}
 	
-	protected void updateLocation(Input input) {}
+	protected void updateLocation(Input input, Scene scene) {}
 	
 	@Override
 	public void render(Graphics2D g, Input input, double xScaler, double yScaler, int width, int height, Scene scene) {
@@ -144,6 +144,6 @@ public abstract class Character implements SceneRenderable {
 		
 		sprite.draw(g, (int) (xScaler * (coordX - 25 - camX)), (int) (yScaler * (coordY - 25 - camY)), (int) (xScaler * 50),(int) (yScaler * 50));
 		
-		updateLocation(input);
+		updateLocation(input, scene);
 	}
 }

@@ -22,7 +22,6 @@ public class RenderPanel extends JPanel {
 	private Scene currentScene;
 	
 	public RenderPanel() {
-		
 		// 16 ms results in about 60 FPS
 		refreshTimer = new Timer(16, (event) -> this.repaint());
 		

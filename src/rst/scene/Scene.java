@@ -76,4 +76,14 @@ public abstract class Scene implements Renderable {
 	public Coordinates getCameraLocation() {
 		return camera.getLocation();
 	}
+
+	public int getWidth() {
+		return xSize;
+	}
+
+	public int getHeight() {
+		return ySize;
+	}
+	
+	
 }
