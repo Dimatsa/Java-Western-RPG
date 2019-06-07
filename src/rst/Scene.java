@@ -28,5 +28,4 @@ public class Scene {
 		this.xCameraPosition = xPlayerPosition;
 		this.yCameraPosition = xPlayerPosition;
 	}
-
 }
