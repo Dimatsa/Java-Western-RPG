@@ -109,15 +109,15 @@ public class Input {
 		}
 	}
 
-	public boolean isLeftMouse() {
+	public boolean isLeftMouseDown() {
 		return leftMouse;
 	}
 
-	public boolean isMiddleMouse() {
+	public boolean isMiddleMouseDown() {
 		return middleMouse;
 	}
 
-	public boolean isRightMouse() {
+	public boolean isRightMouseDown() {
 		return rightMouse;
 	}
 
