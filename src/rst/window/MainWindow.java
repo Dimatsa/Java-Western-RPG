@@ -3,6 +3,8 @@ package rst.window;
 import javax.swing.JFrame;
 
 import rst.assets.AssetRegistry;
+import rst.character.Characters;
+import rst.scene.Scenes;
 
 public class MainWindow {
 
@@ -14,6 +16,21 @@ public class MainWindow {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		AssetRegistry.init();
+		
+		Runnable initScene = new Runnable() {
+			int count;
+
+			@Override
+			public void run() {
+				if(++count >= 2) {
+					Characters.init();
+					Scenes.init();
+				}
+			}
+		};
+		
+		AssetRegistry.getSounds().onLoad(initScene);
+		AssetRegistry.getTextures().onLoad(initScene);
 		
 		Contexts.START.makeCurrent(frame);
 	}

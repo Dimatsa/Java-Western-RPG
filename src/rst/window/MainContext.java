@@ -38,6 +38,8 @@ public class MainContext extends Context {
 	public void makeContextForFrame(JFrame frame) {
 		super.makeContextForFrame(frame);
 		
+		panel.requestFocus();
+		
 		panel.startPainting();
 	}
 	

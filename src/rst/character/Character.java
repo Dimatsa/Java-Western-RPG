@@ -1,9 +1,16 @@
 package rst.character;
 
+import java.awt.Graphics2D;
+
 import rst.assets.Sound;
 import rst.assets.Texture;
+import rst.render.Coordinates;
+import rst.render.Input;
+import rst.render.Renderable;
+import rst.render.SceneRenderable;
+import rst.scene.Scene;
 
-public abstract class Character {
+public abstract class Character implements SceneRenderable {
 	
 	public final static int MALE = 0;
 	public final static int FEMALE = 1;
@@ -22,7 +29,9 @@ public abstract class Character {
 	private Sound hurt1;
 	private Sound hurt2;
 	
-	public Character (String firstName, String lastName, int gender, int strength, double speed, int intelligence, int drunkeness, double gunSpeed, int gunDamage)
+	protected Coordinates location;
+	
+	public Character (String firstName, String lastName, int gender, int strength, double speed, int intelligence, int drunkeness, double gunSpeed, int gunDamage, Texture sprite)
 	{
 		this.firstName = firstName;
 		this.lastName = lastName;
@@ -32,7 +41,9 @@ public abstract class Character {
 		this.intelligence = intelligence;
 		this.gunSpeed = gunSpeed;
 		this.gunDamage = gunDamage;
-		this.sprite = null;
+		this.sprite = sprite;
+		
+		location = new Coordinates();
 		
 		if(gender == MALE)
 		{
@@ -118,5 +129,21 @@ public abstract class Character {
 
 	public Sound getHurt2() {
 		return hurt2;
+	}
+	
+	protected void updateLocation(Input input) {}
+	
+	@Override
+	public void render(Graphics2D g, Input input, double xScaler, double yScaler, int width, int height, Scene scene) {
+		Coordinates camLoc = scene.getCameraLocation();
+		int camX = camLoc.x - Renderable.STANDARD_WIDTH / 2;
+		int camY = camLoc.y - Renderable.STANDARD_HEIGHT / 2;
+		
+		int coordX = location.x;
+		int coordY = location.y;
+		
+		sprite.draw(g, (int) (xScaler * (coordX - 25 - camX)), (int) (yScaler * (coordY - 25 - camY)), (int) (xScaler * 50),(int) (yScaler * 50));
+		
+		updateLocation(input);
 	}
 }
