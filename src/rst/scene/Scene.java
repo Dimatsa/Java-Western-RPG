@@ -56,8 +56,8 @@ public abstract class Scene implements Renderable {
 	@Override
 	public void render(Graphics2D g, Input input, int width, int height) {
 		Coordinates camLoc = getCameraLocation();
-		int camX = camLoc.x - Renderable.STANDARD_WIDTH / 2;
-		int camY = camLoc.y - Renderable.STANDARD_HEIGHT / 2;
+		double camX = camLoc.x - Renderable.STANDARD_WIDTH / 2.0;
+		double camY = camLoc.y - Renderable.STANDARD_HEIGHT / 2.0;
 		
 		double xScaler = ((double)width / Renderable.STANDARD_WIDTH);
 		double yScaler = ((double)height / Renderable.STANDARD_HEIGHT);

@@ -136,11 +136,11 @@ public abstract class Character implements SceneRenderable {
 	@Override
 	public void render(Graphics2D g, Input input, double xScaler, double yScaler, int width, int height, Scene scene) {
 		Coordinates camLoc = scene.getCameraLocation();
-		int camX = camLoc.x - Renderable.STANDARD_WIDTH / 2;
-		int camY = camLoc.y - Renderable.STANDARD_HEIGHT / 2;
+		double camX = camLoc.x - Renderable.STANDARD_WIDTH / 2.0;
+		double camY = camLoc.y - Renderable.STANDARD_HEIGHT / 2.0;
 		
-		int coordX = location.x;
-		int coordY = location.y;
+		double coordX = location.x;
+		double coordY = location.y;
 		
 		sprite.draw(g, (int) (xScaler * (coordX - 25 - camX)), (int) (yScaler * (coordY - 25 - camY)), (int) (xScaler * 50),(int) (yScaler * 50));
 		
