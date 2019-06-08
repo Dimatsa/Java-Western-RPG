@@ -59,4 +59,9 @@ public class Player extends Character implements CameraFollowable {
 		location.x = Math.min(Math.max(location.x, 25 + Renderable.STANDARD_WIDTH / 2 - scene.getWidth() / 2), Renderable.STANDARD_WIDTH / 2 + scene.getWidth() / 2 - 25);
 		location.y = Math.min(Math.max(location.y, 25 + Renderable.STANDARD_HEIGHT / 2 - scene.getHeight() / 2), Renderable.STANDARD_HEIGHT / 2 + scene.getHeight() / 2 - 25);
 	}
+	
+	@Override
+	public int getRenderPriority() {
+		return Integer.MIN_VALUE;
+	}
 }

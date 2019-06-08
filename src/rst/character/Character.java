@@ -146,4 +146,9 @@ public abstract class Character implements SceneRenderable {
 		
 		updateLocation(input, scene);
 	}
+	
+	@Override
+	public int getRenderPriority() {
+		return 10;
+	}
 }

@@ -1,9 +1,13 @@
 package rst.scene;
 
 import java.awt.Graphics2D;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
+import java.util.TreeSet;
 
 import javax.sound.sampled.Clip;
 
@@ -21,7 +25,7 @@ public abstract class Scene implements Renderable {
 	private final int xSize, ySize;
 	private final Sound ambientSound;
 	private final String name;
-	private final Set<SceneRenderable> items;
+	private final List<SceneRenderable> items;
 	
 	private Clip currentPlaying;
 	
@@ -37,7 +41,8 @@ public abstract class Scene implements Renderable {
 		this.ambientSound = ambientSound;
 		this.camera = camera;
 		this.name = name;
-		this.items = new HashSet<>(Arrays.asList(items));
+		this.items = new ArrayList<>(Arrays.asList(items));
+		Collections.sort(this.items);
 	}
 	
 	public void enterScene() {
