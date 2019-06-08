@@ -4,10 +4,7 @@ import java.awt.Graphics2D;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
-import java.util.TreeSet;
 
 import javax.sound.sampled.Clip;
 
@@ -26,6 +23,7 @@ public abstract class Scene implements Renderable {
 	private final Sound ambientSound;
 	private final String name;
 	private final List<SceneRenderable> items;
+	private final List<Impedance> impedances;
 	
 	private Clip currentPlaying;
 	
@@ -43,6 +41,14 @@ public abstract class Scene implements Renderable {
 		this.name = name;
 		this.items = new ArrayList<>(Arrays.asList(items));
 		Collections.sort(this.items);
+		this.impedances = new ArrayList<>();
+		
+		
+		for(SceneRenderable item : items) {
+			if(item instanceof Impedance) {
+				impedances.add((Impedance) item);
+			}
+		}
 	}
 	
 	public void enterScene() {
@@ -90,5 +96,7 @@ public abstract class Scene implements Renderable {
 		return ySize;
 	}
 	
-	
+	public List<Impedance> getHitboxes() {
+		return impedances;
+	}
 }

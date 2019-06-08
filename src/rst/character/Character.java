@@ -4,13 +4,15 @@ import java.awt.Graphics2D;
 
 import rst.assets.Sound;
 import rst.assets.Texture;
+import rst.render.Bounds;
 import rst.render.Coordinates;
 import rst.render.Input;
 import rst.render.Renderable;
 import rst.render.SceneRenderable;
+import rst.scene.Impedance;
 import rst.scene.Scene;
 
-public abstract class Character implements SceneRenderable {
+public abstract class Character implements SceneRenderable, Impedance {
 	
 	public final static int MALE = 0;
 	public final static int FEMALE = 1;
@@ -30,6 +32,7 @@ public abstract class Character implements SceneRenderable {
 	private Sound hurt2;
 	
 	protected Coordinates location;
+	protected Bounds bounds;
 	
 	public Character (String firstName, String lastName, int gender, int strength, double speed, int intelligence, int drunkeness, double gunSpeed, int gunDamage, Texture sprite)
 	{
@@ -44,6 +47,13 @@ public abstract class Character implements SceneRenderable {
 		this.sprite = sprite;
 		
 		location = new Coordinates();
+		bounds = new Bounds();
+		bounds.a = new Coordinates();
+		bounds.a.x = location.x - 20;
+		bounds.a.y = location.y - 20;
+		bounds.b = new Coordinates();
+		bounds.b.x = location.x + 20;
+		bounds.b.y = location.y + 20;
 		
 		if(gender == MALE)
 		{
@@ -142,7 +152,7 @@ public abstract class Character implements SceneRenderable {
 		double coordX = location.x;
 		double coordY = location.y;
 		
-		sprite.draw(g, (int) (xScaler * (coordX - 25 - camX)), (int) (yScaler * (coordY - 25 - camY)), (int) (xScaler * 50),(int) (yScaler * 50));
+		sprite.draw(g, (int) (xScaler * (coordX - 20 - camX)), (int) (yScaler * (coordY - 20 - camY)), (int) (xScaler * 40),(int) (yScaler * 40));
 		
 		updateLocation(input, scene);
 	}
@@ -150,5 +160,10 @@ public abstract class Character implements SceneRenderable {
 	@Override
 	public int getRenderPriority() {
 		return 10;
+	}
+	
+	@Override
+	public Bounds getBounds() {
+		return bounds;
 	}
 }
