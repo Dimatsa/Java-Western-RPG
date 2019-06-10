@@ -9,7 +9,10 @@ public class Textures extends AssetRegistry<Texture>{
 			"icon16",
 			"icon32",
 			"icon64",
-			"icon128"
+			"icon128",
+			"sand",
+			"mainCharacterForward",
+			"path"
 	};
 	
 	public Textures() {

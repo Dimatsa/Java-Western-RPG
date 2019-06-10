@@ -47,12 +47,6 @@ public class Sound extends Asset {
 		} catch (InterruptedException | ExecutionException e) {
 			e.printStackTrace();
 		}
-		
-		try {
-			Thread.sleep(250);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
 	}
 	
 	public byte[] getData() {

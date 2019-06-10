@@ -39,7 +39,7 @@ public class StartContext extends Context {
 		
 		sounds = new JProgressBar();
 		textures = new JProgressBar();
-		fonts = new JProgressBar();	
+		fonts = new JProgressBar();
 		
 		bindProgress(sounds, AssetRegistry.getSounds());
 		bindProgress(textures, AssetRegistry.getTextures());

@@ -1,9 +1,18 @@
 package rst.character;
 
+import java.awt.Graphics2D;
+
 import rst.assets.Sound;
 import rst.assets.Texture;
+import rst.render.Bounds;
+import rst.render.Coordinates;
+import rst.render.Input;
+import rst.render.Renderable;
+import rst.render.SceneRenderable;
+import rst.scene.Impedance;
+import rst.scene.Scene;
 
-public class Character {
+public abstract class Character implements SceneRenderable, Impedance {
 	
 	public final static int MALE = 0;
 	public final static int FEMALE = 1;
@@ -22,7 +31,10 @@ public class Character {
 	private Sound hurt1;
 	private Sound hurt2;
 	
-	public Character (String firstName, String lastName, int gender, int strength, double speed, int intelligence, int drunkeness, double gunSpeed, int gunDamage)
+	protected Coordinates location;
+	protected Bounds bounds;
+	
+	public Character (String firstName, String lastName, int gender, int strength, double speed, int intelligence, int drunkeness, double gunSpeed, int gunDamage, Texture sprite)
 	{
 		this.firstName = firstName;
 		this.lastName = lastName;
@@ -32,7 +44,16 @@ public class Character {
 		this.intelligence = intelligence;
 		this.gunSpeed = gunSpeed;
 		this.gunDamage = gunDamage;
-		this.sprite = null;
+		this.sprite = sprite;
+		
+		location = new Coordinates();
+		bounds = new Bounds();
+		bounds.a = new Coordinates();
+		bounds.a.x = location.x - 10;
+		bounds.a.y = location.y - 20;
+		bounds.b = new Coordinates();
+		bounds.b.x = location.x + 10;
+		bounds.b.y = location.y + 20;
 		
 		if(gender == MALE)
 		{
@@ -118,5 +139,31 @@ public class Character {
 
 	public Sound getHurt2() {
 		return hurt2;
+	}
+	
+	protected void updateLocation(Input input, Scene scene) {}
+	
+	@Override
+	public void render(Graphics2D g, Input input, double xScaler, double yScaler, int width, int height, Scene scene) {
+		Coordinates camLoc = scene.getCameraLocation();
+		double camX = camLoc.x - Renderable.STANDARD_WIDTH / 2.0;
+		double camY = camLoc.y - Renderable.STANDARD_HEIGHT / 2.0;
+		
+		double coordX = location.x;
+		double coordY = location.y;
+		
+		sprite.draw(g, (int) (xScaler * (coordX - 10 - camX)), (int) (yScaler * (coordY - 20 - camY)), (int) (xScaler * 20),(int) (yScaler * 40));
+		
+		updateLocation(input, scene);
+	}
+	
+	@Override
+	public int getRenderPriority() {
+		return 10;
+	}
+	
+	@Override
+	public Bounds getBounds() {
+		return bounds;
 	}
 }

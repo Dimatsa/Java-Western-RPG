@@ -20,12 +20,6 @@ public class Font extends Asset {
 		}
 		
 		this.font = font;
-		
-		try {
-			Thread.sleep(300);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
 	}
 	
 	public java.awt.Font getFont() {

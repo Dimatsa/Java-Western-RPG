@@ -27,6 +27,7 @@ public class Main {
 		Character toby = new Character("Toby", "Larkin", Character.MALE, 1, 1, 1, 1, 1, 1);
 		Character gian = new Character("Giancarlo", "Salvador", Character.MALE, 1, 1, 1, 1, 1, 1);
 		Character steve = new Character("Steve", "Larkin", Character.MALE, 1, 1, 1, 1, 1, 1);
+		Character flinston = new Character("Flinston", "Stone", Character.MALE, 1, 1, 1, 1, 1, 1);
 
 
 		
