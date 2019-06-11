@@ -51,11 +51,11 @@ public abstract class Character implements SceneRenderable, Impedance {
 		location = new Coordinates();
 		bounds = new Bounds();
 		bounds.a = new Coordinates();
-		bounds.a.x = location.x - 10;
-		bounds.a.y = location.y - 20;
+		bounds.a.x = location.x - 20;
+		bounds.a.y = location.y;
 		bounds.b = new Coordinates();
-		bounds.b.x = location.x + 10;
-		bounds.b.y = location.y + 20;
+		bounds.b.x = location.x + 20;
+		bounds.b.y = location.y + 40;
 		
 		if(gender == MALE)
 		{
@@ -166,14 +166,14 @@ public abstract class Character implements SceneRenderable, Impedance {
 		else {
 			t = sprite.getCurrentAnimation().getTexture(0);
 		}
-		t.draw(g, (int) ((coordX - 10 - camX) + 0.5), (int) ((coordY - 20 - camY) + 0.5), 20, 40);
+		t.draw(g, (int) ((coordX - 20 - camX) + 0.5), (int) ((coordY - 40 - camY) + 0.5), 40, 80);
 		
 		updateLocation(input, scene);
 	}
 	
 	@Override
 	public int getRenderPriority() {
-		return 10;
+		return 0;
 	}
 	
 	@Override

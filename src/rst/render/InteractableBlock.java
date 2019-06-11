@@ -10,6 +10,10 @@ public class InteractableBlock extends HittableBlock implements Interactable {
 		super(sceneWidth, sceneHeight, textureName, x, y);
 	}
 
+	public InteractableBlock(int sceneWidth, int sceneHeight, String textureName, int x, int y, int width, int height) {
+		super(sceneWidth, sceneHeight, textureName, x, y, width, height);
+	}
+	
 	public InteractableBlock onInteract(Runnable action) {
 		this.action = action;
 		return this;

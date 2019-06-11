@@ -28,10 +28,10 @@ public class Player extends Character implements CameraFollowable {
 
 		location.x = Renderable.STANDARD_WIDTH / 2;
 		location.y = Renderable.STANDARD_HEIGHT / 2;
-		bounds.a.x = location.x - 10;
-		bounds.a.y = location.y - 20;
-		bounds.b.x = location.x + 10;
-		bounds.b.y = location.y + 20;
+		bounds.a.x = location.x - 20;
+		bounds.a.y = location.y;
+		bounds.b.x = location.x + 20;
+		bounds.b.y = location.y + 40;
 	}
 	
 	private static CharacterSprite makeSprite() {
@@ -166,16 +166,16 @@ public class Player extends Character implements CameraFollowable {
 		} while (soonest != null);
 
 		location.x = Math.min(
-				Math.max(location.x + vX * delta, 10 + Renderable.STANDARD_WIDTH / 2 - scene.getWidth() / 2),
-				Renderable.STANDARD_WIDTH / 2 + scene.getWidth() / 2 - 10);
+				Math.max(location.x + vX * delta, 20 + Renderable.STANDARD_WIDTH / 2 - scene.getWidth() / 2),
+				Renderable.STANDARD_WIDTH / 2 + scene.getWidth() / 2 - 20);
 		location.y = Math.min(
-				Math.max(location.y + vY * delta, 20 + Renderable.STANDARD_HEIGHT / 2 - scene.getHeight() / 2),
-				Renderable.STANDARD_HEIGHT / 2 + scene.getHeight() / 2 - 20);
+				Math.max(location.y + vY * delta, Renderable.STANDARD_HEIGHT / 2 - scene.getHeight() / 2),
+				Renderable.STANDARD_HEIGHT / 2 + scene.getHeight() / 2 - 40);
 		
-		bounds.a.x = location.x - 10;
-		bounds.a.y = location.y - 20;
-		bounds.b.x = location.x + 10;
-		bounds.b.y = location.y + 20;
+		bounds.a.x = location.x - 20;
+		bounds.a.y = location.y;
+		bounds.b.x = location.x + 20;
+		bounds.b.y = location.y + 40;
 		
 		Interactable selected = null;
 		
