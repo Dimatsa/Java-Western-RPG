@@ -113,7 +113,8 @@ public class TestScene extends Scene {
 				new Block("sand" , 9, 6),
 				new Block("sand" , 9, 7),
 				new Block("sand" , 9, 8),
-				new Block("sand" , 9, 9));
+				new Block("sand" , 9, 9),
+				new ScenePortal(Block.GRID_SIZE * 10, Block.GRID_SIZE * 10, "cactus1", -1, 4, "Test Scene", 0, 0));
 
 	}
 }

@@ -6,4 +6,5 @@ public interface Interactable extends Impedance {
 	boolean[] getSides();
 	
 	void performAction();
+	void performContact();
 }

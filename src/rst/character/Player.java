@@ -10,6 +10,7 @@ import rst.render.Bounds;
 import rst.render.CameraFollowable;
 import rst.render.Coordinates;
 import rst.render.Input;
+import rst.render.RenderPanel;
 import rst.render.Renderable;
 import rst.scene.Impedance;
 import rst.scene.Interactable;
@@ -21,7 +22,10 @@ public class Player extends Character implements CameraFollowable {
 	
 	private boolean wasInteracting;
 	
+	private Interactable lastCollided;
+	
 	private DialoguePanel dialogue;
+	private RenderPanel render;
 
 	public Player() {
 		super("Connor", "Adams", Character.MALE, 0, 0, 99, 100, 75, 10, makeSprite());
@@ -49,7 +53,7 @@ public class Player extends Character implements CameraFollowable {
 
 	@Override
 	protected void updateLocation(Input input, Scene scene) {
-		if(hasDialogue() && dialogue.isInDialogue()) {
+		if(hasPanels() && dialogue.isInDialogue()) {
 			lastTimeStamp = System.nanoTime();
 			return;
 		}
@@ -213,6 +217,14 @@ public class Player extends Character implements CameraFollowable {
 		}
 		
 		wasInteracting = input.isKeyDown(KeyEvent.VK_E);
+		
+		if(lastCollided != selected) {
+			lastCollided = selected;
+
+			if(selected != null) {
+				selected.performContact();
+			}
+		}
 	}
 
 	private static class AABBResponse {
@@ -322,7 +334,7 @@ public class Player extends Character implements CameraFollowable {
 	}
 
 	public void startDialogue(String dialogName) {
-		if(hasDialogue()) {
+		if(hasPanels()) {
 			dialogue.setDialogue(Dialogues.getDialogues().getDialogue(dialogName));
 		}
 	}
@@ -332,11 +344,22 @@ public class Player extends Character implements CameraFollowable {
 		return Integer.MIN_VALUE;
 	}
 	
-	public void setDialoguePanel(DialoguePanel dialoguePanel) {
+	public void setPanels(RenderPanel renderPanel, DialoguePanel dialoguePanel) {
 		this.dialogue = dialoguePanel;
+		this.render = renderPanel;
 	}
 	
-	public boolean hasDialogue() {
-		return dialogue != null;
+	public boolean hasPanels() {
+		return dialogue != null && render != null;
+	}
+	
+	public void setScene(Scene newScene, Coordinates loc) {
+		if(hasPanels()) {
+			this.location.x = loc.x;
+			this.location.y = loc.y;
+			
+			render.setScene(newScene);
+		}
+		
 	}
 }

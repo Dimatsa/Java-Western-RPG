@@ -64,4 +64,10 @@ public class RenderPanel extends JPanel {
 			currentScene.render(g, input);
 		}
 	}
+	
+	public void setScene(Scene scene) {
+		currentScene.leaveScene();
+		this.currentScene = scene;
+		currentScene.enterScene();
+	}
 }

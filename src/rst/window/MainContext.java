@@ -35,8 +35,8 @@ public class MainContext extends Context {
 	
 	@Override
 	public void makeContextForFrame(JFrame frame) {
-		if(!((Player)Characters.getCharacters().getCharacter("Connor Adams")).hasDialogue()) {
-			((Player)Characters.getCharacters().getCharacter("Connor Adams")).setDialoguePanel(dialogue);
+		if(!((Player)Characters.getCharacters().getCharacter("Connor Adams")).hasPanels()) {
+			((Player)Characters.getCharacters().getCharacter("Connor Adams")).setPanels(render, dialogue);
 		}
 		
 		super.makeContextForFrame(frame);
