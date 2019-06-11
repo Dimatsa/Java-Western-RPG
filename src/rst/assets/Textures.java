@@ -13,7 +13,7 @@ public class Textures extends AssetRegistry<Texture>{
 			"sand",
 			"mainCharacterForward",
 
-			"plank"
+			"plank",
 			
 
 			"mainCharacterLeft",
