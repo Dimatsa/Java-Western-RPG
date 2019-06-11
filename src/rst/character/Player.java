@@ -3,6 +3,8 @@ package rst.character;
 import java.awt.event.KeyEvent;
 
 import rst.assets.AssetRegistry;
+import rst.dialogue.DialoguePanel;
+import rst.dialogue.Dialogues;
 import rst.render.Animation;
 import rst.render.Bounds;
 import rst.render.CameraFollowable;
@@ -18,6 +20,8 @@ public class Player extends Character implements CameraFollowable {
 	private long lastTimeStamp = -1;
 	
 	private boolean wasInteracting;
+	
+	private DialoguePanel dialogue;
 
 	public Player() {
 		super("Connor", "Adams", Character.MALE, 0, 0, 99, 100, 75, 10, makeSprite());
@@ -45,6 +49,11 @@ public class Player extends Character implements CameraFollowable {
 
 	@Override
 	protected void updateLocation(Input input, Scene scene) {
+		if(hasDialogue() && dialogue.isInDialogue()) {
+			lastTimeStamp = System.nanoTime();
+			return;
+		}
+		
 		if (lastTimeStamp == -1) {
 			lastTimeStamp = System.nanoTime();
 		}
@@ -312,8 +321,22 @@ public class Player extends Character implements CameraFollowable {
 		return resp;
 	}
 
+	public void startDialogue(String dialogName) {
+		if(hasDialogue()) {
+			dialogue.setDialogue(Dialogues.getDialogues().getDialogue(dialogName));
+		}
+	}
+	
 	@Override
 	public int getRenderPriority() {
 		return Integer.MIN_VALUE;
+	}
+	
+	public void setDialoguePanel(DialoguePanel dialoguePanel) {
+		this.dialogue = dialoguePanel;
+	}
+	
+	public boolean hasDialogue() {
+		return dialogue != null;
 	}
 }

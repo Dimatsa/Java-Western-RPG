@@ -4,17 +4,19 @@ import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 
-import javax.swing.JButton;
 import javax.swing.JFrame;
 
-import rst.assets.AssetRegistry;
+import rst.character.Characters;
+import rst.character.Player;
+import rst.dialogue.DialoguePanel;
 import rst.render.RenderPanel;
 
 public class MainContext extends Context {
 
 	private static final long serialVersionUID = 1L;
 	
-	private final RenderPanel panel;
+	private final RenderPanel render;
+	private final DialoguePanel dialogue;
 	
 	public MainContext() {
 		super(true,
@@ -24,29 +26,30 @@ public class MainContext extends Context {
 		
 		setLayout(new BorderLayout());
 		
-		JButton exit = new JButton("Exit");
-		AssetRegistry.getFonts().onLoad(() -> exit.setFont(AssetRegistry.getFonts().get("Montserrat-Regular").getFont().deriveFont((float)exit.getFont().getSize())));
-		exit.addActionListener((event) -> System.exit(0));
+		render = new RenderPanel();
+		dialogue = new DialoguePanel();
 		
-		panel = new RenderPanel();
-		
-		add(exit, BorderLayout.SOUTH);
-		add(panel, BorderLayout.CENTER);
+		add(render, BorderLayout.CENTER);
+		add(dialogue, BorderLayout.SOUTH);
 	}
 	
 	@Override
 	public void makeContextForFrame(JFrame frame) {
+		if(!((Player)Characters.getCharacters().getCharacter("Connor Adams")).hasDialogue()) {
+			((Player)Characters.getCharacters().getCharacter("Connor Adams")).setDialoguePanel(dialogue);
+		}
+		
 		super.makeContextForFrame(frame);
 		
-		panel.requestFocus();
+		render.requestFocus();
 		
-		panel.startPainting();
+		render.startPainting();
 	}
 	
 	@Override
 	public void transferContext(Context other) {
 		super.transferContext(other);
 		
-		panel.stopPainting();
+		render.stopPainting();
 	}
 }

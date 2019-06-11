@@ -4,6 +4,7 @@ import javax.swing.JFrame;
 
 import rst.assets.AssetRegistry;
 import rst.character.Characters;
+import rst.dialogue.Dialogues;
 import rst.scene.Scenes;
 
 public class MainWindow {
@@ -25,6 +26,7 @@ public class MainWindow {
 				if(++count >= 2) {
 					Characters.init();
 					Scenes.init();
+					Dialogues.init();
 				}
 			}
 		};
