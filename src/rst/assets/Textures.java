@@ -12,7 +12,9 @@ public class Textures extends AssetRegistry<Texture>{
 			"icon128",
 			"sand",
 			"mainCharacterForward",
-			"path"
+			"path",
+			"plank"
+			
 	};
 	
 	public Textures() {
