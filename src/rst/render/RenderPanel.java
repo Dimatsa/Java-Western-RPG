@@ -53,12 +53,15 @@ public class RenderPanel extends JPanel {
 	
 	@Override
 	public void paintComponent(Graphics graphics) {
-		Graphics2D g = (Graphics2D) graphics;
+		super.paintComponent(graphics);
+		Graphics2D g = (Graphics2D)graphics.create();
+		g.scale((double)getWidth() / Renderable.STANDARD_WIDTH, (double)getHeight() / Renderable.STANDARD_HEIGHT);
+		
 		g.setColor(Color.BLACK);
-		g.fillRect(0, 0, getWidth(), getHeight());
+		g.fillRect(0, 0, Renderable.STANDARD_WIDTH, Renderable.STANDARD_HEIGHT);
 		
 		if(currentScene != null) {
-			currentScene.render(g, input, getWidth(), getHeight());
+			currentScene.render(g, input);
 		}
 	}
 }

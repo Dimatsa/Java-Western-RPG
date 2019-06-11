@@ -73,18 +73,15 @@ public abstract class Scene implements Renderable {
 	}
 	
 	@Override
-	public void render(Graphics2D g, Input input, int width, int height) {
+	public void render(Graphics2D g, Input input) {
 		Coordinates camLoc = getCameraLocation();
 		double camX = camLoc.x - Renderable.STANDARD_WIDTH / 2.0;
 		double camY = camLoc.y - Renderable.STANDARD_HEIGHT / 2.0;
 		
-		double xScaler = ((double)width / Renderable.STANDARD_WIDTH);
-		double yScaler = ((double)height / Renderable.STANDARD_HEIGHT);
-		
-		background.draw(g, (int) (xScaler * (Renderable.STANDARD_WIDTH / 2.0 - xSize / 2.0 - camX)), (int) (yScaler * (Renderable.STANDARD_HEIGHT / 2.0 - ySize / 2.0 - camY)), (int) (xScaler * xSize),(int) (yScaler * ySize));
+		background.draw(g, (int) ((Renderable.STANDARD_WIDTH / 2.0 - xSize / 2.0 - camX) + 0.5), (int) ((Renderable.STANDARD_HEIGHT / 2.0 - ySize / 2.0 - camY) + 0.5), xSize, ySize);
 		
 		for(SceneRenderable item : items) {
-			item.render(g, input, xScaler, yScaler, width, height, this);
+			item.render(g, input, this);
 		}
 	}
 	

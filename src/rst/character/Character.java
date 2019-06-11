@@ -146,7 +146,7 @@ public class Character implements SceneRenderable, Impedance {
 	protected void updateLocation(Input input, Scene scene) {}
 	
 	@Override
-	public void render(Graphics2D g, Input input, double xScaler, double yScaler, int width, int height, Scene scene) {
+	public void render(Graphics2D g, Input input, Scene scene) {
 		Coordinates camLoc = scene.getCameraLocation();
 		double camX = camLoc.x - Renderable.STANDARD_WIDTH / 2.0;
 		double camY = camLoc.y - Renderable.STANDARD_HEIGHT / 2.0;
@@ -166,7 +166,7 @@ public class Character implements SceneRenderable, Impedance {
 		else {
 			t = sprite.getCurrentAnimation().getTexture(0);
 		}
-		t.draw(g, (int) (xScaler * (coordX - 10 - camX)), (int) (yScaler * (coordY - 20 - camY)), (int) (xScaler * 20),(int) (yScaler * 40));
+		t.draw(g, (int) ((coordX - 10 - camX) + 0.5), (int) ((coordY - 20 - camY) + 0.5), 20, 40);
 		
 		updateLocation(input, scene);
 	}
