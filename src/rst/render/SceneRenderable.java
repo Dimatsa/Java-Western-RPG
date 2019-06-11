@@ -6,7 +6,7 @@ import rst.scene.Scene;
 
 public interface SceneRenderable extends Comparable<SceneRenderable> {
 
-	void render(Graphics2D graphics, Input input, double xScaler, double yScaler, int width, int height, Scene scene);
+	void render(Graphics2D graphics, Input input, Scene scene);
 	int getRenderPriority();
 	
 	@Override

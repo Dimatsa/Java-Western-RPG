@@ -24,6 +24,7 @@ public abstract class Scene implements Renderable {
 	private final String name;
 	private final List<SceneRenderable> items;
 	private final List<Impedance> impedances;
+	private final List<Interactable> interactions;
 	
 	private Clip currentPlaying;
 	
@@ -42,11 +43,18 @@ public abstract class Scene implements Renderable {
 		this.items = new ArrayList<>(Arrays.asList(items));
 		Collections.sort(this.items);
 		this.impedances = new ArrayList<>();
+		this.interactions = new ArrayList<>();
 		
 		
 		for(SceneRenderable item : items) {
 			if(item instanceof Impedance) {
 				impedances.add((Impedance) item);
+			}
+		}
+		
+		for(SceneRenderable item : items) {
+			if(item instanceof Interactable) {
+				interactions.add((Interactable) item);
 			}
 		}
 	}
@@ -65,18 +73,15 @@ public abstract class Scene implements Renderable {
 	}
 	
 	@Override
-	public void render(Graphics2D g, Input input, int width, int height) {
+	public void render(Graphics2D g, Input input) {
 		Coordinates camLoc = getCameraLocation();
 		double camX = camLoc.x - Renderable.STANDARD_WIDTH / 2.0;
 		double camY = camLoc.y - Renderable.STANDARD_HEIGHT / 2.0;
 		
-		double xScaler = ((double)width / Renderable.STANDARD_WIDTH);
-		double yScaler = ((double)height / Renderable.STANDARD_HEIGHT);
-		
-		background.draw(g, (int) (xScaler * (Renderable.STANDARD_WIDTH / 2.0 - xSize / 2.0 - camX)), (int) (yScaler * (Renderable.STANDARD_HEIGHT / 2.0 - ySize / 2.0 - camY)), (int) (xScaler * xSize),(int) (yScaler * ySize));
+		background.draw(g, (int) ((Renderable.STANDARD_WIDTH / 2.0 - xSize / 2.0 - camX) + 0.5), (int) ((Renderable.STANDARD_HEIGHT / 2.0 - ySize / 2.0 - camY) + 0.5), xSize, ySize);
 		
 		for(SceneRenderable item : items) {
-			item.render(g, input, xScaler, yScaler, width, height, this);
+			item.render(g, input, this);
 		}
 	}
 	
@@ -98,5 +103,9 @@ public abstract class Scene implements Renderable {
 	
 	public List<Impedance> getHitboxes() {
 		return impedances;
+	}
+	
+	public List<Interactable> getInteractions() {
+		return interactions;
 	}
 }

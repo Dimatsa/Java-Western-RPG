@@ -2,8 +2,9 @@ package rst;
 
 import javax.swing.SwingUtilities;
 
-import rst.window.MainWindow;
 import rst.character.Character;
+import rst.character.NpcCharacter;
+import rst.window.MainWindow;
 
 public class Main {
 
@@ -11,23 +12,23 @@ public class Main {
 		createAndShowGUI();
 
 		// Creates Dalton brothers
-		Character slimy = new Character("Slimy", "Dalton", Character.MALE, 1, 1, 1, 1, 1, 1, null);
-		Character sneaky = new Character("Sneaky", "Dalton", Character.MALE, 1, 1, 1, 1, 1, 1, null);
-		Character shifty = new Character("Shifty", "Dalton", Character.MALE, 1, 1, 1, 1, 1, 1, null);
-		Character snitchy = new Character("Snitchy", "Dalton", Character.MALE, 1, 1, 1, 1, 1, 1, null);
+		Character slimy = new NpcCharacter("Slimy", "Dalton", Character.MALE, 1, 1, 1, 1, 1, 1, null);
+		Character sneaky = new NpcCharacter("Sneaky", "Dalton", Character.MALE, 1, 1, 1, 1, 1, 1, null);
+		Character shifty = new NpcCharacter("Shifty", "Dalton", Character.MALE, 1, 1, 1, 1, 1, 1, null);
+		Character snitchy = new NpcCharacter("Snitchy", "Dalton", Character.MALE, 1, 1, 1, 1, 1, 1, null);
 
 		// Creates Earps
-		Character marshallVirgil = new Character("Marshal Virgil", "Earp", Character.MALE, 1, 1, 1, 1, 1, 1, null);
-		Character wyatt = new Character("Wyatt", "Earp", Character.MALE, 1, 1, 1, 1, 1, 1, null);
-		Character morgan = new Character("Morgan", "Earp", Character.MALE, 1, 1, 1, 1, 1, 1, null);
-		Character docHolliday = new Character("Doc Holliday", "Earp", Character.MALE, 1, 1, 1, 1, 1, 1, null);
+		Character marshallVirgil = new NpcCharacter("Marshal Virgil", "Earp", Character.MALE, 1, 1, 1, 1, 1, 1, null);
+		Character wyatt = new NpcCharacter("Wyatt", "Earp", Character.MALE, 1, 1, 1, 1, 1, 1, null);
+		Character morgan = new NpcCharacter("Morgan", "Earp", Character.MALE, 1, 1, 1, 1, 1, 1, null);
+		Character docHolliday = new NpcCharacter("Doc Holliday", "Earp", Character.MALE, 1, 1, 1, 1, 1, 1, null);
 
 		// Creates random characters
-		Character ryan = new Character("Ryan", "Larkin", Character.MALE, 1, 1, 1, 1, 1, 1, null);
-		Character toby = new Character("Toby", "Larkin", Character.MALE, 1, 1, 1, 1, 1, 1, null);
-		Character gian = new Character("Giancarlo", "Salvador", Character.MALE, 1, 1, 1, 1, 1, 1, null);
-		Character steve = new Character("Steve", "Larkin", Character.MALE, 1, 1, 1, 1, 1, 1, null);
-		Character flinston = new Character("Flinston", "Stone", Character.MALE, 1, 1, 1, 1, 1, 1, null);
+		Character ryan = new NpcCharacter("Ryan", "Larkin", Character.MALE, 1, 1, 1, 1, 1, 1, null);
+		Character toby = new NpcCharacter("Toby", "Larkin", Character.MALE, 1, 1, 1, 1, 1, 1, null);
+		Character gian = new NpcCharacter("Giancarlo", "Salvador", Character.MALE, 1, 1, 1, 1, 1, 1, null);
+		Character steve = new NpcCharacter("Steve", "Larkin", Character.MALE, 1, 1, 1, 1, 1, 1, null);
+		Character flinston = new NpcCharacter("Flinston", "Stone", Character.MALE, 1, 1, 1, 1, 1, 1, null);
 
 	}
 

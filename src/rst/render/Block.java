@@ -20,16 +20,10 @@ public class Block implements SceneRenderable {
 	}
 	
 	@Override
-	public void render(Graphics2D g, Input input, double xScaler, double yScaler, int width, int height,
-			Scene scene) {
+	public void render(Graphics2D g, Input input, Scene scene) {
 		Coordinates camLoc = scene.getCameraLocation();
-		double camX = camLoc.x - Renderable.STANDARD_WIDTH / 2.0;
-		double camY = camLoc.y - Renderable.STANDARD_HEIGHT / 2.0;
 		
-		double coordX = x * GRID_SIZE;
-		double coordY = y * GRID_SIZE;
-		
-		texture.draw(g, (int) (xScaler * (Renderable.STANDARD_WIDTH / 2 - scene.getWidth() / 2 + coordX - camX)), (int) (yScaler * (Renderable.STANDARD_HEIGHT / 2 - scene.getHeight() / 2 + coordY - camY)), (int) (xScaler * GRID_SIZE),(int) (yScaler * GRID_SIZE));
+		texture.draw(g, (int) ((Renderable.STANDARD_WIDTH - scene.getWidth() / 2 + x * GRID_SIZE - camLoc.x) + 0.5), (int) ((Renderable.STANDARD_HEIGHT - scene.getHeight() / 2 + y * GRID_SIZE - camLoc.y) + 0.5), GRID_SIZE, GRID_SIZE);
 	}
 	
 	@Override

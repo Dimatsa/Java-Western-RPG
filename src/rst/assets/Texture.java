@@ -12,8 +12,12 @@ public class Texture extends Asset {
 	private final BufferedImage image;
 	
 	public Texture(String name, InputStream in) throws IOException {
+		this(name, ImageIO.read(in));
+	}
+	
+	protected Texture(String name, BufferedImage image) {
 		super(name);
-		image = ImageIO.read(in);
+		this.image = image;
 	}
 	
 	public void draw(Graphics g, int x, int y, int width, int height) {

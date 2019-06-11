@@ -12,7 +12,7 @@ import rst.render.SceneRenderable;
 import rst.scene.Impedance;
 import rst.scene.Scene;
 
-public class Character implements SceneRenderable, Impedance {
+public abstract class Character implements SceneRenderable, Impedance {
 	
 	public final static int MALE = 0;
 	public final static int FEMALE = 1;
@@ -20,7 +20,7 @@ public class Character implements SceneRenderable, Impedance {
 	private final String firstName;
 	private final String lastName;
 	private final int gender;
-	private final Texture sprite;
+	private final CharacterSprite sprite;
 	private int hp = 100;
 	private int strength;
 	private double speed;
@@ -33,8 +33,10 @@ public class Character implements SceneRenderable, Impedance {
 	
 	protected Coordinates location;
 	protected Bounds bounds;
+	protected int direction = CharacterSprite.DOWN;
+	protected double currentSpeed;
 	
-	public Character (String firstName, String lastName, int gender, int strength, double speed, int intelligence, int drunkeness, double gunSpeed, int gunDamage, Texture sprite)
+	public Character (String firstName, String lastName, int gender, int strength, double speed, int intelligence, int drunkeness, double gunSpeed, int gunDamage, CharacterSprite sprite)
 	{
 		this.firstName = firstName;
 		this.lastName = lastName;
@@ -144,15 +146,27 @@ public class Character implements SceneRenderable, Impedance {
 	protected void updateLocation(Input input, Scene scene) {}
 	
 	@Override
-	public void render(Graphics2D g, Input input, double xScaler, double yScaler, int width, int height, Scene scene) {
+	public void render(Graphics2D g, Input input, Scene scene) {
 		Coordinates camLoc = scene.getCameraLocation();
 		double camX = camLoc.x - Renderable.STANDARD_WIDTH / 2.0;
 		double camY = camLoc.y - Renderable.STANDARD_HEIGHT / 2.0;
 		
 		double coordX = location.x;
 		double coordY = location.y;
+
+		sprite.setFacing(direction);
 		
-		sprite.draw(g, (int) (xScaler * (coordX - 10 - camX)), (int) (yScaler * (coordY - 20 - camY)), (int) (xScaler * 20),(int) (yScaler * 40));
+		Texture t;
+		
+		if(currentSpeed != 0) {
+			sprite.setTime((int) (100000/currentSpeed));
+			
+			t = sprite;
+		}
+		else {
+			t = sprite.getCurrentAnimation().getTexture(0);
+		}
+		t.draw(g, (int) ((coordX - 10 - camX) + 0.5), (int) ((coordY - 20 - camY) + 0.5), 20, 40);
 		
 		updateLocation(input, scene);
 	}
