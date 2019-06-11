@@ -3,6 +3,7 @@ package rst.character;
 import java.awt.event.KeyEvent;
 
 import rst.assets.AssetRegistry;
+import rst.render.Animation;
 import rst.render.Bounds;
 import rst.render.CameraFollowable;
 import rst.render.Coordinates;
@@ -16,8 +17,7 @@ public class Player extends Character implements CameraFollowable {
 	private long lastTimeStamp = -1;
 
 	public Player() {
-		super("Connor", "Adams", Character.MALE, 0, 0, 99, 100, 75, 10,
-				AssetRegistry.getTextures().get("mainCharacterForward"));
+		super("Connor", "Adams", Character.MALE, 0, 0, 99, 100, 75, 10, makeSprite());
 
 		location.x = Renderable.STANDARD_WIDTH / 2;
 		location.y = Renderable.STANDARD_HEIGHT / 2;
@@ -25,6 +25,14 @@ public class Player extends Character implements CameraFollowable {
 		bounds.a.y = location.y - 20;
 		bounds.b.x = location.x + 10;
 		bounds.b.y = location.y + 20;
+	}
+	
+	private static CharacterSprite makeSprite() {
+		return new CharacterSprite("Connor Adams", 
+				new Animation(1000, AssetRegistry.getTextures().get("mainCharacterForward"),  AssetRegistry.getTextures().get("icon32"), AssetRegistry.getTextures().get("path")),
+				new Animation(1000, AssetRegistry.getTextures().get("icon32")),
+				 new Animation(1000, AssetRegistry.getTextures().get("path")),
+				 new Animation(1000, AssetRegistry.getTextures().get("sand")));
 	}
 
 	@Override
@@ -51,19 +59,77 @@ public class Player extends Character implements CameraFollowable {
 
 		double vX = 0, vY = 0;
 
+		boolean moved = false;
+		int dX = 0, dY = 0;
+		
 		if (input.isKeyDown(KeyEvent.VK_W)) {
+			moved = true;
+			
+			dY--;
+			
 			vY -= speed;
 		}
 		if (input.isKeyDown(KeyEvent.VK_S)) {
+			moved = true;
+			
+			dY++;
+			
 			vY += speed;
 		}
 		if (input.isKeyDown(KeyEvent.VK_A)) {
+			moved = true;
+			
+			dX--;
+			
 			vX -= speed;
 		}
 		if (input.isKeyDown(KeyEvent.VK_D)) {
+			moved = true;
+			
+			dX++;
+			
 			vX += speed;
 		}
 
+		if(moved) {
+			this.currentSpeed = speed;
+		}
+		else {
+			this.currentSpeed = 0;
+		}
+		
+		if(!moved);
+		else if(dX == 0) {
+			if(dY == 0 || dY == 1) {
+				direction = CharacterSprite.DOWN;
+			}
+			else {
+				direction = CharacterSprite.UP;
+			}
+		}
+		else if(dX == -1) {
+			if(dY == 0) {
+				direction = CharacterSprite.LEFT;
+			}
+			else if(dY == 1) {
+				direction = CharacterSprite.LEFT_DOWN;
+			}
+			else {
+				direction = CharacterSprite.LEFT_UP;
+			}
+		}
+		else {
+			if(dY == 0) {
+				direction = CharacterSprite.RIGHT;
+			}
+			else if(dY == 1) {
+				direction = CharacterSprite.RIGHT_DOWN;
+			}
+			else {
+				direction = CharacterSprite.RIGHT_UP;
+			}
+		}
+		
 		bounds.a.x = location.x - 10;
 		bounds.a.y = location.y - 20;
 		bounds.b.x = location.x + 10;

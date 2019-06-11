@@ -103,7 +103,7 @@ public class StartContext extends Context {
 		ComponentAdapter awaitDone = new ComponentAdapter() {
 			@Override
 			public void componentHidden(ComponentEvent e) {	
-				if(!sounds.isVisible() && !textures.isVisible() && !fonts.isVisible()) {
+				if(!sounds.isVisible() && !textures.isVisible() && !fonts.isVisible() && !canStart.get()) {
 					canStart.set(true);
 					StartContext.this.setLayout(new BorderLayout());
 					add(start, BorderLayout.CENTER);
