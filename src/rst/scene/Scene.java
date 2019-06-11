@@ -24,6 +24,7 @@ public abstract class Scene implements Renderable {
 	private final String name;
 	private final List<SceneRenderable> items;
 	private final List<Impedance> impedances;
+	private final List<Interactable> interactions;
 	
 	private Clip currentPlaying;
 	
@@ -42,11 +43,18 @@ public abstract class Scene implements Renderable {
 		this.items = new ArrayList<>(Arrays.asList(items));
 		Collections.sort(this.items);
 		this.impedances = new ArrayList<>();
+		this.interactions = new ArrayList<>();
 		
 		
 		for(SceneRenderable item : items) {
 			if(item instanceof Impedance) {
 				impedances.add((Impedance) item);
+			}
+		}
+		
+		for(SceneRenderable item : items) {
+			if(item instanceof Interactable) {
+				interactions.add((Interactable) item);
 			}
 		}
 	}
@@ -98,5 +106,9 @@ public abstract class Scene implements Renderable {
 	
 	public List<Impedance> getHitboxes() {
 		return impedances;
+	}
+	
+	public List<Interactable> getInteractions() {
+		return interactions;
 	}
 }

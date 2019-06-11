@@ -10,11 +10,14 @@ import rst.render.Coordinates;
 import rst.render.Input;
 import rst.render.Renderable;
 import rst.scene.Impedance;
+import rst.scene.Interactable;
 import rst.scene.Scene;
 
 public class Player extends Character implements CameraFollowable {
 
 	private long lastTimeStamp = -1;
+	
+	private boolean wasInteracting;
 
 	public Player() {
 		super("Connor", "Adams", Character.MALE, 0, 0, 99, 100, 75, 10, makeSprite());
@@ -129,11 +132,6 @@ public class Player extends Character implements CameraFollowable {
 				direction = CharacterSprite.RIGHT_UP;
 			}
 		}
-		
-		bounds.a.x = location.x - 10;
-		bounds.a.y = location.y - 20;
-		bounds.b.x = location.x + 10;
-		bounds.b.y = location.y + 20;
 
 		AABBResponse soonest;
 		do {
@@ -164,6 +162,48 @@ public class Player extends Character implements CameraFollowable {
 		location.y = Math.min(
 				Math.max(location.y + vY * delta, 20 + Renderable.STANDARD_HEIGHT / 2 - scene.getHeight() / 2),
 				Renderable.STANDARD_HEIGHT / 2 + scene.getHeight() / 2 - 20);
+		
+		bounds.a.x = location.x - 10;
+		bounds.a.y = location.y - 20;
+		bounds.b.x = location.x + 10;
+		bounds.b.y = location.y + 20;
+		
+		Interactable selected = null;
+		
+		for(Interactable interact : scene.getInteractions()) {
+			if(interact != this) {
+				if(direction == CharacterSprite.LEFT_UP || direction == CharacterSprite.UP || direction == CharacterSprite.RIGHT_UP) {
+					if(bounds.a.y == interact.getBounds().b.y && interact.getBounds().a.x <= location.x && location.x <= interact.getBounds().b.x) {
+						selected = interact;
+						break;
+					}
+				}
+				if(direction == CharacterSprite.RIGHT_UP || direction == CharacterSprite.RIGHT || direction == CharacterSprite.RIGHT_DOWN) {
+					if(bounds.b.x == interact.getBounds().a.x && interact.getBounds().a.y <= location.y && location.y <= interact.getBounds().b.y) {
+						selected = interact;
+						break;
+					}
+				}
+				if(direction == CharacterSprite.RIGHT_DOWN || direction == CharacterSprite.DOWN || direction == CharacterSprite.LEFT_DOWN) {
+					if(bounds.b.y == interact.getBounds().a.y && interact.getBounds().a.x <= location.x && location.x <= interact.getBounds().b.x) {
+						selected = interact;
+						break;
+					}
+				}
+				if(direction == CharacterSprite.LEFT_DOWN || direction == CharacterSprite.LEFT || direction == CharacterSprite.LEFT_UP) {
+					if(bounds.a.x == interact.getBounds().b.x && interact.getBounds().a.y <= location.y && location.y <= interact.getBounds().b.y) {
+						selected = interact;
+						break;
+					}
+				}
+			}
+		}
+		
+		if(selected != null && input.isKeyDown(KeyEvent.VK_E) && !wasInteracting) {
+			selected.performAction();
+		}
+		
+		wasInteracting = input.isKeyDown(KeyEvent.VK_E);
 	}
 
 	private static class AABBResponse {

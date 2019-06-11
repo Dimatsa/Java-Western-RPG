@@ -4,7 +4,7 @@ import rst.assets.AssetRegistry;
 import rst.character.Characters;
 import rst.render.Block;
 import rst.render.CameraFollowable;
-import rst.render.HittableBlock;
+import rst.render.InteractableBlock;
 
 public class TestScene extends Scene {
 
@@ -12,7 +12,7 @@ public class TestScene extends Scene {
 		super(AssetRegistry.getTextures().get("sand"), Block.GRID_SIZE * 10, Block.GRID_SIZE * 10, AssetRegistry.getSounds().get("test"),
 				(CameraFollowable) Characters.getCharacters().getCharacter("Connor Adams"), 
 				"Test Scene", Characters.getCharacters().getCharacter("Connor Adams"),
-				new HittableBlock(Block.GRID_SIZE * 10, Block.GRID_SIZE * 10, "path", 0, 0),
+				new InteractableBlock(Block.GRID_SIZE * 10, Block.GRID_SIZE * 10, "path", 0, 0).onInteract(() -> System.out.println("First")),
 				new Block("sand" , 0, 0),
 				new Block("sand" , 0, 1),
 				new Block("sand" , 0, 2),
@@ -30,7 +30,7 @@ public class TestScene extends Scene {
 				new Block("path" , 1, 4),
 				new Block("path" , 1, 5),
 				new Block("path" , 1, 6),
-				new Block("path" , 1, 7),
+				new InteractableBlock(Block.GRID_SIZE * 10, Block.GRID_SIZE * 10, "path", 1, 7).onInteract(() -> System.out.println("Second")),
 				new Block("path" , 1, 8),
 				new Block("path" , 1, 9),
 				new Block("path" , 2, 0),
