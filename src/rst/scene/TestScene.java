@@ -14,7 +14,6 @@ public class TestScene extends Scene {
 				(CameraFollowable) Characters.getCharacters().getCharacter("Connor Adams"), 
 				"Test Scene", Characters.getCharacters().getCharacter("Connor Adams"),
 				new InteractableBlock(Block.GRID_SIZE * 10, Block.GRID_SIZE * 10, "path", 0, 0).onInteract(new DialogueStarter("testDialogue")),
-				new Block("sand" , 0, 0),
 				new Block("sand" , 0, 1),
 				new Block("sand" , 0, 2),
 				new Block("sand" , 0, 3),
