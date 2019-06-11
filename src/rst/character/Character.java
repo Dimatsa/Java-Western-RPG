@@ -12,7 +12,7 @@ import rst.render.SceneRenderable;
 import rst.scene.Impedance;
 import rst.scene.Scene;
 
-public class Character implements SceneRenderable, Impedance {
+public abstract class Character implements SceneRenderable, Impedance {
 	
 	public final static int MALE = 0;
 	public final static int FEMALE = 1;
