@@ -6,7 +6,8 @@ import java.io.InputStream;
 public class Sounds extends AssetRegistry<Sound> {
 
 	private static final String[] names = {
-			"test"
+			"test",
+			"town"
 	};
 	
 	public Sounds() {

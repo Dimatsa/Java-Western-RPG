@@ -19,7 +19,8 @@ public class Textures extends AssetRegistry<Texture>{
 			"path",
 
 			"cactus1",
-			"cactus2"
+			"cactus2",
+			"railroad"
 
 	};
 	
