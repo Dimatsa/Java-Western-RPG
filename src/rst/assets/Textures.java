@@ -19,7 +19,8 @@ public class Textures extends AssetRegistry<Texture>{
 			"mainCharacterLeft",
 			"mainCharacterRight",
 			"mainCharacterDown",
-			"path"
+			"path",
+			"cactus2"
 
 	};
 	

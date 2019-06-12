@@ -23,7 +23,7 @@ public class Scenes {
 	protected Scenes() {
 		sceneMap = new HashMap<>();
 		
-		makeScene(new TestScene());
+		makeScene(new Town());
 	}
 	
 	private void makeScene(Scene s) {

@@ -40,7 +40,7 @@ public class RenderPanel extends JPanel {
 	public void startPainting() {
 		refreshTimer.start();
 		
-		currentScene = Scenes.getScenes().getScene("Test Scene");
+		currentScene = Scenes.getScenes().getScene("Town");
 		currentScene.enterScene();
 	}
 	
