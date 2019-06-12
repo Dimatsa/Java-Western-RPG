@@ -2,6 +2,7 @@ package rst.scene;
 
 import rst.assets.AssetRegistry;
 import rst.character.Characters;
+import rst.dialogue.DialogueStarter;
 import rst.render.Block;
 import rst.render.CameraFollowable;
 import rst.render.InteractableBlock;
@@ -10,9 +11,9 @@ public class TestScene extends Scene {
 
 	public TestScene() {
 		super(AssetRegistry.getTextures().get("sand"), Block.GRID_SIZE * 10, Block.GRID_SIZE * 10, AssetRegistry.getSounds().get("test"),
-				(CameraFollowable) Characters.getCharacters().getCharacter("Connor Adams"), "Test Scene", Characters.getCharacters().getCharacter("Connor Adams"),
-				new InteractableBlock(Block.GRID_SIZE * 10, Block.GRID_SIZE * 10, "path", 0, 0).onInteract(() -> System.out.println("First")),
-				new Block("sand" , 0, 0),
+				(CameraFollowable) Characters.getCharacters().getCharacter("Connor Adams"), 
+				"Test Scene", Characters.getCharacters().getCharacter("Connor Adams"),
+				new InteractableBlock(Block.GRID_SIZE * 10, Block.GRID_SIZE * 10, "path", 0, 0).onInteract(new DialogueStarter("testDialogue")),
 				new Block("sand" , 0, 1),
 				new Block("sand" , 0, 2),
 				new Block("sand" , 0, 3),
@@ -28,6 +29,7 @@ public class TestScene extends Scene {
 				new Block("path" , 1, 3),
 				new Block("path" , 1, 4),
 				new Block("path" , 1, 5),
+				new DoubleCactus(1, 5),
 				new Block("path" , 1, 6),
 				new InteractableBlock(Block.GRID_SIZE * 10, Block.GRID_SIZE * 10, "path", 1, 7).onInteract(() -> System.out.println("Second")),
 				new Block("path" , 1, 8),
@@ -111,7 +113,8 @@ public class TestScene extends Scene {
 				new Block("sand" , 9, 6),
 				new Block("sand" , 9, 7),
 				new Block("sand" , 9, 8),
-				new Block("sand" , 9, 9));
+				new Block("sand" , 9, 9),
+				new ScenePortal(Block.GRID_SIZE * 10, Block.GRID_SIZE * 10, "cactus1", -1, 4, "Test Scene", 0, 0));
 
 	}
 }

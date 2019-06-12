@@ -3,11 +3,14 @@ package rst.character;
 import java.awt.event.KeyEvent;
 
 import rst.assets.AssetRegistry;
+import rst.dialogue.DialoguePanel;
+import rst.dialogue.Dialogues;
 import rst.render.Animation;
 import rst.render.Bounds;
 import rst.render.CameraFollowable;
 import rst.render.Coordinates;
 import rst.render.Input;
+import rst.render.RenderPanel;
 import rst.render.Renderable;
 import rst.scene.Impedance;
 import rst.scene.Interactable;
@@ -18,16 +21,21 @@ public class Player extends Character implements CameraFollowable {
 	private long lastTimeStamp = -1;
 	
 	private boolean wasInteracting;
+	
+	private Interactable lastCollided;
+	
+	private DialoguePanel dialogue;
+	private RenderPanel render;
 
 	public Player() {
 		super("Connor", "Adams", Character.MALE, 0, 0, 99, 100, 75, 10, makeSprite());
 
 		location.x = Renderable.STANDARD_WIDTH / 2;
 		location.y = Renderable.STANDARD_HEIGHT / 2;
-		bounds.a.x = location.x - 10;
-		bounds.a.y = location.y - 20;
-		bounds.b.x = location.x + 10;
-		bounds.b.y = location.y + 20;
+		bounds.a.x = location.x - 20;
+		bounds.a.y = location.y;
+		bounds.b.x = location.x + 20;
+		bounds.b.y = location.y + 40;
 	}
 	
 	private static CharacterSprite makeSprite() {
@@ -45,6 +53,11 @@ public class Player extends Character implements CameraFollowable {
 
 	@Override
 	protected void updateLocation(Input input, Scene scene) {
+		if(hasPanels() && dialogue.isInDialogue()) {
+			lastTimeStamp = System.nanoTime();
+			return;
+		}
+		
 		if (lastTimeStamp == -1) {
 			lastTimeStamp = System.nanoTime();
 		}
@@ -157,16 +170,16 @@ public class Player extends Character implements CameraFollowable {
 		} while (soonest != null);
 
 		location.x = Math.min(
-				Math.max(location.x + vX * delta, 10 + Renderable.STANDARD_WIDTH / 2 - scene.getWidth() / 2),
-				Renderable.STANDARD_WIDTH / 2 + scene.getWidth() / 2 - 10);
+				Math.max(location.x + vX * delta, 20 + Renderable.STANDARD_WIDTH / 2 - scene.getWidth() / 2),
+				Renderable.STANDARD_WIDTH / 2 + scene.getWidth() / 2 - 20);
 		location.y = Math.min(
-				Math.max(location.y + vY * delta, 20 + Renderable.STANDARD_HEIGHT / 2 - scene.getHeight() / 2),
-				Renderable.STANDARD_HEIGHT / 2 + scene.getHeight() / 2 - 20);
+				Math.max(location.y + vY * delta, Renderable.STANDARD_HEIGHT / 2 - scene.getHeight() / 2),
+				Renderable.STANDARD_HEIGHT / 2 + scene.getHeight() / 2 - 40);
 		
-		bounds.a.x = location.x - 10;
-		bounds.a.y = location.y - 20;
-		bounds.b.x = location.x + 10;
-		bounds.b.y = location.y + 20;
+		bounds.a.x = location.x - 20;
+		bounds.a.y = location.y;
+		bounds.b.x = location.x + 20;
+		bounds.b.y = location.y + 40;
 		
 		Interactable selected = null;
 		
@@ -204,6 +217,14 @@ public class Player extends Character implements CameraFollowable {
 		}
 		
 		wasInteracting = input.isKeyDown(KeyEvent.VK_E);
+		
+		if(lastCollided != selected) {
+			lastCollided = selected;
+
+			if(selected != null) {
+				selected.performContact();
+			}
+		}
 	}
 
 	private static class AABBResponse {
@@ -312,8 +333,33 @@ public class Player extends Character implements CameraFollowable {
 		return resp;
 	}
 
+	public void startDialogue(String dialogName) {
+		if(hasPanels()) {
+			dialogue.setDialogue(Dialogues.getDialogues().getDialogue(dialogName));
+		}
+	}
+	
 	@Override
 	public int getRenderPriority() {
 		return Integer.MIN_VALUE;
+	}
+	
+	public void setPanels(RenderPanel renderPanel, DialoguePanel dialoguePanel) {
+		this.dialogue = dialoguePanel;
+		this.render = renderPanel;
+	}
+	
+	public boolean hasPanels() {
+		return dialogue != null && render != null;
+	}
+	
+	public void setScene(Scene newScene, Coordinates loc) {
+		if(hasPanels()) {
+			this.location.x = loc.x;
+			this.location.y = loc.y;
+			
+			render.setScene(newScene);
+		}
+		
 	}
 }

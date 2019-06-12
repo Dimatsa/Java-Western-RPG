@@ -12,14 +12,13 @@ public class Textures extends AssetRegistry<Texture>{
 			"icon128",
 			"sand",
 			"mainCharacterForward",
-
 			"plank",
-			
-
 			"mainCharacterLeft",
 			"mainCharacterRight",
 			"mainCharacterDown",
 			"path",
+
+			"cactus1",
 			"cactus2"
 
 	};
