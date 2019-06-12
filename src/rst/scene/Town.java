@@ -1,14 +1,11 @@
 package rst.scene;
 
 import rst.assets.AssetRegistry;
-import rst.assets.Sound;
-import rst.assets.Texture;
 import rst.character.Characters;
+import rst.dialogue.DialogueStarter;
 import rst.render.Block;
 import rst.render.CameraFollowable;
-import rst.render.HittableBlock;
 import rst.render.InteractableBlock;
-import rst.render.SceneRenderable;
 
 public class Town extends Scene{
 
@@ -937,7 +934,7 @@ public class Town extends Scene{
 					new Block ("path", 39, 9),
 					new Block ("path", 39, 10),
 					//Cacti
-					new HittableBlock(Block.GRID_SIZE * 40, Block.GRID_SIZE * 30, "cactus2", 5, 6));
+					new InteractableBlock(Block.GRID_SIZE * 40, Block.GRID_SIZE * 20, "cactus2", 5, 6).onInteract(new DialogueStarter("plotTest")));
 
 	}
 

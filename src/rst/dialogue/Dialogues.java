@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Consumer;
 
+import rst.plot.PlotLine;
+
 public class Dialogues {
 	private static Dialogues dialogues;
 	
@@ -27,6 +29,13 @@ public class Dialogues {
 				new String[] { "Option a", "Option b", "Option c", "Option d" }, chain("testDialogue2", "testDialogue2", "testDialogue2", "testDialogue2")));
 		makeDialogue(new DialogueEntry("testDialogue2", "Try some more!",
 				new String[] { "Option A", "Option B", "Option C" }, null));
+		
+		makeDialogue(new DialogueEntry("plotTest", "Would you like to try a plot?", new String[] { "Yes", "No" }, chain(item -> PlotLine.getPlotLine().getPlot("speak").activate(), null)));
+	}
+	
+	@SafeVarargs
+	private final Consumer<DialoguePanel>[] chain(Consumer<DialoguePanel>... panels) {
+		return panels;
 	}
 	
 	private Consumer<DialoguePanel>[] chain(String...dialogues) {

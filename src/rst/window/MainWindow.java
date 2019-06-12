@@ -5,6 +5,7 @@ import javax.swing.JFrame;
 import rst.assets.AssetRegistry;
 import rst.character.Characters;
 import rst.dialogue.Dialogues;
+import rst.plot.PlotLine;
 import rst.scene.Scenes;
 
 public class MainWindow {
@@ -27,6 +28,7 @@ public class MainWindow {
 					Characters.init();
 					Scenes.init();
 					Dialogues.init();
+					PlotLine.init();
 				}
 			}
 		};
