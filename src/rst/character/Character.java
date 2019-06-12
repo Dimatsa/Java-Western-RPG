@@ -52,7 +52,7 @@ public abstract class Character implements SceneRenderable, Impedance {
 		bounds = new Bounds();
 		bounds.a = new Coordinates();
 		bounds.a.x = location.x - 20;
-		bounds.a.y = location.y;
+		bounds.a.y = location.y - 40;
 		bounds.b = new Coordinates();
 		bounds.b.x = location.x + 20;
 		bounds.b.y = location.y + 40;
