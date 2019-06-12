@@ -5,6 +5,7 @@ import rst.character.Characters;
 import rst.dialogue.DialogueStarter;
 import rst.render.Block;
 import rst.render.CameraFollowable;
+import rst.render.HittableBlock;
 import rst.render.InteractableBlock;
 
 public class Town extends Scene{
@@ -933,8 +934,62 @@ public class Town extends Scene{
 					new Block ("path", 39, 8),
 					new Block ("path", 39, 9),
 					new Block ("path", 39, 10),
+					// path 1
+					new Block ("path", 6, 11),
+					new Block ("path", 9, 11),
+					new Block ("path", 10, 11),
+					new Block ("path", 9, 12),
+					new Block ("path", 7, 11),
+					new Block ("path", 8, 11),
+					new Block ("path", 7, 12),
+					new Block ("path", 8, 12 ),
+					new Block ("path", 7, 13),
+					new Block ("path", 8, 13),
+					new Block ("path", 7, 14),
+					new Block ("path", 8, 14),
+					new Block ("path", 7, 15),
+					new Block ("path", 8, 15),
+					new Block ("path", 7, 16),
+					new Block ("path", 8, 16),
+					new Block ("path", 7, 17),
+					new Block ("path", 8, 17),
+					new Block ("path", 7, 18),
+					new Block ("path", 8, 18),
+					new Block ("path", 7, 19),
+					new Block ("path", 8, 19),
+					
+					//Path 2
+					new Block ("path", 25, 7),
+					new Block ("path", 25, 6),
+					new Block ("path", 25, 5),
+					new Block ("path", 24, 7),
+					new Block ("path", 28, 7),
+					
+					
+					new Block ("path", 26, 7),
+					new Block ("path", 27, 7),
+					new Block ("path", 26, 6),
+					new Block ("path", 27, 6),
+					new Block ("path", 26, 5),
+					new Block ("path", 27, 5),
+					new Block ("path", 26, 4),
+					new Block ("path", 27, 4),
+					new Block ("path", 26, 3),
+					new Block ("path", 27, 3),
+					new Block ("path", 26, 2),
+					new Block ("path", 27, 2),
+					new Block ("path", 26, 1),
+					new Block ("path", 27, 1),
+					new Block ("path", 26, 0),
+					new Block ("path", 27, 0),
+					
 					//Cacti
-					new InteractableBlock(Block.GRID_SIZE * 40, Block.GRID_SIZE * 20, "cactus2", 5, 6).onInteract(new DialogueStarter("plotTest")));
+					new InteractableBlock(Block.GRID_SIZE * 40, Block.GRID_SIZE * 20, "cactus2", 5, 6).onInteract(new DialogueStarter("plotTest")),
+					new DoubleCactus(Block.GRID_SIZE * 40, Block.GRID_SIZE * 20, 1, 5),
+					new DoubleCactus(Block.GRID_SIZE * 40, Block.GRID_SIZE * 20, 10, 14),
+					new DoubleCactus(Block.GRID_SIZE * 40, Block.GRID_SIZE * 20, 14, 15),
+					new DoubleCactus(Block.GRID_SIZE * 40, Block.GRID_SIZE * 20, 19, 18),
+					new HittableBlock(Block.GRID_SIZE * 40, Block.GRID_SIZE * 20, "cactus2", 13, 11 ));
 
 	}
 
