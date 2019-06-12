@@ -40,10 +40,10 @@ public class Player extends Character implements CameraFollowable {
 	
 	private static CharacterSprite makeSprite() {
 		return new CharacterSprite("Connor Adams", 
-				new Animation(1000, AssetRegistry.getTextures().get("mainCharacterForward"),  AssetRegistry.getTextures().get("icon32"), AssetRegistry.getTextures().get("path")),
-				new Animation(1000, AssetRegistry.getTextures().get("icon32")),
-				 new Animation(1000, AssetRegistry.getTextures().get("path")),
-				 new Animation(1000, AssetRegistry.getTextures().get("sand")));
+				new Animation(1000, AssetRegistry.getTextures().get("mainCharacterUp")),
+				new Animation(1000, AssetRegistry.getTextures().get("mainCharacterDown")),
+				 new Animation(1000, AssetRegistry.getTextures().get("mainCharacterRight")),
+				 new Animation(1000, AssetRegistry.getTextures().get("mainCharacterLeft")));
 	}
 
 	@Override

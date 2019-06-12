@@ -12,7 +12,7 @@ import rst.render.SceneRenderable;
 
 public class Town extends Scene{
 
-	public Town() {	super(AssetRegistry.getTextures().get("sand"), Block.GRID_SIZE * 40, Block.GRID_SIZE * 2A0, AssetRegistry.getSounds().get("test"),
+	public Town() {	super(AssetRegistry.getTextures().get("sand"), Block.GRID_SIZE * 40, Block.GRID_SIZE * 20, AssetRegistry.getSounds().get("test"),
 					(CameraFollowable) Characters.getCharacters().getCharacter("Connor Adams"), "Town", Characters.getCharacters().getCharacter("Connor Adams"),
 					new Block ("sand", 0, 0),
 					new Block ("sand", 0, 1),

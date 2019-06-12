@@ -11,11 +11,11 @@ public class Textures extends AssetRegistry<Texture>{
 			"icon64",
 			"icon128",
 			"sand",
-			"mainCharacterForward",
+			"mainCharacterUp",
+			"mainCharacterDown",
 			"plank",
 			"mainCharacterLeft",
 			"mainCharacterRight",
-			"mainCharacterDown",
 			"path",
 
 			"cactus1",
