@@ -29,7 +29,7 @@ public class TestScene extends Scene {
 				new Block("path" , 1, 3),
 				new Block("path" , 1, 4),
 				new Block("path" , 1, 5),
-				new DoubleCactus(1, 5),
+				new DoubleCactus(Block.GRID_SIZE * 10, Block.GRID_SIZE * 10, 1, 5),
 				new Block("path" , 1, 6),
 				new InteractableBlock(Block.GRID_SIZE * 10, Block.GRID_SIZE * 10, "path", 1, 7).onInteract(() -> System.out.println("Second")),
 				new Block("path" , 1, 8),
