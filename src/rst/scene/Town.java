@@ -818,7 +818,8 @@ public class Town extends Scene{
 					//Paths
 					
 					//Cacti
-					new HittableBlock(Block.GRID_SIZE * 40, Block.GRID_SIZE * 30, "cactus2", 5, 6));
+					new HittableBlock(Block.GRID_SIZE * 40, Block.GRID_SIZE * 20, "cactus2", 5, 6),
+					new DoubleCactus(Block.GRID_SIZE * 40, Block.GRID_SIZE * 20, 1, 5));
 
 	}
 
