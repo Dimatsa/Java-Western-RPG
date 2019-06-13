@@ -10,10 +10,8 @@ import java.awt.event.MouseEvent;
 import java.awt.geom.Rectangle2D;
 
 import javax.swing.JPanel;
-import javax.swing.Timer;
 
 import rst.assets.AssetRegistry;
-import rst.assets.Fonts;
 import rst.scene.Scene;
 import rst.scene.Scenes;
 
