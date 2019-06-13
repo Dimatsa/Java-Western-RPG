@@ -4,6 +4,7 @@ import java.awt.Graphics2D;
 
 import rst.assets.AssetRegistry;
 import rst.assets.Texture;
+import rst.character.CharacterSprite;
 import rst.render.AABB;
 import rst.render.AABB.AABBResponse;
 import rst.render.Bounds;
@@ -145,6 +146,43 @@ public class Bullet implements SceneRenderable, Interactable {
 		}
 	}
 
+	public int getBulletDirection() {
+		double theta = Math.atan2(vY, vX) / Math.PI;
+		int direction;
+		
+		
+		if(theta < 0) {
+			theta += 2;
+		}
+		
+		if(0.125 < theta && theta <= 0.375) {
+			direction = CharacterSprite.RIGHT_DOWN;
+		}
+		else if(0.375 < theta && theta <= 0.625) {
+			direction = CharacterSprite.DOWN; 
+		}
+		else if(0.625 < theta && theta <= 0.875) {
+			direction = CharacterSprite.LEFT_DOWN;
+		}
+		else if(0.875 < theta && theta <= 1.125) {
+			direction = CharacterSprite.LEFT;
+		}
+		else if(1.125 < theta && theta <= 1.375) {
+			direction = CharacterSprite.LEFT_UP;
+		}
+		else if(1.375 < theta && theta <= 1.625) {
+			direction = CharacterSprite.UP;
+		}
+		else if(1.625 < theta && theta <= 1.875) {
+			direction = CharacterSprite.RIGHT_UP;
+		}
+		else {
+			direction = CharacterSprite.RIGHT;
+		}
+		
+		return direction;
+	}
+	
 	@Override
 	public int getRenderPriority() {
 		return 1;

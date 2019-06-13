@@ -234,6 +234,7 @@ public class Player extends Character implements CameraFollowable {
 			Bullet bullet = new Bullet(location.x, location.y,
 					((double)Renderable.STANDARD_WIDTH / render.getWidth() * input.getMouseX()) - Scene.STANDARD_WIDTH / 2 + scene.getCameraLocation().x,
 					((double)Renderable.STANDARD_HEIGHT / render.getHeight() * input.getMouseY()) - Scene.STANDARD_HEIGHT / 2 + scene.getCameraLocation().y, this);
+			direction = bullet.getBulletDirection();
 			scene.addItemRender(bullet);
 			lastShot = System.nanoTime();
 		}
