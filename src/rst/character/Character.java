@@ -21,7 +21,7 @@ public abstract class Character implements SceneRenderable, Interactable {
 	private final String lastName;
 	private final int gender;
 	private final CharacterSprite sprite;
-	private int hp = 100;
+	private int hp = 10;
 	private int strength;
 	private double speed;
 	private int intelligence;

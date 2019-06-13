@@ -57,6 +57,8 @@ public class Player extends Character implements CameraFollowable {
 
 	@Override
 	protected void updateLocation(Input input, Scene scene) {
+		dialogue.updatePlayer(this);
+		
 		if(hasPanels() && dialogue.isInDialogue()) {
 			lastTimeStamp = System.nanoTime();
 			return;
