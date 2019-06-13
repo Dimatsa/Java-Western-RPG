@@ -11,6 +11,7 @@ import javax.sound.sampled.Clip;
 import rst.assets.Sound;
 import rst.plot.PlotLine;
 import rst.render.Block;
+import rst.render.Bounds;
 import rst.render.CameraFollowable;
 import rst.render.Coordinates;
 import rst.render.Input;
@@ -95,11 +96,18 @@ public abstract class Scene implements Renderable {
 		items.add(item);
 		
 		if(item instanceof Impedance) {
-			impedances.add((Impedance) item);
-		}
-		
-		if(item instanceof Interactable) {
-			interactions.add((Interactable) item);
+			Bounds b = ((Impedance) item).getBounds();
+			
+			if(b.b.x >= Renderable.STANDARD_WIDTH / 2 - getWidth() / 2
+					&& b.a.x <= Renderable.STANDARD_WIDTH / 2 + getWidth() / 2 &&
+					b.b.y >= Renderable.STANDARD_HEIGHT / 2 - getHeight() / 2
+					&& b.a.y <= Renderable.STANDARD_HEIGHT / 2 + getHeight() / 2) {
+				impedances.add((Impedance) item);
+				
+				if(item instanceof Interactable) {
+					interactions.add((Interactable) item);
+				}
+			}
 		}
 	}
 	

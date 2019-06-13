@@ -7,7 +7,6 @@ import rst.character.Characters;
 import rst.dialogue.DialogueStarter;
 import rst.render.Block;
 import rst.render.CameraFollowable;
-import rst.render.HittableBlock;
 import rst.render.InteractableBlock;
 import rst.render.SceneRenderable;
 
@@ -583,11 +582,6 @@ public class Town extends Scene{
 					
 					//Cacti
 					new InteractableBlock(true, Block.GRID_SIZE * 60, Block.GRID_SIZE * 40, "cactus2", 5, 6).onInteract(new DialogueStarter("plotTest")),
-					new DoubleCactus(Block.GRID_SIZE * 60, Block.GRID_SIZE * 40, 1, 5),
-					new DoubleCactus(Block.GRID_SIZE * 60, Block.GRID_SIZE * 40, 10, 14),
-					new DoubleCactus(Block.GRID_SIZE * 60, Block.GRID_SIZE * 40, 14, 15),
-					new DoubleCactus(Block.GRID_SIZE * 60, Block.GRID_SIZE * 40, 19, 18),
-					new HittableBlock(Block.GRID_SIZE * 60, Block.GRID_SIZE * 40, "cactus2", 13, 11 ),
 					
 					//Rails
 					new Block("railroad" , 50, -20),
