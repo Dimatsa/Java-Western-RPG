@@ -671,7 +671,11 @@ public class Town extends Scene{
 					new Block("railroad" , 50, 57),
 					new Block("railroad" , 50, 58),
 					new Block("railroad" , 50, 59),
-					new Block("railroad" , 50, 60)
+					new Block("railroad" , 50, 60),
+					
+					//Portals
+					new ScenePortal(Block.GRID_SIZE * 60, Block.GRID_SIZE * 40, "greenArrowUp", 20, 20, "Saloon", 4, 4)
+
 );
 	
 					
