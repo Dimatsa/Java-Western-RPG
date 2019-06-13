@@ -156,7 +156,6 @@ public abstract class Scene implements Renderable {
 		
 		remove.removeIf(a -> true);
 		add.removeIf(a -> true);
-		
 	}
 	
 	public String getName() {

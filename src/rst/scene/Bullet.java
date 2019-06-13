@@ -54,10 +54,13 @@ public class Bullet implements SceneRenderable, Interactable {
 		double camX = camLoc.x - Renderable.STANDARD_WIDTH / 2.0;
 		double camY = camLoc.y - Renderable.STANDARD_HEIGHT / 2.0;
 		
-		double coordX = location.x;
-		double coordY = location.y;
+		int coordX = (int) ((location.x - 5 - camX) + 0.5);
+		int coordY = (int) ((location.y - 5 - camY) + 0.5);
 		
-		texture.draw(g, (int) ((coordX - 5 - camX) + 0.5), (int) ((coordY - 5 - camY) + 0.5), 10, 10);
+		if(coordX + 10 >= 0 && coordX <= Renderable.STANDARD_WIDTH &&
+				coordY + 10 >= 0 && coordY <= Renderable.STANDARD_HEIGHT) {
+			texture.draw(g, coordX, coordY, 10, 10);
+		}
 		
 		updateLocation(input, scene);
 	}

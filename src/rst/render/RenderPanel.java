@@ -62,6 +62,12 @@ public class RenderPanel extends JPanel {
 		Graphics2D g = (Graphics2D)graphics.create();
 		g.scale((double)getWidth() / Renderable.STANDARD_WIDTH, (double)getHeight() / Renderable.STANDARD_HEIGHT);
 		
+		// Uncomment to show rendering optimization
+//		g.translate(getWidth() / 2.0 - 0.5 * Renderable.STANDARD_WIDTH / 2.0, getHeight() / 2.0 - 0.5 * Renderable.STANDARD_HEIGHT / 2.0);
+//		g.scale(0.5, 0.5);
+		
+		
+		
 		g.setColor(Color.BLACK);
 		g.fillRect(0, 0, Renderable.STANDARD_WIDTH, Renderable.STANDARD_HEIGHT);
 		
