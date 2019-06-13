@@ -68,9 +68,9 @@ public class Player extends Character implements CameraFollowable {
 
 		double speed;
 		if (input.isKeyDown(KeyEvent.VK_SHIFT)) {
-			speed = 500;
+			speed = 400;
 		} else {
-			speed = 100;
+			speed = 250;
 		}
 
 		double vX = 0, vY = 0;
