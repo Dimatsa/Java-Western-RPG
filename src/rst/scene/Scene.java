@@ -32,7 +32,7 @@ public abstract class Scene implements Renderable {
 	@SuppressWarnings("unused")
 	private Sound overrideAmbientSound;
 	
-	public Scene(String background, int xSize, int ySize, Sound ambientSound, CameraFollowable camera, String name, SceneRenderable... items)
+	public Scene(String background1, String background2, int xSize, int ySize, Sound ambientSound, CameraFollowable camera, String name, SceneRenderable... items)
 	{
 		this.xSize = xSize * Block.GRID_SIZE;
 		this.ySize = ySize * Block.GRID_SIZE;
@@ -47,13 +47,26 @@ public abstract class Scene implements Renderable {
 		
 		for(int i = -20; i < xSize + 20; i++) {
 			for(int j = -20; j < ySize + 20; j++) {
-				Block b = new Block(background, i, j) {
-					@Override
-					public int getRenderPriority() {
-						return 11;
+				if(0 <= i && i < xSize && 0 <= j && j <= ySize) {
+					if(background1 != null) {
+						Block b = new Block(background1, i, j) {
+							@Override
+							public int getRenderPriority() {
+								return 11;
+							}
+						};
+						this.items.add(b);
 					}
-				};
-				this.items.add(b);
+				}
+				else if(background2 != null) {
+					Block b = new Block(background2, i, j) {
+						@Override
+						public int getRenderPriority() {
+							return 11;
+						}
+					};
+					this.items.add(b);
+				}
 			}
 		}
 		
