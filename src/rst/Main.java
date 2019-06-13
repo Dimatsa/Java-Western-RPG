@@ -7,7 +7,7 @@ import rst.character.NpcCharacter;
 import rst.window.MainWindow;
 
 public class Main {
-
+	
 	public static void main(String[] args) {
 		createAndShowGUI();
 
@@ -29,7 +29,6 @@ public class Main {
 		Character gian = new NpcCharacter("Giancarlo", "Salvador", Character.MALE, 1, 1, 1, 1, 1, 1, null);
 		Character steve = new NpcCharacter("Steve", "Larkin", Character.MALE, 1, 1, 1, 1, 1, 1, null);
 		Character flinston = new NpcCharacter("Flinston", "Stone", Character.MALE, 1, 1, 1, 1, 1, 1, null);
-
 	}
 
 	private static void createAndShowGUI() {

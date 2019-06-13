@@ -9,7 +9,6 @@ import java.util.List;
 import javax.sound.sampled.Clip;
 
 import rst.assets.Sound;
-import rst.assets.Texture;
 import rst.render.Block;
 import rst.render.CameraFollowable;
 import rst.render.Coordinates;
@@ -44,6 +43,7 @@ public abstract class Scene implements Renderable {
 		this.interactions = new ArrayList<>();
 		
 		
+		
 		for(int i = -20; i < xSize + 20; i++) {
 			for(int j = -20; j < ySize + 20; j++) {
 				Block b = new Block(background, i, j) {
@@ -56,8 +56,6 @@ public abstract class Scene implements Renderable {
 			}
 		}
 		
-		Collections.sort(this.items);
-		
 		for(SceneRenderable item : items) {
 			if(item instanceof Impedance) {
 				impedances.add((Impedance) item);
@@ -69,7 +67,25 @@ public abstract class Scene implements Renderable {
 				interactions.add((Interactable) item);
 			}
 		}
+		
+		editTerrain();
+		
+		Collections.sort(this.items);
 	}
+	
+	protected void addItem(SceneRenderable item) {
+		items.add(item);
+		
+		if(item instanceof Impedance) {
+			impedances.add((Impedance) item);
+		}
+		
+		if(item instanceof Interactable) {
+			interactions.add((Interactable) item);
+		}
+	}
+	
+	protected void editTerrain() {}
 	
 	public void enterScene() {
 		if(ambientSound != null) {
@@ -113,5 +129,9 @@ public abstract class Scene implements Renderable {
 	
 	public List<Interactable> getInteractions() {
 		return interactions;
+	}
+	
+	protected List<SceneRenderable> getSceneRenderables() {
+		return items;
 	}
 }

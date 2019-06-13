@@ -1,5 +1,8 @@
 package rst.scene;
 
+import java.util.Random;
+
+import rst.Main;
 import rst.assets.AssetRegistry;
 import rst.character.Characters;
 import rst.dialogue.DialogueStarter;
@@ -7,6 +10,7 @@ import rst.render.Block;
 import rst.render.CameraFollowable;
 import rst.render.HittableBlock;
 import rst.render.InteractableBlock;
+import rst.render.SceneRenderable;
 
 public class Town extends Scene{
 
@@ -579,13 +583,13 @@ public class Town extends Scene{
 
 					
 					//Cacti
-					new InteractableBlock(Block.GRID_SIZE * 60, Block.GRID_SIZE * 40, "cactus2", 5, 6).onInteract(new DialogueStarter("plotTest")),
-					new DoubleCactus(Block.GRID_SIZE * 60, Block.GRID_SIZE * 40, 1, 5),
-					new DoubleCactus(Block.GRID_SIZE * 60, Block.GRID_SIZE * 40, 10, 14),
-					new DoubleCactus(Block.GRID_SIZE * 60, Block.GRID_SIZE * 40, 14, 15),
-					new DoubleCactus(Block.GRID_SIZE * 60, Block.GRID_SIZE * 40, 19, 18),
-					new HittableBlock(Block.GRID_SIZE * 60, Block.GRID_SIZE * 40, "cactus2", 13, 11 ),
-					
+//					new InteractableBlock(Block.GRID_SIZE * 60, Block.GRID_SIZE * 40, "cactus2", 5, 6).onInteract(new DialogueStarter("plotTest")),
+//					new DoubleCactus(Block.GRID_SIZE * 60, Block.GRID_SIZE * 40, 1, 5),
+//					new DoubleCactus(Block.GRID_SIZE * 60, Block.GRID_SIZE * 40, 10, 14),
+//					new DoubleCactus(Block.GRID_SIZE * 60, Block.GRID_SIZE * 40, 14, 15),
+//					new DoubleCactus(Block.GRID_SIZE * 60, Block.GRID_SIZE * 40, 19, 18),
+//					new HittableBlock(Block.GRID_SIZE * 60, Block.GRID_SIZE * 40, "cactus2", 13, 11 ),
+//					
 					//Rails
 					new Block("railroad" , 50, -20),
 					new Block("railroad" , 50, -19),
@@ -674,4 +678,62 @@ public class Town extends Scene{
 
 	}
 
+	public void editTerrain() {
+		final long seed = 4598653583816203960L;
+		
+		int w = getWidth() / Block.GRID_SIZE;
+		int h = getHeight() / Block.GRID_SIZE;
+		
+		int num_cactus = (int) (0.125 * (w + 40) * (h + 40));
+		
+		Random random = new Random(seed);
+		
+		boolean[][] taken = new boolean[w + 40][h + 40]; 
+		
+		for(SceneRenderable item : this.getSceneRenderables()) {
+			if(item instanceof Block) {
+				Block block = (Block)item;
+				if(!block.getTexture().getName().equals("sand") && -20 <= block.getX() && block.getX() < w + 20 && -20 <= block.getY() && block.getY() < h + 20) {
+					taken[block.getX() + 20][block.getY() + 20] = true;
+				}
+			}
+		}
+		
+		for(int i = 0; i < num_cactus; i++) {
+			int x, y;
+			do {
+				x = random.nextInt(w + 40) - 20;
+				y = random.nextInt(h + 40) - 20;
+			} while(taken[x + 20][y + 20] || taken[x + 20][Math.min(h + 19, y + 21)]);
+			
+			taken[x + 20][y + 20] = true;
+			int type = random.nextInt(5);
+			
+			
+			Block block;
+			switch(type) {
+			case 0:
+				if(y != h + 19) {
+					taken[x + 20][y + 21] = true; 
+				}
+				block = new DoubleCactus(getWidth(), getHeight(), x, y);
+				break;
+			case 1:
+				block = new HittableBlock(getWidth(), getHeight(), "cactus2", x, y);
+				break;
+			case 2:
+				block = new HittableBlock(getWidth(), getHeight(), "bush1", x, y);
+				break;
+			case 3:
+				block = new HittableBlock(getWidth(), getHeight(), "bush2", x, y);
+				break;
+			case 4:
+				block = new HittableBlock(getWidth(), getHeight(), "bush3", x, y);
+				break;
+				default: throw new IllegalStateException("Number should be 0..4");
+			}
+			
+			addItem(block);
+		}
+	}
 }

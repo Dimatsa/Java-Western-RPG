@@ -23,7 +23,10 @@ public class Textures extends AssetRegistry<Texture>{
 			"fenceVertical",
 			"railroad",
 			"fenceHorizontalRight",
-			"fenceHorizontalLeft"
+			"fenceHorizontalLeft",
+			"bush1",
+			"bush2",
+			"bush3"
 	};
 	
 	public Textures() {
