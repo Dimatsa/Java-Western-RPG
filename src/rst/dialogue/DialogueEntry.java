@@ -30,6 +30,9 @@ public class DialogueEntry implements Consumer<DialoguePanel> {
 	public void execute(DialoguePanel dialoguePanel, int index) {
 		if(actions != null && actions[index] != null) {
 			actions[index].accept(dialoguePanel);
+			if(dialoguePanel.getDialogueName().equals(getDialogue())) {
+				dialoguePanel.setDialogue(null);
+			}
 		}
 		else {
 			dialoguePanel.setDialogue(null);

@@ -9,6 +9,7 @@ import java.util.List;
 import javax.sound.sampled.Clip;
 
 import rst.assets.Sound;
+import rst.plot.PlotLine;
 import rst.render.Block;
 import rst.render.CameraFollowable;
 import rst.render.Coordinates;
@@ -102,6 +103,8 @@ public abstract class Scene implements Renderable {
 	
 	@Override
 	public void render(Graphics2D g, Input input) {
+		PlotLine.getPlotLine().executePlot();
+		
 		for(SceneRenderable item : items) {
 			item.render(g, input, this);
 		}
