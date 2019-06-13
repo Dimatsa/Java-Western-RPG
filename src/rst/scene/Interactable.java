@@ -5,6 +5,8 @@ public interface Interactable extends Impedance {
 	
 	boolean[] getSides();
 	
-	void performAction();
-	void performContact();
+	void performAction(Scene scene);
+	void performContact(Scene scene);
+	
+	void performHit(Scene scene);
 }

@@ -11,7 +11,7 @@ public class ScenePortal extends InteractableBlock {
 	private final Coordinates newCoords;
 	
 	public ScenePortal(int width, int height, String textureName, int x, int y, String otherScene, int newX, int newY) {
-		super(width, height, textureName, x, y, 1, 1);
+		super(true, width, height, textureName, x, y, 1, 1);
 		super.onCollide(this::updateLocation);
 		
 		this.otherScene = otherScene;

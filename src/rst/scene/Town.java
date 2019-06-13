@@ -582,7 +582,7 @@ public class Town extends Scene{
 
 					
 					//Cacti
-					new InteractableBlock(Block.GRID_SIZE * 60, Block.GRID_SIZE * 40, "cactus2", 5, 6).onInteract(new DialogueStarter("plotTest")),
+					new InteractableBlock(true, Block.GRID_SIZE * 60, Block.GRID_SIZE * 40, "cactus2", 5, 6).onInteract(new DialogueStarter("plotTest")),
 					new DoubleCactus(Block.GRID_SIZE * 60, Block.GRID_SIZE * 40, 1, 5),
 					new DoubleCactus(Block.GRID_SIZE * 60, Block.GRID_SIZE * 40, 10, 14),
 					new DoubleCactus(Block.GRID_SIZE * 60, Block.GRID_SIZE * 40, 14, 15),
@@ -722,16 +722,16 @@ public class Town extends Scene{
 				block = new DoubleCactus(getWidth(), getHeight(), x, y);
 				break;
 			case 1:
-				block = new HittableBlock(getWidth(), getHeight(), "cactus2", x, y);
+				block = new InteractableBlock(false, getWidth(), getHeight(), "cactus2", x, y);
 				break;
 			case 2:
-				block = new HittableBlock(getWidth(), getHeight(), "bush1", x, y);
+				block = new InteractableBlock(false, getWidth(), getHeight(), "bush1", x, y);
 				break;
 			case 3:
-				block = new HittableBlock(getWidth(), getHeight(), "bush2", x, y);
+				block = new InteractableBlock(false, getWidth(), getHeight(), "bush2", x, y);
 				break;
 			case 4:
-				block = new HittableBlock(getWidth(), getHeight(), "bush3", x, y);
+				block = new InteractableBlock(false, getWidth(), getHeight(), "bush3", x, y);
 				break;
 				default: throw new IllegalStateException("Number should be 0..4");
 			}

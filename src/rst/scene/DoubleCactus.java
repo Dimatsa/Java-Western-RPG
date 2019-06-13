@@ -1,11 +1,11 @@
 package rst.scene;
 
-import rst.render.HittableBlock;
+import rst.render.InteractableBlock;
 
-public class DoubleCactus extends HittableBlock {
+public class DoubleCactus extends InteractableBlock {
 
 	public DoubleCactus(int sceneWidth, int sceneHeight, int x, int y) {
-		super(sceneWidth, sceneHeight, "cactus1", x, y, 1, 2);
+		super(false, sceneWidth, sceneHeight, "cactus1", x, y, 1, 2);
 	}
 	
 	@Override

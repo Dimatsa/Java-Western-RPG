@@ -5,13 +5,15 @@ import java.awt.event.KeyEvent;
 import rst.assets.AssetRegistry;
 import rst.dialogue.DialoguePanel;
 import rst.dialogue.Dialogues;
+import rst.render.AABB;
+import rst.render.AABB.AABBResponse;
 import rst.render.Animation;
-import rst.render.Bounds;
 import rst.render.CameraFollowable;
 import rst.render.Coordinates;
 import rst.render.Input;
 import rst.render.RenderPanel;
 import rst.render.Renderable;
+import rst.scene.Bullet;
 import rst.scene.Impedance;
 import rst.scene.Interactable;
 import rst.scene.Scene;
@@ -26,6 +28,8 @@ public class Player extends Character implements CameraFollowable {
 	
 	private DialoguePanel dialogue;
 	private RenderPanel render;
+	
+	private long lastShot;
 
 	public Player() {
 		super("Connor", "Adams", Character.MALE, 0, 0, 99, 100, 75, 10, makeSprite());
@@ -146,13 +150,13 @@ public class Player extends Character implements CameraFollowable {
 			}
 		}
 
-		AABBResponse soonest;
+		AABB.AABBResponse soonest;
 		do {
 			soonest = null;
 			
 			for (Impedance hitbox : scene.getHitboxes()) {
 				if (hitbox != this) {
-					AABBResponse resp = sweptAABB(this.getBounds(), hitbox.getBounds(), vX, vY, delta);
+					AABBResponse resp = AABB.sweptAABB(this.getBounds(), hitbox.getBounds(), vX, vY, delta);
 
 					if (resp.toi < delta && (soonest == null || resp.toi < soonest.toi)) {
 						soonest = resp;
@@ -213,7 +217,7 @@ public class Player extends Character implements CameraFollowable {
 		}
 		
 		if(selected != null && input.isKeyDown(KeyEvent.VK_E) && !wasInteracting) {
-			selected.performAction();
+			selected.performAction(scene);
 		}
 		
 		wasInteracting = input.isKeyDown(KeyEvent.VK_E);
@@ -222,115 +226,17 @@ public class Player extends Character implements CameraFollowable {
 			lastCollided = selected;
 
 			if(selected != null) {
-				selected.performContact();
+				selected.performContact(scene);
 			}
 		}
-	}
-
-	private static class AABBResponse {
-		private double toi;
-		private double xNormal, yNormal;
-	}
-
-	private static AABBResponse sweptAABB(Bounds a, Bounds b, double vX, double vY, double delta) {
-		double xInvEntry, yInvEntry;
-		double xInvExit, yInvExit;
-
-		// find the distance between the objects on the near and far sides for both x
-		// and y
-		if (vX > 0) {
-			xInvEntry = b.a.x - a.b.x;
-			xInvExit = b.b.x - a.a.x;
-		} else {
-			xInvEntry = b.b.x - a.a.x;
-			xInvExit = b.a.x - a.b.x;
+		
+		if(System.nanoTime() >= lastShot + 1000000000 && input.isLeftMouseDown()) {
+			Bullet bullet = new Bullet(location.x, location.y,
+					((double)Renderable.STANDARD_WIDTH / render.getWidth() * input.getMouseX()) - Scene.STANDARD_WIDTH / 2 + scene.getCameraLocation().x,
+					((double)Renderable.STANDARD_HEIGHT / render.getHeight() * input.getMouseY()) - Scene.STANDARD_HEIGHT / 2 + scene.getCameraLocation().y, this);
+			scene.addItemRender(bullet);
+			lastShot = System.nanoTime();
 		}
-
-		if (vY > 0) {
-			yInvEntry = b.a.y - a.b.y;
-			yInvExit = b.b.y - a.a.y;
-		} else {
-			yInvEntry = b.b.y - a.a.y;
-			yInvExit = b.a.y - a.b.y;
-		}
-
-		// find time of collision and time of leaving for each axis (if statement is to
-		// prevent divide by zero)
-		double xEntry, yEntry;
-		double xExit, yExit;
-
-		if (vX == 0) {
-			xEntry = Double.NEGATIVE_INFINITY;
-			xExit = Double.POSITIVE_INFINITY;
-		} else {
-			xEntry = xInvEntry / vX;
-			xExit = xInvExit / vX;
-		}
-
-		if (vY == 0) {
-			yEntry = Double.NEGATIVE_INFINITY;
-			yExit = Double.POSITIVE_INFINITY;
-		} else {
-			yEntry = yInvEntry / vY;
-			yExit = yInvExit / vY;
-		}
-
-		if (yEntry > delta) {
-			yEntry = Double.NEGATIVE_INFINITY;
-		}
-		if (xEntry > delta) {
-			xEntry = Double.NEGATIVE_INFINITY;
-		}
-
-		// find the earliest/latest times of collision
-		double entryTime = Math.max(xEntry, yEntry);
-		double exitTime = Math.min(xExit, yExit);
-
-		AABBResponse resp = new AABBResponse();
-		resp.toi = delta;
-
-		if (entryTime > exitTime) {
-			return resp; // This check was correct.
-		}
-		if (xEntry < 0 && yEntry < 0) {
-			return resp;
-		}
-		if (xEntry < 0) {
-			// Check that the bounding box started overlapped or not.
-			if (a.b.x <= b.a.x || a.a.x >= b.b.x) {
-				return resp;
-			}
-		}
-		if (yEntry < 0) {
-			// Check that the bounding box started overlapped or not.
-			if (a.b.y <= b.a.y || a.a.y >= b.b.y) {
-				return resp;
-			}
-		}
-
-		resp.toi = entryTime;
-
-		// calculate normal of collided surface
-		if (xEntry > yEntry) {
-			if (xInvEntry < 0) {
-				resp.xNormal = 1.0f;
-				resp.yNormal = 0.0f;
-			} else {
-				resp.xNormal = -1.0f;
-				resp.yNormal = 0.0f;
-			}
-		} else {
-			if (yInvEntry < 0.0f) {
-				resp.xNormal = 0.0f;
-				resp.yNormal = 1.0f;
-			} else {
-				resp.xNormal = 0.0f;
-				resp.yNormal = -1.0f;
-			}
-		}
-
-		// return the time of collision
-		return resp;
 	}
 
 	public void startDialogue(String dialogName) {

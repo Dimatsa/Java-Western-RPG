@@ -9,10 +9,10 @@ import rst.render.Coordinates;
 import rst.render.Input;
 import rst.render.Renderable;
 import rst.render.SceneRenderable;
-import rst.scene.Impedance;
+import rst.scene.Interactable;
 import rst.scene.Scene;
 
-public abstract class Character implements SceneRenderable, Impedance {
+public abstract class Character implements SceneRenderable, Interactable {
 	
 	public final static int MALE = 0;
 	public final static int FEMALE = 1;
@@ -180,4 +180,20 @@ public abstract class Character implements SceneRenderable, Impedance {
 	public Bounds getBounds() {
 		return bounds;
 	}
+	
+	@Override
+	public boolean[] getSides() {
+		return new boolean[] { true, true, true, true };
+	}
+	
+	@Override
+	public void performHit(Scene scene) {
+		hp -= 5;
+	}
+	
+	@Override
+	public void performContact(Scene scene) {}
+	
+	@Override
+	public void performAction(Scene scene) {}
 }

@@ -26,6 +26,8 @@ public abstract class Scene implements Renderable {
 	private final List<Impedance> impedances;
 	private final List<Interactable> interactions;
 	
+	private final List<SceneRenderable> remove, add;
+	
 	private Clip currentPlaying;
 	
 	private CameraFollowable camera;
@@ -42,6 +44,8 @@ public abstract class Scene implements Renderable {
 		this.items = new ArrayList<>(Arrays.asList(items));
 		this.impedances = new ArrayList<>();
 		this.interactions = new ArrayList<>();
+		this.remove = new ArrayList<>();
+		this.add = new ArrayList<>();
 		
 		
 		
@@ -99,6 +103,10 @@ public abstract class Scene implements Renderable {
 		}
 	}
 	
+	public void addItemRender(SceneRenderable item) {
+		add.add(item);
+	}
+	
 	protected void editTerrain() {}
 	
 	public void enterScene() {
@@ -121,6 +129,26 @@ public abstract class Scene implements Renderable {
 		for(SceneRenderable item : items) {
 			item.render(g, input, this);
 		}
+		
+		for(SceneRenderable item : remove) {
+			items.remove(item);
+			
+			if(item instanceof Impedance) {
+				impedances.remove((Impedance)item);
+			}
+			
+			if(item instanceof Interactable) {
+				interactions.remove((Interactable)item);
+			}
+		}
+		
+		for(SceneRenderable item : add) {
+			this.addItem(item);
+		}
+		
+		remove.removeIf(a -> true);
+		add.removeIf(a -> true);
+		
 	}
 	
 	public String getName() {
@@ -149,5 +177,9 @@ public abstract class Scene implements Renderable {
 	
 	protected List<SceneRenderable> getSceneRenderables() {
 		return items;
+	}
+	
+	public void removeItem(SceneRenderable item) {
+		remove.add(item);
 	}
 }
