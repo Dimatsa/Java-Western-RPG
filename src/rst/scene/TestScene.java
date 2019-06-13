@@ -10,7 +10,7 @@ import rst.render.InteractableBlock;
 public class TestScene extends Scene {
 
 	public TestScene() {
-		super(AssetRegistry.getTextures().get("sand"), Block.GRID_SIZE * 10, Block.GRID_SIZE * 10, AssetRegistry.getSounds().get("test"),
+		super("sand", 10, 10, AssetRegistry.getSounds().get("test"),
 				(CameraFollowable) Characters.getCharacters().getCharacter("Connor Adams"), 
 				"Test Scene", Characters.getCharacters().getCharacter("Connor Adams"),
 				new InteractableBlock(Block.GRID_SIZE * 10, Block.GRID_SIZE * 10, "path", 0, 0).onInteract(new DialogueStarter("testDialogue")),

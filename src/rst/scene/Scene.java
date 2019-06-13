@@ -10,6 +10,7 @@ import javax.sound.sampled.Clip;
 
 import rst.assets.Sound;
 import rst.assets.Texture;
+import rst.render.Block;
 import rst.render.CameraFollowable;
 import rst.render.Coordinates;
 import rst.render.Input;
@@ -18,7 +19,6 @@ import rst.render.SceneRenderable;
 
 public abstract class Scene implements Renderable {
 	
-	private final Texture background;
 	private final int xSize, ySize;
 	private final Sound ambientSound;
 	private final String name;
@@ -32,19 +32,31 @@ public abstract class Scene implements Renderable {
 	@SuppressWarnings("unused")
 	private Sound overrideAmbientSound;
 	
-	public Scene(Texture background, int xSize, int ySize, Sound ambientSound, CameraFollowable camera, String name, SceneRenderable... items)
+	public Scene(String background, int xSize, int ySize, Sound ambientSound, CameraFollowable camera, String name, SceneRenderable... items)
 	{
-		this.background = background;
-		this.xSize = xSize;
-		this.ySize = ySize;
+		this.xSize = xSize * Block.GRID_SIZE;
+		this.ySize = ySize * Block.GRID_SIZE;
 		this.ambientSound = ambientSound;
 		this.camera = camera;
 		this.name = name;
 		this.items = new ArrayList<>(Arrays.asList(items));
-		Collections.sort(this.items);
 		this.impedances = new ArrayList<>();
 		this.interactions = new ArrayList<>();
 		
+		
+		for(int i = -20; i < xSize + 20; i++) {
+			for(int j = -20; j < ySize + 20; j++) {
+				Block b = new Block(background, i, j) {
+					@Override
+					public int getRenderPriority() {
+						return 11;
+					}
+				};
+				this.items.add(b);
+			}
+		}
+		
+		Collections.sort(this.items);
 		
 		for(SceneRenderable item : items) {
 			if(item instanceof Impedance) {
@@ -74,12 +86,6 @@ public abstract class Scene implements Renderable {
 	
 	@Override
 	public void render(Graphics2D g, Input input) {
-		Coordinates camLoc = getCameraLocation();
-		double camX = camLoc.x - Renderable.STANDARD_WIDTH / 2.0;
-		double camY = camLoc.y - Renderable.STANDARD_HEIGHT / 2.0;
-		
-		background.draw(g, (int) ((Renderable.STANDARD_WIDTH / 2.0 - xSize / 2.0 - camX) + 0.5), (int) ((Renderable.STANDARD_HEIGHT / 2.0 - ySize / 2.0 - camY) + 0.5), xSize, ySize);
-		
 		for(SceneRenderable item : items) {
 			item.render(g, input, this);
 		}
