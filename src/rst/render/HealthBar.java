@@ -48,7 +48,5 @@ public class HealthBar extends JComponent {
 		for(int i = health; i < max; i++) {
 			emptyTexture.draw(g2d, i * 18, 0, 16, 16);
 		}
-		
-		;
 	}
 }
