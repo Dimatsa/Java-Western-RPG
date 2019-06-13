@@ -14,6 +14,7 @@ public class Town extends Scene{
 
 	public Town() {	super("sand", "sand", 60, 40, AssetRegistry.getSounds().get("town"),
 					(CameraFollowable) Characters.getCharacters().getCharacter("Connor Adams"), "Town", Characters.getCharacters().getCharacter("Connor Adams"),
+					Characters.getCharacters().getCharacter("Toby Larkin"),
 					//Paths
 					new Block("path" , -20, 19),
 					new Block("path" , -20, 20),

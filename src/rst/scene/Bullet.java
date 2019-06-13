@@ -21,7 +21,6 @@ public class Bullet implements SceneRenderable, Interactable {
 	protected Bounds bounds;
 	protected final double vX, vY;
 	private final Impedance source;
-	boolean remove;
 	
 	private long lastTimeStamp = -1;
 	
@@ -66,10 +65,6 @@ public class Bullet implements SceneRenderable, Interactable {
 	}
 	
 	private void updateLocation(Input input, Scene scene) {
-		if(remove) {
-			scene.removeItem(this);
-		}
-		
 		if (lastTimeStamp == -1) {
 			lastTimeStamp = System.nanoTime();
 		}
@@ -118,6 +113,7 @@ public class Bullet implements SceneRenderable, Interactable {
 		
 		boolean collision = false;
 		
+		
 		for(Impedance hit : scene.getHitboxes()) {
 			if(this != hit && source != hit) {
 				Impedance selected = null;
@@ -145,7 +141,7 @@ public class Bullet implements SceneRenderable, Interactable {
 		
 		if(collision || location.x == 5 + Renderable.STANDARD_WIDTH / 2 - scene.getWidth() / 2 || location.x == Renderable.STANDARD_WIDTH / 2 + scene.getWidth() / 2 - 5
 				|| location.y == 5 + Renderable.STANDARD_HEIGHT / 2 - scene.getHeight() / 2 || location.y == Renderable.STANDARD_HEIGHT / 2 + scene.getHeight() / 2 - 5) {
-			remove = true;
+			scene.removeItem(this);
 		}
 	}
 

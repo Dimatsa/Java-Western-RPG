@@ -21,7 +21,7 @@ public abstract class Character implements SceneRenderable, Interactable {
 	private final String lastName;
 	private final int gender;
 	private final CharacterSprite sprite;
-	private int hp = 10;
+	protected int hp = 10;
 	private int strength;
 	private double speed;
 	private int intelligence;
@@ -191,7 +191,7 @@ public abstract class Character implements SceneRenderable, Interactable {
 	
 	@Override
 	public void performHit(Scene scene) {
-		hp -= 5;
+		damaged(1);
 	}
 	
 	@Override
@@ -199,4 +199,12 @@ public abstract class Character implements SceneRenderable, Interactable {
 	
 	@Override
 	public void performAction(Scene scene) {}
+	
+	public Coordinates getLocation() {
+		return location;
+	}
+	
+	public void setDirection(int direction) {
+		this.direction = direction;
+	}
 }

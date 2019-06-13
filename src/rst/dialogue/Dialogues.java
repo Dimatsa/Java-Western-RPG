@@ -4,7 +4,10 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Consumer;
 
+import rst.character.Characters;
+import rst.character.Player;
 import rst.plot.PlotLine;
+import rst.scene.Scenes;
 
 public class Dialogues {
 	private static Dialogues dialogues;
@@ -31,6 +34,7 @@ public class Dialogues {
 				new String[] { "Option A", "Option B", "Option C" }, null));
 		
 		makeDialogue(new DialogueEntry("plotTest", "Would you like to try a plot?", new String[] { "Yes", "No" }, chain(item -> PlotLine.getPlotLine().getPlot("speak").activate(), null)));
+		makeDialogue(new DialogueEntry("death", "You died!", new String[] { "Respawn" }, chain(item -> ((Player)Characters.getCharacters().getCharacter("Connor Adams")).respawn())));
 	}
 	
 	@SafeVarargs

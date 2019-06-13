@@ -1,5 +1,9 @@
 package rst.plot;
 
+import rst.character.CharacterSprite;
+import rst.character.Characters;
+import rst.character.NpcCharacter;
+
 public class TestEntry extends PlotEntry {
 
 	public TestEntry(String requirement) {
@@ -8,18 +12,18 @@ public class TestEntry extends PlotEntry {
 
 	@Override
 	public void onStart() {
-		System.out.println("Test");
+		((NpcCharacter)Characters.getCharacters().getCharacter("Toby Larkin")).setTarget(Characters.getCharacters().getCharacter("Connor Adams"));
 	}
 
 	@Override
 	public void onEnd() {
-		System.out.println("Test end");
+		((NpcCharacter)Characters.getCharacters().getCharacter("Toby Larkin")).setTarget(null);
+		Characters.getCharacters().getCharacter("Toby Larkin").setDirection(CharacterSprite.DOWN);
 	}
 
 	@Override
 	public boolean periodic() {
-		System.out.println("Execute");
-		return true;
+		return (Characters.getCharacters().getCharacter("Connor Adams")).getHp() <= 0;
 	}
 
 }

@@ -17,6 +17,7 @@ import rst.scene.Bullet;
 import rst.scene.Impedance;
 import rst.scene.Interactable;
 import rst.scene.Scene;
+import rst.scene.Scenes;
 
 public class Player extends Character implements CameraFollowable {
 
@@ -263,12 +264,29 @@ public class Player extends Character implements CameraFollowable {
 	}
 	
 	public void setScene(Scene newScene, Coordinates loc) {
+		setScene(newScene, loc.x, loc.y);
+	}
+	
+	public void setScene(Scene newScene, double x, double y) {
 		if(hasPanels()) {
-			this.location.x = loc.x;
-			this.location.y = loc.y;
+			this.location.x = x;
+			this.location.y = y;
 			
 			render.setScene(newScene);
 		}
 		
+	}
+	
+	@Override
+	public void die() {
+		super.die();
+		
+		startDialogue("death");
+	}
+	
+	public void respawn() {
+		setScene(Scenes.getScenes().getScene("Town"), 500, 200);
+		setDirection(CharacterSprite.DOWN);
+		hp = 10;
 	}
 }

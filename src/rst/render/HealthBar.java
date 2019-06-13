@@ -19,7 +19,7 @@ public class HealthBar extends JComponent {
 	public HealthBar(String full, String empty, int maxHealth, int initialHealth) {
 		AssetRegistry.getTextures().onLoad(() -> {
 			this.fullTexture = AssetRegistry.getTextures().get(full);
-			this.emptyTexture = AssetRegistry.getTextures().get(full);
+			this.emptyTexture = AssetRegistry.getTextures().get(empty);
 			
 			setHealth(initialHealth);
 		});
