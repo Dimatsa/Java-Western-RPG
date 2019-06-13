@@ -151,22 +151,25 @@ public abstract class Character implements SceneRenderable, Interactable {
 		double camX = camLoc.x - Renderable.STANDARD_WIDTH / 2.0;
 		double camY = camLoc.y - Renderable.STANDARD_HEIGHT / 2.0;
 		
-		double coordX = location.x;
-		double coordY = location.y;
+		int coordX = (int) ((location.x - 20 - camX) + 0.5);
+		int coordY = (int) ((location.y - 40 - camY) + 0.5);
 
-		sprite.setFacing(direction);
-		
-		Texture t;
-		
-		if(currentSpeed != 0) {
-			sprite.setTime((int) (100000/currentSpeed));
+		if(coordX + 40 >= 0 && coordX <= Renderable.STANDARD_WIDTH &&
+				coordY + 80 >= 0 && coordY <= Renderable.STANDARD_HEIGHT) {
+			sprite.setFacing(direction);
 			
-			t = sprite;
+			Texture t;
+			
+			if(currentSpeed != 0) {
+				sprite.setTime((int) (100000/currentSpeed));
+				
+				t = sprite;
+			}
+			else {
+				t = sprite.getCurrentAnimation().getTexture(0);
+			}
+			t.draw(g, coordX, coordY, 40, 80);
 		}
-		else {
-			t = sprite.getCurrentAnimation().getTexture(0);
-		}
-		t.draw(g, (int) ((coordX - 20 - camX) + 0.5), (int) ((coordY - 40 - camY) + 0.5), 40, 80);
 		
 		updateLocation(input, scene);
 	}
