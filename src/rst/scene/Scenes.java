@@ -24,6 +24,7 @@ public class Scenes {
 		sceneMap = new HashMap<>();
 		
 		makeScene(new Town());
+		makeScene(new Saloon());
 	}
 	
 	private void makeScene(Scene s) {
