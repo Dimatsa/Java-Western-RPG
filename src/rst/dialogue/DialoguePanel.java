@@ -118,4 +118,8 @@ public class DialoguePanel extends JPanel implements ActionListener {
 	public boolean isInDialogue() {
 		return dialogue != null;
 	}
+	
+	public String getDialogueName() {
+		return dialogue.getDialogue();
+	}
 }

@@ -2,7 +2,6 @@ package rst.scene;
 
 import java.util.Random;
 
-import rst.Main;
 import rst.assets.AssetRegistry;
 import rst.character.Characters;
 import rst.dialogue.DialogueStarter;
@@ -583,13 +582,13 @@ public class Town extends Scene{
 
 					
 					//Cacti
-//					new InteractableBlock(Block.GRID_SIZE * 60, Block.GRID_SIZE * 40, "cactus2", 5, 6).onInteract(new DialogueStarter("plotTest")),
-//					new DoubleCactus(Block.GRID_SIZE * 60, Block.GRID_SIZE * 40, 1, 5),
-//					new DoubleCactus(Block.GRID_SIZE * 60, Block.GRID_SIZE * 40, 10, 14),
-//					new DoubleCactus(Block.GRID_SIZE * 60, Block.GRID_SIZE * 40, 14, 15),
-//					new DoubleCactus(Block.GRID_SIZE * 60, Block.GRID_SIZE * 40, 19, 18),
-//					new HittableBlock(Block.GRID_SIZE * 60, Block.GRID_SIZE * 40, "cactus2", 13, 11 ),
-//					
+					new InteractableBlock(Block.GRID_SIZE * 60, Block.GRID_SIZE * 40, "cactus2", 5, 6).onInteract(new DialogueStarter("plotTest")),
+					new DoubleCactus(Block.GRID_SIZE * 60, Block.GRID_SIZE * 40, 1, 5),
+					new DoubleCactus(Block.GRID_SIZE * 60, Block.GRID_SIZE * 40, 10, 14),
+					new DoubleCactus(Block.GRID_SIZE * 60, Block.GRID_SIZE * 40, 14, 15),
+					new DoubleCactus(Block.GRID_SIZE * 60, Block.GRID_SIZE * 40, 19, 18),
+					new HittableBlock(Block.GRID_SIZE * 60, Block.GRID_SIZE * 40, "cactus2", 13, 11 ),
+					
 					//Rails
 					new Block("railroad" , 50, -20),
 					new Block("railroad" , 50, -19),

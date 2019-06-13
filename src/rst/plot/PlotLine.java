@@ -19,6 +19,9 @@ public class PlotLine {
 	
 	private final Map<String, PlotEntry> plots;
 	
+	private PlotEntry lastPlot;
+	private PlotEntry current;
+	
 	public PlotLine() {
 		this.plots = new HashMap<String, PlotEntry>();
 		
@@ -27,5 +30,28 @@ public class PlotLine {
 	
 	public PlotEntry getPlot(String name) {
 		return plots.get(name);
+	}
+	
+	public void executePlot() {
+		if(lastPlot != current) {
+			if(lastPlot != null) {
+				lastPlot.deactivate();
+			}
+			lastPlot = current;
+		}
+		
+		if(current != null) {
+			if(current.periodic()) {
+				current = null;
+			}
+		}
+	}
+	
+	void makeCurrent(PlotEntry p) {
+		this.current = p;
+	}
+	
+	public boolean hasCurrent() {
+		return current != null;
 	}
 }

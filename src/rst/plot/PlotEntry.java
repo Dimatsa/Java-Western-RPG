@@ -10,8 +10,9 @@ public abstract class PlotEntry {
 	}
 	
 	public boolean activate() {
-		if((requirement == null || PlotLine.getPlotLine().getPlot(requirement).isCompleted()) && !completed) {
+		if((requirement == null || PlotLine.getPlotLine().getPlot(requirement).isCompleted()) && !completed && !PlotLine.getPlotLine().hasCurrent()) {
 			onStart();
+			PlotLine.getPlotLine().makeCurrent(this);
 			return true;
 		}
 		else {

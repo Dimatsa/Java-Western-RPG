@@ -18,6 +18,7 @@ public class TestEntry extends PlotEntry {
 
 	@Override
 	public boolean periodic() {
+		System.out.println("Execute");
 		return true;
 	}
 
