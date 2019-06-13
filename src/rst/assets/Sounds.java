@@ -7,7 +7,8 @@ public class Sounds extends AssetRegistry<Sound> {
 
 	private static final String[] names = {
 			"test",
-			"town"
+			"town",
+			"saloon"
 	};
 	
 	public Sounds() {

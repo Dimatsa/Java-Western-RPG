@@ -10,7 +10,7 @@ import rst.render.InteractableBlock;
 public class Saloon extends Scene {
 
 	public Saloon() {
-		super("plank", null, 10, 10, AssetRegistry.getSounds().get("test"),
+		super("plank", null, 10, 10, AssetRegistry.getSounds().get("saloon"),
 				(CameraFollowable) Characters.getCharacters().getCharacter("Connor Adams"), 
 				"Saloon", Characters.getCharacters().getCharacter("Connor Adams"),
 				new InteractableBlock(true, Block.GRID_SIZE * 10, Block.GRID_SIZE * 10, "path", 0, 0).onInteract(new DialogueStarter("testDialogue")),
