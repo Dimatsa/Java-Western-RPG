@@ -8,8 +8,8 @@ import rst.character.NpcCharacter;
 
 public class TestEntry extends PlotEntry {
 
-	public TestEntry(String requirement) {
-		super(requirement);
+	public TestEntry(String requirement, String name) {
+		super(requirement, name);
 	}
 
 	@Override
@@ -20,7 +20,7 @@ public class TestEntry extends PlotEntry {
 
 	@Override
 	public void onEnd() {
-		((NpcCharacter)Characters.getCharacters().getCharacter("Toby Larkin")).setTarget(null);
+		((NpcCharacter)Characters.getCharacters().getCharacter("Toby Larkin")).emptyTargets();;
 		Characters.getCharacters().getCharacter("Toby Larkin").setDirection(CharacterSprite.DOWN);
 	}
 

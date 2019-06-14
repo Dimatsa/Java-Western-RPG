@@ -1,7 +1,8 @@
 package rst.scene;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.Random;
+
+import rst.datastructures.Searches;
 
 public class Scenes {
 
@@ -18,20 +19,43 @@ public class Scenes {
 		return scenes;
 	}
 	
-	private Map<String, Scene> sceneMap;
+	private String[] sceneNames;
+	private Scene[] sceneItems;
 	
 	protected Scenes() {
-		sceneMap = new HashMap<>();
+		sceneNames = new String[2];
+		sceneItems = new Scene[2];
 		
-		makeScene(new Town());
-		makeScene(new Saloon());
+		// Names must be sorted alphabetically (:
+		makeScene(new Saloon(), 0);
+		makeScene(new Town(), 1);
 	}
 	
-	private void makeScene(Scene s) {
-		sceneMap.put(s.getName(), s);
+	private void makeScene(Scene s, int num) {
+		sceneNames[num] = s.getName();
+		sceneItems[num] = s;
 	}
 
 	public Scene getScene(String name) {
-		return sceneMap.get(name);
+		int index;
+		
+		switch(new Random().nextInt(3)) {
+		case 0:
+			index = Searches.binarySearchNonRecursive(sceneNames, name);
+			break;
+		case 1:
+			index = Searches.binarySearchRecursive(sceneNames, name);
+			break;
+		default:
+			index = Searches.linearSearch(sceneNames, name);
+			break;
+		}
+		
+		if(index == Searches.NOT_FOUND) {
+			return null;
+		}
+		else {
+			return sceneItems[index];
+		}
 	}
 }

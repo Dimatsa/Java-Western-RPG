@@ -1,7 +1,6 @@
 package rst.plot;
 
-import java.util.HashMap;
-import java.util.Map;
+import rst.datastructures.Stack;
 
 public class PlotLine {
 	private static PlotLine story;
@@ -17,19 +16,19 @@ public class PlotLine {
 		return story;
 	}
 	
-	private final Map<String, PlotEntry> plots;
+	private final Stack<PlotEntry> plots;
 	
 	private PlotEntry lastPlot;
 	private PlotEntry current;
 	
 	public PlotLine() {
-		this.plots = new HashMap<String, PlotEntry>();
+		this.plots = new Stack<>();
 		
-		plots.put("speak", new TestEntry(null));
+		plots.push(new TestEntry(null, "speak"));
 	}
 	
-	public PlotEntry getPlot(String name) {
-		return plots.get(name);
+	public PlotEntry getPlot() {
+		return plots.top();
 	}
 	
 	public void executePlot() {
@@ -44,6 +43,15 @@ public class PlotLine {
 			if(current.periodic()) {
 				current = null;
 			}
+		}
+	}
+	
+	public boolean activate(String name) {
+		if(plots != null && plots.top().getName().equals(name)) {
+			return plots.top().activate();
+		}
+		else {
+			return false;
 		}
 	}
 	

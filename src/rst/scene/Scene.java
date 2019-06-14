@@ -3,12 +3,12 @@ package rst.scene;
 import java.awt.Graphics2D;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
 import javax.sound.sampled.Clip;
 
 import rst.assets.Sound;
+import rst.datastructures.Sorts;
 import rst.plot.PlotLine;
 import rst.render.Block;
 import rst.render.Bounds;
@@ -89,7 +89,9 @@ public abstract class Scene implements Renderable {
 		
 		editTerrain();
 		
-		Collections.sort(this.items);
+		if(!this.items.isEmpty()) {
+			Sorts.mergeSort(this.items);
+		}
 	}
 	
 	protected void addItem(SceneRenderable item) {
@@ -152,6 +154,10 @@ public abstract class Scene implements Renderable {
 		
 		for(SceneRenderable item : add) {
 			this.addItem(item);
+		}
+		
+		if(add.size() > 0) {
+			Sorts.insertionSort(items);
 		}
 		
 		remove.removeIf(a -> true);

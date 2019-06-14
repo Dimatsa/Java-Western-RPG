@@ -1,5 +1,6 @@
 package rst.character;
 
+import rst.datastructures.Queue;
 import rst.render.Coordinates;
 import rst.render.Input;
 import rst.scene.Bullet;
@@ -7,7 +8,7 @@ import rst.scene.Scene;
 
 public class NpcCharacter extends Character {
 
-	private Character target;
+	private final Queue<Character> targets;
 	
 	private long movementStart;
 	private NpcPath path;
@@ -18,10 +19,16 @@ public class NpcCharacter extends Character {
 	public NpcCharacter(String firstName, String lastName, int gender, int strength, double speed, int intelligence,
 			int drunkeness, double gunSpeed, int gunDamage, CharacterSprite sprite) {
 		super(firstName, lastName, gender, strength, speed, intelligence, drunkeness, gunSpeed, gunDamage, sprite);
+		
+		targets = new Queue<>();
 	}
 	
 	public void setTarget(Character target) {
-		this.target = target;
+		targets.enqueue(target);
+	}
+	
+	public void emptyTargets() {
+		targets.makeEmpty();
 	}
 	
 	@Override
@@ -54,10 +61,14 @@ public class NpcCharacter extends Character {
 			}
 		}
 		
-		if(System.nanoTime() >= lastShot + 1000000000 && target != null && target.getHp() > 0) {
+		if(!targets.isEmpty() && targets.front().getHp() <= 0) {
+			targets.dequeue();
+		}
+		
+		if(System.nanoTime() >= lastShot + 1000000000 && !targets.isEmpty()) {
 			Bullet bullet = new Bullet(location.x, location.y,
-					target.getLocation().x,
-					target.getLocation().y, this);
+					targets.front().getLocation().x,
+					targets.front().getLocation().y, this);
 			direction = bullet.getBulletDirection();
 			scene.addItemRender(bullet);
 			lastShot = System.nanoTime();
