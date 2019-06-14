@@ -1,3 +1,10 @@
+/*
+ * AssetRegistry.java
+ * Keeps track of assets
+ * Dmitry Tsarapkine, Kevin Kurra, Ryan Larkin
+ * June 14th, 2019
+ * ICS4U
+ */
 package rst.assets;
 
 import java.io.IOException;
@@ -19,6 +26,11 @@ public abstract class AssetRegistry<T extends Asset> extends SwingWorker<T[],Str
 	private static Sounds sounds;
 	private static Fonts fonts;
 	
+	/**
+	 * Initializes textures
+	 * pre: none 
+	 * post: has been initialized
+	 */
 	public static void init() {
 		if(textures == null && sounds == null && fonts == null) {
 			textures = new Textures();
@@ -31,16 +43,31 @@ public abstract class AssetRegistry<T extends Asset> extends SwingWorker<T[],Str
 		}
 	}
 	
+	/**
+	 * Retrieves textures
+	 * pre: none
+	 * post: retrieves textures
+	 */
 	public static Textures getTextures() {
 		init();
 		return textures;
 	}
 
+	/**
+	 * Retrieves sounds
+	 * pre: none
+	 * post: sounds have been retrieved
+	 */
 	public static Sounds getSounds() {
 		init();
 		return sounds;
 	}
 
+	/**
+	 * Retrieves font
+	 * pre: none
+	 * post: fonts have been sent
+	 */
 	public static Fonts getFonts() {
 		init();
 		return fonts;
@@ -54,6 +81,11 @@ public abstract class AssetRegistry<T extends Asset> extends SwingWorker<T[],Str
 	private Set<Runnable> loadingCallbacks;
 	private Set<Consumer<String>> processCallbacks;
 	
+	/**
+	 * Constructor
+	 * pre: assets
+	 * post: registry has been created
+	 */
 	protected AssetRegistry(String asset, String extension, String[] items) {
 		this.asset = asset;
 		this.extension = extension;
@@ -63,6 +95,11 @@ public abstract class AssetRegistry<T extends Asset> extends SwingWorker<T[],Str
 		this.processCallbacks = new HashSet<>();
 	}
 	
+	/**
+	 * Does stuff in background
+	 * pre: none
+	 * post: code has been executed
+	 */
 	@Override
 	protected T[] doInBackground() throws Exception {
 		T[] t = newArray(items.length);
@@ -77,13 +114,22 @@ public abstract class AssetRegistry<T extends Asset> extends SwingWorker<T[],Str
 		
 		return t;
 	}
-	
+	/**
+	 * Executes the following code
+	 * pre: none
+	 * post: the commands have been executed
+	 */
 	@Override
 	protected void process(List<String> chunks) {
 		String latest = chunks.get(chunks.size() - 1);
 		processCallbacks.forEach(callback -> callback.accept(latest));
 	}
 	
+	/**
+	 * Executes the following code
+	 * pre: none
+	 * post: the commands have been executed
+	 */
 	@Override
 	protected void done() {
 		HashMap<String, T> assets = new HashMap<>();
@@ -105,7 +151,11 @@ public abstract class AssetRegistry<T extends Asset> extends SwingWorker<T[],Str
 	
 	protected abstract T[] newArray(int length);
 	protected abstract T load(String name, InputStream in) throws IOException;
-
+	/**
+	 * Executes the following code
+	 * pre: none
+	 * post: the commands have been executed
+	 */
 	public T get(String name) {
 		T result = null;
 		
@@ -115,11 +165,19 @@ public abstract class AssetRegistry<T extends Asset> extends SwingWorker<T[],Str
 		
 		return result;
 	}
-	
+	/**
+	 * Executes the following code
+	 * pre: none
+	 * post: the commands have been executed
+	 */
 	public void onLoad(Runnable callback) {
 		loadingCallbacks.add(callback);
 	}
-	
+	/**
+	 * Executes the following code
+	 * pre: none
+	 * post: the commands have been executed
+	 */
 	public void onBatch(Consumer<String> callback) {
 		processCallbacks.add(callback);
 	}

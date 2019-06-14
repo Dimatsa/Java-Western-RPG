@@ -1,3 +1,10 @@
+/*
+ * DialoguePanel.java
+ * Deals with the dialogue panel
+ * Dmitry Tsarapkine, Kevin Kurra, Ryan Larkin
+ * June 14th, 2019
+ * ICS4U
+ */
 package rst.dialogue;
 
 import java.awt.BorderLayout;
@@ -26,6 +33,11 @@ public class DialoguePanel extends JPanel implements ActionListener {
 	private final HealthBar hp;
 	private final JLabel strength, intelligence, drunkness, gunSpeed, gunDamage;
 	
+	/**
+	 * Executes the following code
+	 * pre: none
+	 * post: the commands have been executed
+	 */
 	public DialoguePanel() {
 		setLayout(new BorderLayout());
 		text = new JLabel("Dialogue...");
@@ -85,7 +97,12 @@ public class DialoguePanel extends JPanel implements ActionListener {
 		add(top, BorderLayout.CENTER);
 		add(bottom, BorderLayout.SOUTH);
 	}
-	
+
+	/**
+	 * Executes the following code
+	 * pre: none
+	 * post: the commands have been executed
+	 */
 	private static void addStat(JPanel panel, String name, JComponent component) {
 		JPanel panel1 = new JPanel();
 		JLabel label = new JLabel(name + ":");
@@ -106,7 +123,11 @@ public class DialoguePanel extends JPanel implements ActionListener {
 		
 		dialogue.execute(this, selection);
 	}
-	
+	/**
+	 * Executes the following code
+	 * pre: none
+	 * post: the commands have been executed
+	 */
 	public void setDialogue(DialogueEntry d) {
 		this.dialogue = d;
 		
@@ -147,6 +168,11 @@ public class DialoguePanel extends JPanel implements ActionListener {
 		}
 	}
 	
+	/**
+	 * Executes the following code
+	 * pre: none
+	 * post: the commands have been executed
+	 */
 	public void setInteract(boolean interact) {
 		if(!isInDialogue()) {
 			if(interact) {
@@ -165,11 +191,19 @@ public class DialoguePanel extends JPanel implements ActionListener {
 	private static void setFont(JComponent field, float size) {
 		field.setFont(AssetRegistry.getFonts().get("Montserrat-Regular").getFont().deriveFont(size));
 	}
-	
+	/**
+	 * Executes the following code
+	 * pre: none
+	 * post: the commands have been executed
+	 */
 	public boolean isInDialogue() {
 		return dialogue != null;
 	}
-	
+	/**
+	 * Executes the following code
+	 * pre: none
+	 * post: the commands have been executed
+	 */
 	public String getDialogueName() {
 		return dialogue.getDialogue();
 	}

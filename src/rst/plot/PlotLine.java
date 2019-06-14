@@ -1,3 +1,10 @@
+/*
+ * PlotLine.java
+ * Keeps track of the plots
+ * Dmitry Tsarapkine, Kevin Kurra, Ryan Larkin
+ * June 14th, 2019
+ * ICS4U
+ */
 package rst.plot;
 
 import rst.character.Characters;
@@ -12,7 +19,11 @@ public class PlotLine {
 			story = new PlotLine();
 		}
 	}
-	
+	/**
+	 * Executes the following code
+	 * pre: none
+	 * post: the commands have been executed
+	 */
 	public static PlotLine getPlotLine() {
 		init();
 		return story;
@@ -22,17 +33,30 @@ public class PlotLine {
 	
 	private PlotEntry lastPlot;
 	private PlotEntry current;
-	
+	/**
+	 * Executes the following code
+	 * pre: none
+	 * post: the commands have been executed
+	 */
 	public PlotLine() {
 		this.plots = new Stack<>();
 		
 		plots.push(new TestEntry(null, "speak"));
 	}
 	
+	/**
+	 * Executes the following code
+	 * pre: none
+	 * post: the commands have been executed
+	 */	
 	public PlotEntry getPlot() {
 		return plots.top();
 	}
-	
+	/**
+	 * Executes the following code
+	 * pre: none
+	 * post: the commands have been executed
+	 */
 	public void executePlot() {
 		if(lastPlot != current) {
 			if(lastPlot != null) {

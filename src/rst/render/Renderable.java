@@ -1,3 +1,10 @@
+/*
+ * Renderable.java
+ * Allows game to render objects
+ * Dmitry Tsarapkine, Kevin Kurra, Ryan Larkin
+ * June 14th, 2019
+ * ICS4U
+ */
 package rst.render;
 
 import java.awt.Graphics2D;

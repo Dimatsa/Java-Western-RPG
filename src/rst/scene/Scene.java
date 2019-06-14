@@ -1,3 +1,10 @@
+/*
+ * Scene.java
+ * Creates a scene
+ * Dmitry Tsarapkine, Kevin Kurra, Ryan Larkin
+ * June 14th, 2019
+ * ICS4U
+ */
 package rst.scene;
 
 import java.awt.Graphics2D;
@@ -34,7 +41,11 @@ public abstract class Scene implements Renderable {
 	private CameraFollowable camera;
 	@SuppressWarnings("unused")
 	private Sound overrideAmbientSound;
-	
+	/**
+	 * Executes the following code
+	 * pre: none
+	 * post: the commands have been executed
+	 */
 	public Scene(String background1, String background2, int xSize, int ySize, Sound ambientSound, CameraFollowable camera, String name, SceneRenderable... items)
 	{
 		this.xSize = xSize * Block.GRID_SIZE;
@@ -93,7 +104,11 @@ public abstract class Scene implements Renderable {
 			Sorts.mergeSort(this.items);
 		}
 	}
-	
+	/**
+	 * Executes the following code
+	 * pre: none
+	 * post: the commands have been executed
+	 */
 	protected void addItem(SceneRenderable item) {
 		items.add(item);
 		
@@ -112,26 +127,46 @@ public abstract class Scene implements Renderable {
 			}
 		}
 	}
-	
+	/**
+	 * Executes the following code
+	 * pre: none
+	 * post: the commands have been executed
+	 */
 	public void addItemRender(SceneRenderable item) {
 		add.add(item);
 	}
-	
+	/**
+	 * Executes the following code
+	 * pre: none
+	 * post: the commands have been executed
+	 */
 	protected void editTerrain() {}
-	
+	/**
+	 * Executes the following code
+	 * pre: none
+	 * post: the commands have been executed
+	 */
 	public void enterScene() {
 		if(ambientSound != null) {
 			currentPlaying = ambientSound.startSound(1.0, Clip.LOOP_CONTINUOUSLY);
 		}
 	}
-	
+	/**
+	 * Executes the following code
+	 * pre: none
+	 * post: the commands have been executed
+	 */
 	public void leaveScene() {
 		if(currentPlaying != null) {
 			currentPlaying.stop();
 			currentPlaying = null;
 		}
 	}
-	
+	/**
+	 * Executes the following code
+	 * pre: none
+	 * post: the commands have been executed
+	 */
 	@Override
 	public void render(Graphics2D g, Input input) {
 		PlotLine.getPlotLine().executePlot();
@@ -163,7 +198,11 @@ public abstract class Scene implements Renderable {
 		remove.removeIf(a -> true);
 		add.removeIf(a -> true);
 	}
-	
+	/**
+	 * Executes the following code
+	 * pre: none
+	 * post: the commands have been executed
+	 */
 	public String getName() {
 		return name;
 	}
@@ -171,27 +210,51 @@ public abstract class Scene implements Renderable {
 	public Coordinates getCameraLocation() {
 		return camera.getLocation();
 	}
-
+	/**
+	 * Executes the following code
+	 * pre: none
+	 * post: the commands have been executed
+	 */
 	public int getWidth() {
 		return xSize;
 	}
-
+	/**
+	 * Executes the following code
+	 * pre: none
+	 * post: the commands have been executed
+	 */
 	public int getHeight() {
 		return ySize;
 	}
-	
+	/**
+	 * Executes the following code
+	 * pre: none
+	 * post: the commands have been executed
+	 */
 	public List<Impedance> getHitboxes() {
 		return impedances;
 	}
-	
+	/**
+	 * Executes the following code
+	 * pre: none
+	 * post: the commands have been executed
+	 */
 	public List<Interactable> getInteractions() {
 		return interactions;
 	}
-	
+	/**
+	 * Executes the following code
+	 * pre: none
+	 * post: the commands have been executed
+	 */
 	protected List<SceneRenderable> getSceneRenderables() {
 		return items;
 	}
-	
+	/**
+	 * Executes the following code
+	 * pre: none
+	 * post: the commands have been executed
+	 */
 	public void removeItem(SceneRenderable item) {
 		remove.add(item);
 	}

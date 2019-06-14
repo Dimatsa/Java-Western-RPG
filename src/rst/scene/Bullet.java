@@ -1,3 +1,10 @@
+/*
+ * Bullet.java
+ * Creates a bullet
+ * Dmitry Tsarapkine, Kevin Kurra, Ryan Larkin
+ * June 14th, 2019
+ * ICS4U
+ */
 package rst.scene;
 
 import java.awt.Graphics2D;
@@ -25,7 +32,11 @@ public class Bullet implements SceneRenderable, Interactable {
 	private long lastTimeStamp = -1;
 	
 	private final Texture texture;
-	
+	/**
+	 * Executes the following code
+	 * pre: none
+	 * post: the commands have been executed
+	 */
 	public Bullet(double x, double y, double x2, double y2, Impedance source) {
 		texture = AssetRegistry.getTextures().get("cactus2");
 		this.source = source;
@@ -47,7 +58,11 @@ public class Bullet implements SceneRenderable, Interactable {
 		bounds.b.x = location.x + 5;
 		bounds.b.y = location.y + 5;
 	}
-	
+	/**
+	 * Executes the following code
+	 * pre: none
+	 * post: the commands have been executed
+	 */
 	@Override
 	public void render(Graphics2D g, Input input, Scene scene) {
 		Coordinates camLoc = scene.getCameraLocation();
@@ -64,7 +79,11 @@ public class Bullet implements SceneRenderable, Interactable {
 		
 		updateLocation(input, scene);
 	}
-	
+	/**
+	 * Executes the following code
+	 * pre: none
+	 * post: the commands have been executed
+	 */
 	private void updateLocation(Input input, Scene scene) {
 		if (lastTimeStamp == -1) {
 			lastTimeStamp = System.nanoTime();
@@ -145,32 +164,60 @@ public class Bullet implements SceneRenderable, Interactable {
 			scene.removeItem(this);
 		}
 	}
-
+	/**
+	 * Executes the following code
+	 * pre: none
+	 * post: the commands have been executed
+	 */
 	public int getBulletDirection() {
 		return CharacterSprite.pointToDirection(vX, vY);
 	}
-	
+	/**
+	 * Executes the following code
+	 * pre: none
+	 * post: the commands have been executed
+	 */
 	@Override
 	public int getRenderPriority() {
 		return 1;
 	}
-
+	/**
+	 * Executes the following code
+	 * pre: none
+	 * post: the commands have been executed
+	 */
 	@Override
 	public Bounds getBounds() {
 		return bounds;
 	}
-
+	/**
+	 * Executes the following code
+	 * pre: none
+	 * post: the commands have been executed
+	 */
 	@Override
 	public boolean[] getSides() {
 		return new boolean[] {true, true, true, true};
 	}
-
+	/**
+	 * Executes the following code
+	 * pre: none
+	 * post: the commands have been executed
+	 */
 	@Override
 	public void performAction(Scene scene) {}
-
+	/**
+	 * Executes the following code
+	 * pre: none
+	 * post: the commands have been executed
+	 */
 	@Override
 	public void performContact(Scene scene) {}
-
+	/**
+	 * Executes the following code
+	 * pre: none
+	 * post: the commands have been executed
+	 */
 	@Override
 	public void performHit(Scene scene) {}
 

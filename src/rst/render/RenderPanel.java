@@ -1,3 +1,10 @@
+/*
+ * RenderPanel.java
+ * Renders objects onto panel
+ * Dmitry Tsarapkine, Kevin Kurra, Ryan Larkin
+ * June 14th, 2019
+ * ICS4U
+ */
 package rst.render;
 
 import java.awt.Color;
@@ -22,7 +29,6 @@ public class RenderPanel extends JPanel {
 	private final Input input;
 	
 	private Scene currentScene;
-	
 	private long lastPaint;
 	private double fps;
 	private long lastOccasional;
@@ -33,6 +39,12 @@ public class RenderPanel extends JPanel {
 	
 	private boolean death, win;
 	
+
+	/**
+	 * Executes the following code
+	 * pre: none
+	 * post: the commands have been executed
+	 */
 	public RenderPanel() {
 		setFocusable(true);
 		
@@ -47,17 +59,29 @@ public class RenderPanel extends JPanel {
 		
 		input = new Input(this);
 	}
-	
+	/**
+	 * Executes the following code
+	 * pre: none
+	 * post: the commands have been executed
+	 */
 	public void startPainting() {
 		currentScene = Scenes.getScenes().getScene("Saloon");
 		currentScene.enterScene();
 	}
-	
+	/**
+	 * Executes the following code
+	 * pre: none
+	 * post: the commands have been executed
+	 */
 	public void stopPainting() {
 		currentScene.leaveScene();
 		currentScene = null;
 	}
-	
+	/**
+	 * Executes the following code
+	 * pre: none
+	 * post: the commands have been executed
+	 */
 	@Override
 	public void paintComponent(Graphics graphics) {
 		super.paintComponent(graphics);
@@ -121,7 +145,11 @@ public class RenderPanel extends JPanel {
 		
 		lastPaint = System.nanoTime();
 	}
-	
+	/**
+	 * Executes the following code
+	 * pre: none
+	 * post: the commands have been executed
+	 */
 	public void setScene(Scene scene) {
 		currentScene.leaveScene();
 		this.currentScene = scene;

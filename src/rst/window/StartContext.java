@@ -26,7 +26,11 @@ public class StartContext extends Context {
 	private static final long serialVersionUID = 1L;
 
 	private final JProgressBar textures, sounds, fonts;
-	
+	/**
+	 * Executes the following action commands
+	 * pre: none
+	 * post: the commands have been executed
+	 */
 	public StartContext() {
 		super(false,
 				(int)Toolkit.getDefaultToolkit().getScreenSize().getWidth() / 2 - 200,
@@ -138,7 +142,11 @@ public class StartContext extends Context {
 		add(textures);
 		add(fonts);
 	}
-	
+	/**
+	 * Executes the following action commands
+	 * pre: none
+	 * post: the commands have been executed
+	 */
 	private static void bindProgress(JProgressBar progress, AssetRegistry<?> registry) {
 		progress.setMinimum(0);
 		progress.setMaximum(100);
@@ -151,15 +159,27 @@ public class StartContext extends Context {
 		registry.onLoad(() -> progress.setVisible(false));
 		registry.onBatch(progress::setString);
 	}
-	
+	/**
+	 * Executes the following action commands
+	 * pre: none
+	 * post: the commands have been executed
+	 */
 	JProgressBar getSoundsBar() {
 		return sounds;
 	}
-	
+	/**
+	 * Executes the following action commands
+	 * pre: none
+	 * post: the commands have been executed
+	 */
 	JProgressBar getTexturesBar() {
 		return textures;
 	}
-	
+	/**
+	 * Executes the following action commands
+	 * pre: none
+	 * post: the commands have been executed
+	 */
 	JProgressBar getFontsBar() {
 		return fonts;
 	}

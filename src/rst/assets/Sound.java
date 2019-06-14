@@ -1,3 +1,10 @@
+/*
+ * Sound.java
+ * Deals with sound
+ * Dmitry Tsarapkine, Kevin Kurra, Ryan Larkin
+ * June 14th, 2019
+ * ICS4U
+ */
 package rst.assets;
 
 import java.io.IOException;
@@ -19,7 +26,11 @@ public class Sound extends Asset {
 	private final AudioFormat audioFormat;
 	
 	private SwingWorker<Clip, Void> asyncClip;
-	
+	/**
+	 * Executes the following code
+	 * pre: none
+	 * post: the commands have been executed
+	 */
 	Sound(String name, InputStream in) {
 		super(name);
 		
@@ -48,15 +59,27 @@ public class Sound extends Asset {
 			e.printStackTrace();
 		}
 	}
-	
+	/**
+	 * Executes the following code
+	 * pre: none
+	 * post: the commands have been executed
+	 */
 	public byte[] getData() {
 		return data;
 	}
-
+	/**
+	 * Executes the following code
+	 * pre: none
+	 * post: the commands have been executed
+	 */
 	public AudioFormat getAudioFormat() {
 		return audioFormat;
 	}
-	
+	/**
+	 * Executes the following code
+	 * pre: none
+	 * post: the commands have been executed
+	 */
 	public Clip startSound(double volume, int loops) {
 		Clip clip = null;
 		try {
@@ -80,14 +103,22 @@ public class Sound extends Asset {
 		
 		return clip;
 	}
-	
+	/**
+	 * Executes the following code
+	 * pre: none
+	 * post: the commands have been executed
+	 */
 	private Clip createClip() throws LineUnavailableException {
 		Clip clip = AudioSystem.getClip();
 		clip.open(getAudioFormat(), getData(), 0, getData().length);
 		
 		return clip;
 	}
-	
+	/**
+	 * Executes the following code
+	 * pre: none
+	 * post: the commands have been executed
+	 */
 	private void asyncLoad() {
 		asyncClip = new SwingWorker<Clip, Void>() {
 			@Override

@@ -1,3 +1,10 @@
+/*
+ * Character.java
+ * Defines a character
+ * Dmitry Tsarapkine, Kevin Kurra, Ryan Larkin
+ * June 14th, 2019
+ * ICS4U
+ */
 package rst.character;
 
 import java.awt.Graphics2D;
@@ -35,7 +42,11 @@ public abstract class Character implements SceneRenderable, Interactable {
 	protected Bounds bounds;
 	protected int direction = CharacterSprite.DOWN;
 	protected double currentSpeed;
-	
+	/**
+	 * Executes the following code
+	 * pre: none
+	 * post: the commands have been executed
+	 */
 	public Character (String firstName, String lastName, int gender, int strength, double speed, int intelligence, int drunkeness, double gunSpeed, int gunDamage, CharacterSprite sprite)
 	{
 		this.firstName = firstName;
@@ -67,6 +78,11 @@ public abstract class Character implements SceneRenderable, Interactable {
 		}
 	}
 	
+	/**
+	 * Executes the following code
+	 * pre: none
+	 * post: the commands have been executed
+	 */
 	public void damaged(Scene scene, int damage)
 	{
 		if(damage > 0)
@@ -84,67 +100,131 @@ public abstract class Character implements SceneRenderable, Interactable {
 	{
 		scene.removeItem(this);
 	}
-	
+	/**
+	 * Executes the following code
+	 * pre: none
+	 * post: the commands have been executed
+	 */
 	private void playHurtSound()
 	{
 		//Randomly generates whether to play first or second hurt sound based on gender
 	}
-	
+	/**
+	 * Executes the following code
+	 * pre: none
+	 * post: the commands have been executed
+	 */
 	public int getGunDamage()
 	{
 		return gunDamage;
 	}
-
+	/**
+	 * Executes the following code
+	 * pre: none
+	 * post: the commands have been executed
+	 */
 	public String getFirstName() {
 		return firstName;
 	}
-
+	/**
+	 * Executes the following code
+	 * pre: none
+	 * post: the commands have been executed
+	 */
 	public String getLastName() {
 		return lastName;
 	}
-
+	/**
+	 * Executes the following code
+	 * pre: none
+	 * post: the commands have been executed
+	 */
 	public int getGender() {
 		return gender;
 	}
-
+	/**
+	 * Executes the following code
+	 * pre: none
+	 * post: the commands have been executed
+	 */
 	public Texture getSprite() {
 		return sprite;
 	}
-
+	/**
+	 * Executes the following code
+	 * pre: none
+	 * post: the commands have been executed
+	 */
 	public int getHp() {
 		return hp;
 	}
-
+	/**
+	 * Executes the following code
+	 * pre: none
+	 * post: the commands have been executed
+	 */
 	public int getStrength() {
 		return strength;
 	}
-
+	/**
+	 * Executes the following code
+	 * pre: none
+	 * post: the commands have been executed
+	 */
 	public double getSpeed() {
 		return speed;
 	}
-
+	/**
+	 * Executes the following code
+	 * pre: none
+	 * post: the commands have been executed
+	 */
 	public int getIntelligence() {
 		return intelligence;
 	}
-
+	/**
+	 * Executes the following code
+	 * pre: none
+	 * post: the commands have been executed
+	 */
 	public int getDrunkeness() {
 		return drunkeness;
 	}
-
+	/**
+	 * Executes the following code
+	 * pre: none
+	 * post: the commands have been executed
+	 */
 	public double getGunSpeed() {
 		return gunSpeed;
 	}
-
+	/**
+	 * Executes the following code
+	 * pre: none
+	 * post: the commands have been executed
+	 */
 	public Sound getHurt1() {
 		return hurt1;
 	}
-
+	/**
+	 * Executes the following code
+	 * pre: none
+	 * post: the commands have been executed
+	 */
 	public Sound getHurt2() {
 		return hurt2;
 	}
-	
+	/**
+	 * Executes the following code
+	 * pre: none
+	 * post: the commands have been executed
+	 */
 	protected void updateLocation(Input input, Scene scene) {}
-	
+	/**
+	 * Executes the following code
+	 * pre: none
+	 * post: the commands have been executed
+	 */
 	@Override
 	public void render(Graphics2D g, Input input, Scene scene) {
 		Coordinates camLoc = scene.getCameraLocation();
@@ -173,30 +253,54 @@ public abstract class Character implements SceneRenderable, Interactable {
 		
 		updateLocation(input, scene);
 	}
-	
+	/**
+	 * Executes the following code
+	 * pre: none
+	 * post: the commands have been executed
+	 */
 	@Override
 	public int getRenderPriority() {
 		return 0;
 	}
-	
+	/**
+	 * Executes the following code
+	 * pre: none
+	 * post: the commands have been executed
+	 */
 	@Override
 	public Bounds getBounds() {
 		return bounds;
 	}
-	
+	/**
+	 * Executes the following code
+	 * pre: none
+	 * post: the commands have been executed
+	 */
 	@Override
 	public boolean[] getSides() {
 		return new boolean[] { true, true, true, true };
 	}
-	
+	/**
+	 * Executes the following code
+	 * pre: none
+	 * post: the commands have been executed
+	 */
 	@Override
 	public void performHit(Scene scene) {
 		damaged(scene, 1);
 	}
-	
+	/**
+	 * Executes the following code
+	 * pre: none
+	 * post: the commands have been executed
+	 */
 	@Override
 	public void performContact(Scene scene) {}
-	
+	/**
+	 * Executes the following code
+	 * pre: none
+	 * post: the commands have been executed
+	 */
 	@Override
 	public void performAction(Scene scene) {}
 	

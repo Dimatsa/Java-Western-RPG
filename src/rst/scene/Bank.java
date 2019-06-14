@@ -1,3 +1,10 @@
+/*
+ * Bank.java
+ * Creates a bank
+ * Dmitry Tsarapkine, Kevin Kurra, Ryan Larkin
+ * June 14th, 2019
+ * ICS4U
+ */
 package rst.scene;
 
 import rst.assets.AssetRegistry;
@@ -8,7 +15,11 @@ import rst.render.CameraFollowable;
 import rst.render.InteractableBlock;
 
 public class Bank extends Scene {
-
+	/**
+	 * Executes the following code
+	 * pre: none
+	 * post: the commands have been executed
+	 */
 	public Bank() {
 		super("plank", null, 10, 10, AssetRegistry.getSounds().get("test"),
 				(CameraFollowable) Characters.getCharacters().getCharacter("Connor Adams"), 

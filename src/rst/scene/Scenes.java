@@ -1,3 +1,10 @@
+/*
+ * Scenes.java
+ * Keeps track of scenes
+ * Dmitry Tsarapkine, Kevin Kurra, Ryan Larkin
+ * June 14th, 2019
+ * ICS4U
+ */
 package rst.scene;
 
 import java.util.Random;
@@ -7,13 +14,21 @@ import rst.datastructures.Searches;
 public class Scenes {
 
 	private static Scenes scenes;
-	
+	/**
+	 * Executes the following code
+	 * pre: none
+	 * post: the commands have been executed
+	 */
 	public static void init() {
 		if(scenes == null) {
 			scenes = new Scenes();
 		}
 	}
-	
+	/**
+	 * Executes the following code
+	 * pre: none
+	 * post: the commands have been executed
+	 */
 	public static Scenes getScenes() {
 		init();
 		return scenes;
@@ -22,6 +37,11 @@ public class Scenes {
 	private String[] sceneNames;
 	private Scene[] sceneItems;
 	
+	/**
+	 * Executes the following code
+	 * pre: none
+	 * post: the commands have been executed
+	 */
 	protected Scenes() {
 		sceneNames = new String[7];
 		sceneItems = new Scene[7];
@@ -35,12 +55,21 @@ public class Scenes {
 		makeScene(new Saloon(), 5);
 		makeScene(new Town(), 6);
 	}
-	
+
+	/**
+	 * Executes the following code
+	 * pre: none
+	 * post: the commands have been executed
+	 */
 	private void makeScene(Scene s, int num) {
 		sceneNames[num] = s.getName();
 		sceneItems[num] = s;
 	}
-
+	/**
+	 * Executes the following code
+	 * pre: none
+	 * post: the commands have been executed
+	 */
 	public Scene getScene(String name) {
 		int index;
 		
