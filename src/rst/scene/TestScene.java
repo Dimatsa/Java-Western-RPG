@@ -1,3 +1,10 @@
+/*
+ * TestScene.java
+ * Deals with test scene
+ * Dmitry Tsarapkine, Kevin Kurra, Ryan Larkin
+ * June 14th, 2019
+ * ICS4U
+ */
 package rst.scene;
 
 import rst.assets.AssetRegistry;
@@ -8,7 +15,11 @@ import rst.render.CameraFollowable;
 import rst.render.InteractableBlock;
 
 public class TestScene extends Scene {
-
+	/**
+	 * Executes the following code
+	 * pre: none
+	 * post: the commands have been executed
+	 */
 	public TestScene() {
 		super("sand", "sand", 10, 10, AssetRegistry.getSounds().get("test"),
 				(CameraFollowable) Characters.getCharacters().getCharacter("Connor Adams"), 

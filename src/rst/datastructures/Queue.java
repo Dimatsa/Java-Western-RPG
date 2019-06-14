@@ -1,9 +1,9 @@
 /*
- * Queue data structure
  * Queue.java
+ * Defines a queue
+ * Dmitry Tsarapkine, Kevin Kurra, Ryan Larkin
+ * June 14th, 2019
  * ICS4U
- * May 18, 2019
- * Ryan Larkin, Dmitry Tsarapkine, Kevin Kurra
  */
 package rst.datastructures;
 

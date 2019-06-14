@@ -1,3 +1,10 @@
+/*
+ * Input.java
+ * Deals with user input
+ * Dmitry Tsarapkine, Kevin Kurra, Ryan Larkin
+ * June 14th, 2019
+ * ICS4U
+ */
 package rst.render;
 
 import java.awt.event.KeyAdapter;
@@ -18,7 +25,11 @@ public class Input {
 	private boolean leftMouse, middleMouse, rightMouse;
 	private int mouseX, mouseY;
 	private double mouseScroll;
-	
+	/**
+	 * Executes the following code
+	 * pre: none
+	 * post: the commands have been executed
+	 */
 	public Input(JComponent hook) {
 		keyPresses = new boolean[256];
 		
@@ -99,7 +110,11 @@ public class Input {
 		hook.addMouseMotionListener(mouseAdapter);
 		hook.addMouseWheelListener(mouseAdapter);
 	}
-
+	/**
+	 * Executes the following code
+	 * pre: none
+	 * post: the commands have been executed
+	 */
 	public boolean isKeyDown(int key) {
 		if(key < 256) {
 			return keyPresses[key];
@@ -108,27 +123,51 @@ public class Input {
 			return false;
 		}
 	}
-
+	/**
+	 * Executes the following code
+	 * pre: none
+	 * post: the commands have been executed
+	 */
 	public boolean isLeftMouseDown() {
 		return leftMouse;
 	}
-
+	/**
+	 * Executes the following code
+	 * pre: none
+	 * post: the commands have been executed
+	 */
 	public boolean isMiddleMouseDown() {
 		return middleMouse;
 	}
-
+	/**
+	 * Executes the following code
+	 * pre: none
+	 * post: the commands have been executed
+	 */
 	public boolean isRightMouseDown() {
 		return rightMouse;
 	}
-
+	/**
+	 * Executes the following code
+	 * pre: none
+	 * post: the commands have been executed
+	 */
 	public int getMouseX() {
 		return mouseX;
 	}
-
+	/**
+	 * Executes the following code
+	 * pre: none
+	 * post: the commands have been executed
+	 */
 	public int getMouseY() {
 		return mouseY;
 	}
-
+	/**
+	 * Executes the following code
+	 * pre: none
+	 * post: the commands have been executed
+	 */
 	public double getMouseScroll() {
 		return mouseScroll;
 	}

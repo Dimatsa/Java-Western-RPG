@@ -1,3 +1,10 @@
+/*
+ * RenderPanel.java
+ * Renders objects onto panel
+ * Dmitry Tsarapkine, Kevin Kurra, Ryan Larkin
+ * June 14th, 2019
+ * ICS4U
+ */
 package rst.render;
 
 import java.awt.Color;
@@ -20,7 +27,11 @@ public class RenderPanel extends JPanel {
 	private final Input input;
 	
 	private Scene currentScene;
-	
+	/**
+	 * Executes the following code
+	 * pre: none
+	 * post: the commands have been executed
+	 */
 	public RenderPanel() {
 		// 16 ms results in about 60 FPS
 		refreshTimer = new Timer(16, (event) -> this.repaint());
@@ -36,21 +47,33 @@ public class RenderPanel extends JPanel {
 		
 		input = new Input(this);
 	}
-	
+	/**
+	 * Executes the following code
+	 * pre: none
+	 * post: the commands have been executed
+	 */
 	public void startPainting() {
 		refreshTimer.start();
 		
 		currentScene = Scenes.getScenes().getScene("Town");
 		currentScene.enterScene();
 	}
-	
+	/**
+	 * Executes the following code
+	 * pre: none
+	 * post: the commands have been executed
+	 */
 	public void stopPainting() {
 		refreshTimer.stop();
 		
 		currentScene.leaveScene();
 		currentScene = null;
 	}
-	
+	/**
+	 * Executes the following code
+	 * pre: none
+	 * post: the commands have been executed
+	 */
 	@Override
 	public void paintComponent(Graphics graphics) {
 		super.paintComponent(graphics);
@@ -64,7 +87,11 @@ public class RenderPanel extends JPanel {
 			currentScene.render(g, input);
 		}
 	}
-	
+	/**
+	 * Executes the following code
+	 * pre: none
+	 * post: the commands have been executed
+	 */
 	public void setScene(Scene scene) {
 		currentScene.leaveScene();
 		this.currentScene = scene;

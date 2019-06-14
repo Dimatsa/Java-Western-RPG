@@ -1,3 +1,10 @@
+/*
+ * Textures.java
+ * Keeps track of textures
+ * Dmitry Tsarapkine, Kevin Kurra, Ryan Larkin
+ * June 14th, 2019
+ * ICS4U
+ */
 package rst.assets;
 
 import java.io.IOException;

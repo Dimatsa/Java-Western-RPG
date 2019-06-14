@@ -17,7 +17,11 @@ public class MainContext extends Context {
 	
 	private final RenderPanel render;
 	private final DialoguePanel dialogue;
-	
+	/**
+	 * Executes the following action commands
+	 * pre: none
+	 * post: the commands have been executed
+	 */
 	public MainContext() {
 		super(true,
 				(int)Toolkit.getDefaultToolkit().getScreenSize().getWidth() / 2 - 424,
@@ -32,7 +36,11 @@ public class MainContext extends Context {
 		add(render, BorderLayout.CENTER);
 		add(dialogue, BorderLayout.SOUTH);
 	}
-	
+	/**
+	 * Executes the following action commands
+	 * pre: none
+	 * post: the commands have been executed
+	 */
 	@Override
 	public void makeContextForFrame(JFrame frame) {
 		if(!((Player)Characters.getCharacters().getCharacter("Connor Adams")).hasPanels()) {
@@ -45,7 +53,11 @@ public class MainContext extends Context {
 		
 		render.startPainting();
 	}
-	
+	/**
+	 * Executes the following action commands
+	 * pre: none
+	 * post: the commands have been executed
+	 */
 	@Override
 	public void transferContext(Context other) {
 		super.transferContext(other);

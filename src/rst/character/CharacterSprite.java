@@ -1,3 +1,10 @@
+/*
+ * CharacterSprites.java
+ * Deals with character sprites
+ * Dmitry Tsarapkine, Kevin Kurra, Ryan Larkin
+ * June 14th, 2019
+ * ICS4U
+ */
 package rst.character;
 
 import java.awt.Graphics;
@@ -17,7 +24,11 @@ public class CharacterSprite extends Texture {
 	public CharacterSprite(String name, Animation up, Animation down, Animation right, Animation left) {
 		this(name, up, down, right, left, left, left, right, right);
 	}
-	
+	/**
+	 * Executes the following code
+	 * pre: none
+	 * post: the commands have been executed
+	 */
 	public CharacterSprite(String name, Animation up, Animation down, Animation right, Animation left, Animation leftUp, Animation leftDown, Animation rightUp, Animation rightDown)  {
 		super(name, down.getImage(0));
 		
@@ -32,25 +43,45 @@ public class CharacterSprite extends Texture {
 		animation[RIGHT_UP] = rightUp;
 		animation[RIGHT_DOWN] = rightDown;
 	}
-	
+	/**
+	 * Executes the following code
+	 * pre: none
+	 * post: the commands have been executed
+	 */
 	public void setFacing(int direction) {
 		this.direction = direction;
 	}
-	
+	/**
+	 * Executes the following code
+	 * pre: none
+	 * post: the commands have been executed
+	 */
 	public Animation getCurrentAnimation() {
 		return animation[direction];
 	}
-	
+	/**
+	 * Executes the following code
+	 * pre: none
+	 * post: the commands have been executed
+	 */
 	@Override
 	public void draw(Graphics g, int x, int y, int width, int height) {
 		animation[direction].draw(g, x, y, width, height);
 	}
-
+	/**
+	 * Executes the following code
+	 * pre: none
+	 * post: the commands have been executed
+	 */
 	@Override
 	public BufferedImage getImage() {
 		return animation[direction].getImage();
 	}
-	
+	/**
+	 * Executes the following code
+	 * pre: none
+	 * post: the commands have been executed
+	 */
 	public void setTime(int delay) {
 		for(Animation m : animation) {
 			m.setTime(delay);

@@ -1,3 +1,10 @@
+/*
+ * Player.java
+ * Defines a player
+ * Dmitry Tsarapkine, Kevin Kurra, Ryan Larkin
+ * June 14th, 2019
+ * ICS4U
+ */
 package rst.character;
 
 import java.awt.event.KeyEvent;
@@ -30,7 +37,11 @@ public class Player extends Character implements CameraFollowable {
 	private RenderPanel render;
 	
 	private long lastShot;
-
+	/**
+	 * Executes the following code
+	 * pre: none
+	 * post: the commands have been executed
+	 */
 	public Player() {
 		super("Connor", "Adams", Character.MALE, 0, 0, 99, 100, 75, 10, makeSprite());
 
@@ -41,7 +52,11 @@ public class Player extends Character implements CameraFollowable {
 		bounds.b.x = location.x + 20;
 		bounds.b.y = location.y + 40;
 	}
-	
+	/**
+	 * Executes the following code
+	 * pre: none
+	 * post: the commands have been executed
+	 */
 	private static CharacterSprite makeSprite() {
 		return new CharacterSprite("Connor Adams", 
 				new Animation(1000, AssetRegistry.getTextures().get("mainCharacterUp")),
@@ -49,12 +64,20 @@ public class Player extends Character implements CameraFollowable {
 				 new Animation(1000, AssetRegistry.getTextures().get("mainCharacterRight")),
 				 new Animation(1000, AssetRegistry.getTextures().get("mainCharacterLeft")));
 	}
-
+	/**
+	 * Executes the following code
+	 * pre: none
+	 * post: the commands have been executed
+	 */
 	@Override
 	public Coordinates getLocation() {
 		return location;
 	}
-
+	/**
+	 * Executes the following code
+	 * pre: none
+	 * post: the commands have been executed
+	 */
 	@Override
 	protected void updateLocation(Input input, Scene scene) {
 		if(hasPanels() && dialogue.isInDialogue()) {
@@ -239,27 +262,47 @@ public class Player extends Character implements CameraFollowable {
 			lastShot = System.nanoTime();
 		}
 	}
-
+	/**
+	 * Executes the following code
+	 * pre: none
+	 * post: the commands have been executed
+	 */
 	public void startDialogue(String dialogName) {
 		if(hasPanels()) {
 			dialogue.setDialogue(Dialogues.getDialogues().getDialogue(dialogName));
 		}
 	}
-	
+	/**
+	 * Executes the following code
+	 * pre: none
+	 * post: the commands have been executed
+	 */
 	@Override
 	public int getRenderPriority() {
 		return Integer.MIN_VALUE;
 	}
-	
+	/**
+	 * Executes the following code
+	 * pre: none
+	 * post: the commands have been executed
+	 */
 	public void setPanels(RenderPanel renderPanel, DialoguePanel dialoguePanel) {
 		this.dialogue = dialoguePanel;
 		this.render = renderPanel;
 	}
-	
+	/**
+	 * Executes the following code
+	 * pre: none
+	 * post: the commands have been executed
+	 */
 	public boolean hasPanels() {
 		return dialogue != null && render != null;
 	}
-	
+	/**
+	 * Executes the following code
+	 * pre: none
+	 * post: the commands have been executed
+	 */
 	public void setScene(Scene newScene, Coordinates loc) {
 		if(hasPanels()) {
 			this.location.x = loc.x;

@@ -1,3 +1,10 @@
+/*
+ * DialoguePanel.java
+ * Deals with the dialogue panel
+ * Dmitry Tsarapkine, Kevin Kurra, Ryan Larkin
+ * June 14th, 2019
+ * ICS4U
+ */
 package rst.dialogue;
 
 import java.awt.BorderLayout;
@@ -20,7 +27,11 @@ public class DialoguePanel extends JPanel implements ActionListener {
 	
 	private final JLabel text;
 	private final JButton option1, option2, option3, option4;
-	
+	/**
+	 * Executes the following code
+	 * pre: none
+	 * post: the commands have been executed
+	 */
 	public DialoguePanel() {
 		setLayout(new BorderLayout());
 		text = new JLabel("Dialogue...");
@@ -63,14 +74,22 @@ public class DialoguePanel extends JPanel implements ActionListener {
 		add(top, BorderLayout.NORTH);
 		add(bottom, BorderLayout.SOUTH);
 	}
-	
+	/**
+	 * Executes the following code
+	 * pre: none
+	 * post: the commands have been executed
+	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		int selection = Integer.parseInt(e.getActionCommand()) - 1;
 		
 		dialogue.execute(this, selection);
 	}
-	
+	/**
+	 * Executes the following code
+	 * pre: none
+	 * post: the commands have been executed
+	 */
 	public void setDialogue(DialogueEntry d) {
 		this.dialogue = d;
 		
@@ -110,15 +129,27 @@ public class DialoguePanel extends JPanel implements ActionListener {
 			}
 		}
 	}
-	
+	/**
+	 * Executes the following code
+	 * pre: none
+	 * post: the commands have been executed
+	 */
 	private static void setFont(JComponent field) {
 		field.setFont(AssetRegistry.getFonts().get("Montserrat-Regular").getFont().deriveFont(20.0f));
 	}
-	
+	/**
+	 * Executes the following code
+	 * pre: none
+	 * post: the commands have been executed
+	 */
 	public boolean isInDialogue() {
 		return dialogue != null;
 	}
-	
+	/**
+	 * Executes the following code
+	 * pre: none
+	 * post: the commands have been executed
+	 */
 	public String getDialogueName() {
 		return dialogue.getDialogue();
 	}

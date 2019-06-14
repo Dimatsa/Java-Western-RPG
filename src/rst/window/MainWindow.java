@@ -11,7 +11,11 @@ import rst.scene.Scenes;
 public class MainWindow {
 
 	private final JFrame frame;
-	
+	/**
+	 * Executes the following action commands
+	 * pre: none
+	 * post: the commands have been executed
+	 */
 	public MainWindow() {
 		frame = new JFrame("Shootout at Sweaty Post");
 		

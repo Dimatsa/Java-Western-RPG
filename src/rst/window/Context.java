@@ -15,7 +15,11 @@ public abstract class Context extends JPanel {
 	private final int extendedState;
 	
 	private JFrame current;
-	
+	/**
+	 * Executes the following action commands
+	 * pre: none
+	 * post: the commands have been executed
+	 */
 	public Context(boolean resizable, int x, int y, Dimension size, int extendedState) {
 		this.resizable = resizable;
 		this.x = x;
@@ -23,7 +27,11 @@ public abstract class Context extends JPanel {
 		this.size = size;
 		this.extendedState = extendedState;
 	}
-	
+	/**
+	 * Executes the following action commands
+	 * pre: none
+	 * post: the commands have been executed
+	 */
 	public void makeContextForFrame(JFrame frame) {
 		this.current = frame;
 		
@@ -34,7 +42,11 @@ public abstract class Context extends JPanel {
 		frame.setContentPane(this);
 		frame.revalidate();
 	}
-	
+	/**
+	 * Executes the following action commands
+	 * pre: none
+	 * post: the commands have been executed
+	 */
 	public void transferContext(Context other) {
 		if(current == null) {
 			System.err.println("Can't transfer without ownership!");
@@ -44,7 +56,11 @@ public abstract class Context extends JPanel {
 		
 		current = null;
 	}
-	
+	/**
+	 * Executes the following action commands
+	 * pre: none
+	 * post: the commands have been executed
+	 */
 	protected JFrame getCurrent() {
 		return current;
 	}

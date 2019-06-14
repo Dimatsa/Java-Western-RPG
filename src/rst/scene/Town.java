@@ -1,3 +1,10 @@
+/*
+ * Town.java
+ * Creates a town
+ * Dmitry Tsarapkine, Kevin Kurra, Ryan Larkin
+ * June 14th, 2019
+ * ICS4U
+ */
 package rst.scene;
 
 import java.util.Random;
@@ -12,7 +19,11 @@ import rst.render.InteractableBlock;
 import rst.render.SceneRenderable;
 
 public class Town extends Scene{
-
+	/**
+	 * Executes the following action commands
+	 * pre: none
+	 * post: the commands have been executed
+	 */
 	public Town() {	super("sand", "sand", 60, 40, AssetRegistry.getSounds().get("town"),
 					(CameraFollowable) Characters.getCharacters().getCharacter("Connor Adams"), "Town", Characters.getCharacters().getCharacter("Connor Adams"),
 					//Paths

@@ -1,3 +1,10 @@
+/*
+ * AABB.java
+ * Access align bounding box
+ * Dmitry Tsarapkine, Kevin Kurra, Ryan Larkin
+ * June 14th, 2019
+ * ICS4U
+ */
 package rst.render;
 
 public class AABB {
@@ -5,7 +12,11 @@ public class AABB {
 		public double toi;
 		public double xNormal, yNormal;
 	}
-
+	/**
+	 * Executes the following code
+	 * pre: none
+	 * post: the commands have been executed
+	 */
 	public static AABBResponse sweptAABB(Bounds a, Bounds b, double vX, double vY, double delta) {
 		double xInvEntry, yInvEntry;
 		double xInvExit, yInvExit;
