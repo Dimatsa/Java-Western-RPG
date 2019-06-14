@@ -49,7 +49,7 @@ public class RenderPanel extends JPanel {
 	}
 	
 	public void startPainting() {
-		currentScene = Scenes.getScenes().getScene("Town");
+		currentScene = Scenes.getScenes().getScene("Saloon");
 		currentScene.enterScene();
 	}
 	

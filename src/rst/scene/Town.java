@@ -14,7 +14,21 @@ public class Town extends Scene{
 
 	public Town() {	super("sand", "sand", 60, 40, AssetRegistry.getSounds().get("town"),
 					(CameraFollowable) Characters.getCharacters().getCharacter("Connor Adams"), "Town", Characters.getCharacters().getCharacter("Connor Adams"),
+					Characters.getCharacters().getCharacter("Ryan Larkin"),
 					Characters.getCharacters().getCharacter("Toby Larkin"),
+					Characters.getCharacters().getCharacter("Giancarlo Salvador"),
+					Characters.getCharacters().getCharacter("Steve Larkin"),
+					Characters.getCharacters().getCharacter("Flinston Stone"),
+					
+					Characters.getCharacters().getCharacter("Marshal Virgil Earp"),
+					Characters.getCharacters().getCharacter("Wyatt Earp"),
+					Characters.getCharacters().getCharacter("Morgan Earp"),
+					Characters.getCharacters().getCharacter("Doc Holliday Earp"),
+					
+					Characters.getCharacters().getCharacter("Slimy Dalton"),
+					Characters.getCharacters().getCharacter("Sneaky Dalton"),
+					Characters.getCharacters().getCharacter("Shifty Dalton"),
+					Characters.getCharacters().getCharacter("Snitchy Dalton"),
 					//Paths
 					new Block("path" , -20, 19),
 					new Block("path" , -20, 20),
@@ -582,7 +596,7 @@ public class Town extends Scene{
 
 					
 					//Cacti
-					new InteractableBlock(true, Block.GRID_SIZE * 60, Block.GRID_SIZE * 40, "cactus2", 5, 6).onInteract(new DialogueStarter("plotTest")),
+					new InteractableBlock(true, Block.GRID_SIZE * 60, Block.GRID_SIZE * 40, "cactus2", 31, 20).onInteract(new DialogueStarter("plotTest")),
 					
 					//Rails
 					new Block("railroad" , 50, -20),
@@ -668,7 +682,12 @@ public class Town extends Scene{
 					new Block("railroad" , 50, 60),
 					
 					//Portals
-					new ScenePortal(Block.GRID_SIZE * 60, Block.GRID_SIZE * 40, "greenArrowUp", 20, 20, "Saloon", 4, 4)
+					new ScenePortal(Block.GRID_SIZE * 60, Block.GRID_SIZE * 40, "greenArrowUp", 20, 20, "Bank", 4, 4),
+					new ScenePortal(Block.GRID_SIZE * 60, Block.GRID_SIZE * 40, "greenArrowUp", 22, 20, "Bar", 4, 4),
+					new ScenePortal(Block.GRID_SIZE * 60, Block.GRID_SIZE * 40, "greenArrowUp", 24, 20, "Hotel", 4, 4),
+					new ScenePortal(Block.GRID_SIZE * 60, Block.GRID_SIZE * 40, "greenArrowUp", 18, 20, "Jail", 4, 4),
+					new ScenePortal(Block.GRID_SIZE * 60, Block.GRID_SIZE * 40, "greenArrowUp", 28, 20, "RailwayStation", 4, 4),
+					new ScenePortal(Block.GRID_SIZE * 60, Block.GRID_SIZE * 40, "greenArrowUp", 16, 20, "Saloon", 4, 4)
 
 );
 	

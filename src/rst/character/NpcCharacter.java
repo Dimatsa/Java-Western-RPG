@@ -17,8 +17,17 @@ public class NpcCharacter extends Character {
 	private long lastShot;
 	
 	public NpcCharacter(String firstName, String lastName, int gender, int strength, double speed, int intelligence,
-			int drunkeness, double gunSpeed, int gunDamage, CharacterSprite sprite) {
+			int drunkeness, double gunSpeed, int gunDamage, CharacterSprite sprite, double x, double y) {
 		super(firstName, lastName, gender, strength, speed, intelligence, drunkeness, gunSpeed, gunDamage, sprite);
+		
+		this.location.x = x;
+		this.location.y = y;
+		bounds.a = new Coordinates();
+		bounds.a.x = location.x - 20;
+		bounds.a.y = location.y - 40;
+		bounds.b = new Coordinates();
+		bounds.b.x = location.x + 20;
+		bounds.b.y = location.y + 40;
 		
 		targets = new Queue<>();
 	}

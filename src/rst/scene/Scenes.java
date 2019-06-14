@@ -23,12 +23,17 @@ public class Scenes {
 	private Scene[] sceneItems;
 	
 	protected Scenes() {
-		sceneNames = new String[2];
-		sceneItems = new Scene[2];
+		sceneNames = new String[7];
+		sceneItems = new Scene[7];
 		
 		// Names must be sorted alphabetically (:
-		makeScene(new Saloon(), 0);
-		makeScene(new Town(), 1);
+		makeScene(new Bank(), 0);
+		makeScene(new Bar(), 1);
+		makeScene(new Hotel(), 2);
+		makeScene(new Jail(), 3);
+		makeScene(new RailwayStation(), 4);
+		makeScene(new Saloon(), 5);
+		makeScene(new Town(), 6);
 	}
 	
 	private void makeScene(Scene s, int num) {

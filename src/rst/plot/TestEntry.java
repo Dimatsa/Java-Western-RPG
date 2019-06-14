@@ -14,7 +14,7 @@ public class TestEntry extends PlotEntry {
 	@Override
 	public void onStart() {
 		((NpcCharacter)Characters.getCharacters().getCharacter("Toby Larkin")).setTarget(Characters.getCharacters().getCharacter("Connor Adams"));
-		((NpcCharacter)Characters.getCharacters().getCharacter("Toby Larkin")).setMovement(new CompoundNpcPath(new LinearNpcPath(600, 0, 10, 100), new LinearNpcPath(0, 600, 10, 100)));
+		((NpcCharacter)Characters.getCharacters().getCharacter("Toby Larkin")).setMovement(new CompoundNpcPath(new LinearNpcPath(-750, 0, 10, 100), new LinearNpcPath(0, -500, 10, 100)));
 	}
 
 	@Override
