@@ -28,7 +28,7 @@ public abstract class Character implements SceneRenderable, Interactable {
 	private final String lastName;
 	private final int gender;
 	private final CharacterSprite sprite;
-	private int hp = 100;
+	protected int hp = 10;
 	private int strength;
 	private double speed;
 	private int intelligence;
@@ -77,12 +77,13 @@ public abstract class Character implements SceneRenderable, Interactable {
 			//Retrieve female sounds for hurt1 and hurt 2
 		}
 	}
+	
 	/**
 	 * Executes the following code
 	 * pre: none
 	 * post: the commands have been executed
 	 */
-	public void damaged(int damage)
+	public void damaged(Scene scene, int damage)
 	{
 		if(damage > 0)
 		{
@@ -90,18 +91,14 @@ public abstract class Character implements SceneRenderable, Interactable {
 			playHurtSound();
 			if(hp < 1)
 			{
-				die();
+				die(scene);
 			}
 		}
 	}
-	/**
-	 * Executes the following code
-	 * pre: none
-	 * post: the commands have been executed
-	 */
-	public void die()
+	
+	public void die(Scene scene)
 	{
-		
+		scene.removeItem(this);
 	}
 	/**
 	 * Executes the following code
@@ -234,22 +231,25 @@ public abstract class Character implements SceneRenderable, Interactable {
 		double camX = camLoc.x - Renderable.STANDARD_WIDTH / 2.0;
 		double camY = camLoc.y - Renderable.STANDARD_HEIGHT / 2.0;
 		
-		double coordX = location.x;
-		double coordY = location.y;
+		int coordX = (int) ((location.x - 20 - camX) + 0.5);
+		int coordY = (int) ((location.y - 40 - camY) + 0.5);
 
-		sprite.setFacing(direction);
-		
-		Texture t;
-		
-		if(currentSpeed != 0) {
-			sprite.setTime((int) (100000/currentSpeed));
+		if(coordX + 40 >= 0 && coordX <= Renderable.STANDARD_WIDTH &&
+				coordY + 80 >= 0 && coordY <= Renderable.STANDARD_HEIGHT) {
+			sprite.setFacing(direction);
 			
-			t = sprite;
+			Texture t;
+			
+			if(currentSpeed != 0) {
+				sprite.setTime((int) (100000/currentSpeed));
+				
+				t = sprite;
+			}
+			else {
+				t = sprite.getCurrentAnimation().getTexture(0);
+			}
+			t.draw(g, coordX, coordY, 40, 80);
 		}
-		else {
-			t = sprite.getCurrentAnimation().getTexture(0);
-		}
-		t.draw(g, (int) ((coordX - 20 - camX) + 0.5), (int) ((coordY - 40 - camY) + 0.5), 40, 80);
 		
 		updateLocation(input, scene);
 	}
@@ -287,7 +287,7 @@ public abstract class Character implements SceneRenderable, Interactable {
 	 */
 	@Override
 	public void performHit(Scene scene) {
-		hp -= 5;
+		damaged(scene, 1);
 	}
 	/**
 	 * Executes the following code
@@ -303,4 +303,17 @@ public abstract class Character implements SceneRenderable, Interactable {
 	 */
 	@Override
 	public void performAction(Scene scene) {}
+	
+	public Coordinates getLocation() {
+		return location;
+	}
+	
+	public void setDirection(int direction) {
+		this.direction = direction;
+	}
+	
+	@Override
+	public boolean shouldDisplay() {
+		return false;
+	}
 }

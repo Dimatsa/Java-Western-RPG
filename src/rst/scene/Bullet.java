@@ -28,7 +28,6 @@ public class Bullet implements SceneRenderable, Interactable {
 	protected Bounds bounds;
 	protected final double vX, vY;
 	private final Impedance source;
-	boolean remove;
 	
 	private long lastTimeStamp = -1;
 	
@@ -69,10 +68,13 @@ public class Bullet implements SceneRenderable, Interactable {
 		double camX = camLoc.x - Renderable.STANDARD_WIDTH / 2.0;
 		double camY = camLoc.y - Renderable.STANDARD_HEIGHT / 2.0;
 		
-		double coordX = location.x;
-		double coordY = location.y;
+		int coordX = (int) ((location.x - 5 - camX) + 0.5);
+		int coordY = (int) ((location.y - 5 - camY) + 0.5);
 		
-		texture.draw(g, (int) ((coordX - 5 - camX) + 0.5), (int) ((coordY - 5 - camY) + 0.5), 10, 10);
+		if(coordX + 10 >= 0 && coordX <= Renderable.STANDARD_WIDTH &&
+				coordY + 10 >= 0 && coordY <= Renderable.STANDARD_HEIGHT) {
+			texture.draw(g, coordX, coordY, 10, 10);
+		}
 		
 		updateLocation(input, scene);
 	}
@@ -82,10 +84,6 @@ public class Bullet implements SceneRenderable, Interactable {
 	 * post: the commands have been executed
 	 */
 	private void updateLocation(Input input, Scene scene) {
-		if(remove) {
-			scene.removeItem(this);
-		}
-		
 		if (lastTimeStamp == -1) {
 			lastTimeStamp = System.nanoTime();
 		}
@@ -134,6 +132,7 @@ public class Bullet implements SceneRenderable, Interactable {
 		
 		boolean collision = false;
 		
+		
 		for(Impedance hit : scene.getHitboxes()) {
 			if(this != hit && source != hit) {
 				Impedance selected = null;
@@ -161,7 +160,7 @@ public class Bullet implements SceneRenderable, Interactable {
 		
 		if(collision || location.x == 5 + Renderable.STANDARD_WIDTH / 2 - scene.getWidth() / 2 || location.x == Renderable.STANDARD_WIDTH / 2 + scene.getWidth() / 2 - 5
 				|| location.y == 5 + Renderable.STANDARD_HEIGHT / 2 - scene.getHeight() / 2 || location.y == Renderable.STANDARD_HEIGHT / 2 + scene.getHeight() / 2 - 5) {
-			remove = true;
+			scene.removeItem(this);
 		}
 	}
 	/**
@@ -170,40 +169,7 @@ public class Bullet implements SceneRenderable, Interactable {
 	 * post: the commands have been executed
 	 */
 	public int getBulletDirection() {
-		double theta = Math.atan2(vY, vX) / Math.PI;
-		int direction;
-		
-		
-		if(theta < 0) {
-			theta += 2;
-		}
-		
-		if(0.125 < theta && theta <= 0.375) {
-			direction = CharacterSprite.RIGHT_DOWN;
-		}
-		else if(0.375 < theta && theta <= 0.625) {
-			direction = CharacterSprite.DOWN; 
-		}
-		else if(0.625 < theta && theta <= 0.875) {
-			direction = CharacterSprite.LEFT_DOWN;
-		}
-		else if(0.875 < theta && theta <= 1.125) {
-			direction = CharacterSprite.LEFT;
-		}
-		else if(1.125 < theta && theta <= 1.375) {
-			direction = CharacterSprite.LEFT_UP;
-		}
-		else if(1.375 < theta && theta <= 1.625) {
-			direction = CharacterSprite.UP;
-		}
-		else if(1.625 < theta && theta <= 1.875) {
-			direction = CharacterSprite.RIGHT_UP;
-		}
-		else {
-			direction = CharacterSprite.RIGHT;
-		}
-		
-		return direction;
+		return CharacterSprite.pointToDirection(vX, vY);
 	}
 	/**
 	 * Executes the following code
@@ -253,4 +219,9 @@ public class Bullet implements SceneRenderable, Interactable {
 	 */
 	@Override
 	public void performHit(Scene scene) {}
+
+	@Override
+	public boolean shouldDisplay() {
+		return false;
+	}
 }

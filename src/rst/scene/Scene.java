@@ -10,14 +10,15 @@ package rst.scene;
 import java.awt.Graphics2D;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
 import javax.sound.sampled.Clip;
 
 import rst.assets.Sound;
+import rst.datastructures.Sorts;
 import rst.plot.PlotLine;
 import rst.render.Block;
+import rst.render.Bounds;
 import rst.render.CameraFollowable;
 import rst.render.Coordinates;
 import rst.render.Input;
@@ -99,7 +100,9 @@ public abstract class Scene implements Renderable {
 		
 		editTerrain();
 		
-		Collections.sort(this.items);
+		if(!this.items.isEmpty()) {
+			Sorts.mergeSort(this.items);
+		}
 	}
 	/**
 	 * Executes the following code
@@ -110,11 +113,18 @@ public abstract class Scene implements Renderable {
 		items.add(item);
 		
 		if(item instanceof Impedance) {
-			impedances.add((Impedance) item);
-		}
-		
-		if(item instanceof Interactable) {
-			interactions.add((Interactable) item);
+			Bounds b = ((Impedance) item).getBounds();
+			
+			if(b.b.x >= Renderable.STANDARD_WIDTH / 2 - getWidth() / 2
+					&& b.a.x <= Renderable.STANDARD_WIDTH / 2 + getWidth() / 2 &&
+					b.b.y >= Renderable.STANDARD_HEIGHT / 2 - getHeight() / 2
+					&& b.a.y <= Renderable.STANDARD_HEIGHT / 2 + getHeight() / 2) {
+				impedances.add((Impedance) item);
+				
+				if(item instanceof Interactable) {
+					interactions.add((Interactable) item);
+				}
+			}
 		}
 	}
 	/**
@@ -181,9 +191,12 @@ public abstract class Scene implements Renderable {
 			this.addItem(item);
 		}
 		
+		if(add.size() > 0) {
+			Sorts.insertionSort(items);
+		}
+		
 		remove.removeIf(a -> true);
 		add.removeIf(a -> true);
-		
 	}
 	/**
 	 * Executes the following code
@@ -244,5 +257,9 @@ public abstract class Scene implements Renderable {
 	 */
 	public void removeItem(SceneRenderable item) {
 		remove.add(item);
+	}
+	
+	public boolean contains(SceneRenderable item) {
+		return items.contains(item);
 	}
 }

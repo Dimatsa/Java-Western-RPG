@@ -24,6 +24,7 @@ import rst.scene.Bullet;
 import rst.scene.Impedance;
 import rst.scene.Interactable;
 import rst.scene.Scene;
+import rst.scene.Scenes;
 
 public class Player extends Character implements CameraFollowable {
 
@@ -80,6 +81,8 @@ public class Player extends Character implements CameraFollowable {
 	 */
 	@Override
 	protected void updateLocation(Input input, Scene scene) {
+		dialogue.updatePlayer(this);
+		
 		if(hasPanels() && dialogue.isInDialogue()) {
 			lastTimeStamp = System.nanoTime();
 			return;
@@ -239,6 +242,8 @@ public class Player extends Character implements CameraFollowable {
 			}
 		}
 		
+		dialogue.setInteract(selected != null && selected.shouldDisplay());
+		
 		if(selected != null && input.isKeyDown(KeyEvent.VK_E) && !wasInteracting) {
 			selected.performAction(scene);
 		}
@@ -304,12 +309,42 @@ public class Player extends Character implements CameraFollowable {
 	 * post: the commands have been executed
 	 */
 	public void setScene(Scene newScene, Coordinates loc) {
+		setScene(newScene, loc.x, loc.y);
+	}
+	
+	public void setScene(Scene newScene, double x, double y) {
 		if(hasPanels()) {
-			this.location.x = loc.x;
-			this.location.y = loc.y;
+			render.setDead(false);
+			
+			if(!newScene.contains(this)) {
+				newScene.addItemRender(this);
+			}
+			
+			this.location.x = x;
+			this.location.y = y;
 			
 			render.setScene(newScene);
 		}
+	}
+	
+	@Override
+	public void die(Scene scene) {
+		super.die(scene);
 		
+		render.setDead(true);
+		
+		dialogue.updatePlayer(this);
+		startDialogue("death");
+	}
+	
+	public void respawn() {
+		setScene(Scenes.getScenes().getScene("Town"), 500, 200);
+		setDirection(CharacterSprite.DOWN);
+		hp = 10;
+	}
+	
+	public void win() {
+		render.setWin(true);
+		startDialogue("win");
 	}
 }

@@ -48,7 +48,13 @@ public class Block implements SceneRenderable {
 	public void render(Graphics2D g, Input input, Scene scene) {
 		Coordinates camLoc = scene.getCameraLocation();
 		
-		texture.draw(g, (int) ((Renderable.STANDARD_WIDTH - scene.getWidth() / 2 + x * GRID_SIZE - camLoc.x) + 0.5), (int) ((Renderable.STANDARD_HEIGHT - scene.getHeight() / 2 + y * GRID_SIZE - camLoc.y) + 0.5), GRID_SIZE * width, GRID_SIZE * height);
+		int coordX = (int) ((Renderable.STANDARD_WIDTH - scene.getWidth() / 2 + x * GRID_SIZE - camLoc.x) + 0.5);
+		int coordY = (int) ((Renderable.STANDARD_HEIGHT - scene.getHeight() / 2 + y * GRID_SIZE - camLoc.y) + 0.5);
+		
+		if(coordX + (GRID_SIZE * width) >= 0 && coordX <= Renderable.STANDARD_WIDTH &&
+				coordY + (GRID_SIZE * height) >= 0 && coordY <= Renderable.STANDARD_HEIGHT) {
+			texture.draw(g, coordX, coordY, GRID_SIZE * width, GRID_SIZE * height);
+		}
 	}
 	/**
 	 * Executes the following code

@@ -7,13 +7,10 @@
  */
 package rst.plot;
 
-import java.util.HashMap;
-import java.util.Map;
-/**
- * Executes the following code
- * pre: none
- * post: the commands have been executed
- */
+import rst.character.Characters;
+import rst.character.Player;
+import rst.datastructures.Stack;
+
 public class PlotLine {
 	private static PlotLine story;
 	
@@ -32,7 +29,7 @@ public class PlotLine {
 		return story;
 	}
 	
-	private final Map<String, PlotEntry> plots;
+	private final Stack<PlotEntry> plots;
 	
 	private PlotEntry lastPlot;
 	private PlotEntry current;
@@ -42,17 +39,18 @@ public class PlotLine {
 	 * post: the commands have been executed
 	 */
 	public PlotLine() {
-		this.plots = new HashMap<String, PlotEntry>();
+		this.plots = new Stack<>();
 		
-		plots.put("speak", new TestEntry(null));
+		plots.push(new TestEntry(null, "speak"));
 	}
+	
 	/**
 	 * Executes the following code
 	 * pre: none
 	 * post: the commands have been executed
-	 */
-	public PlotEntry getPlot(String name) {
-		return plots.get(name);
+	 */	
+	public PlotEntry getPlot() {
+		return plots.top();
 	}
 	/**
 	 * Executes the following code
@@ -70,7 +68,20 @@ public class PlotLine {
 		if(current != null) {
 			if(current.periodic()) {
 				current = null;
+				
+				if(plots.isEmpty()) {
+					((Player)Characters.getCharacters().getCharacter("Connor Adams")).win();
+				}
 			}
+		}
+	}
+	
+	public boolean activate(String name) {
+		if(plots != null && plots.top().getName().equals(name)) {
+			return plots.pop().activate();
+		}
+		else {
+			return false;
 		}
 	}
 	

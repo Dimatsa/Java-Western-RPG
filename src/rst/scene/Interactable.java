@@ -29,4 +29,6 @@ public interface Interactable extends Impedance {
 	 * post: the commands have been executed
 	 */
 	void performHit(Scene scene);
+	
+	boolean shouldDisplay();
 }
