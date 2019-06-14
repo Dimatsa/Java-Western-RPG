@@ -219,6 +219,8 @@ public class Player extends Character implements CameraFollowable {
 			}
 		}
 		
+		dialogue.setInteract(selected != null);
+		
 		if(selected != null && input.isKeyDown(KeyEvent.VK_E) && !wasInteracting) {
 			selected.performAction(scene);
 		}

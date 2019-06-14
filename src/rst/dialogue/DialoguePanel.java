@@ -147,6 +147,17 @@ public class DialoguePanel extends JPanel implements ActionListener {
 		}
 	}
 	
+	public void setInteract(boolean interact) {
+		if(!isInDialogue()) {
+			if(interact) {
+				text.setText("Press E to interact");
+			}
+			else {
+				text.setText(" ");
+			}
+		}
+	}
+	
 	private static void setFont(JComponent field) {
 		setFont(field, 20);
 	}
