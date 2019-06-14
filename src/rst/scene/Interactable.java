@@ -9,4 +9,6 @@ public interface Interactable extends Impedance {
 	void performContact(Scene scene);
 	
 	void performHit(Scene scene);
+	
+	boolean shouldDisplay();
 }

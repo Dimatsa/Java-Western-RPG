@@ -79,4 +79,8 @@ public class NpcCharacter extends Character {
 		this.path = path;
 		movementStart = -1;
 	}
+	
+	public boolean isTargetting(Character character) {
+		return !targets.isEmpty() && targets.front() == character;
+	}
 }

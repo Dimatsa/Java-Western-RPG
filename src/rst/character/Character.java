@@ -207,4 +207,9 @@ public abstract class Character implements SceneRenderable, Interactable {
 	public void setDirection(int direction) {
 		this.direction = direction;
 	}
+	
+	@Override
+	public boolean shouldDisplay() {
+		return false;
+	}
 }

@@ -172,4 +172,9 @@ public class Bullet implements SceneRenderable, Interactable {
 
 	@Override
 	public void performHit(Scene scene) {}
+
+	@Override
+	public boolean shouldDisplay() {
+		return false;
+	}
 }

@@ -1,5 +1,7 @@
 package rst.plot;
 
+import rst.character.Characters;
+import rst.character.Player;
 import rst.datastructures.Stack;
 
 public class PlotLine {
@@ -42,13 +44,17 @@ public class PlotLine {
 		if(current != null) {
 			if(current.periodic()) {
 				current = null;
+				
+				if(plots.isEmpty()) {
+					((Player)Characters.getCharacters().getCharacter("Connor Adams")).win();
+				}
 			}
 		}
 	}
 	
 	public boolean activate(String name) {
 		if(plots != null && plots.top().getName().equals(name)) {
-			return plots.top().activate();
+			return plots.pop().activate();
 		}
 		else {
 			return false;

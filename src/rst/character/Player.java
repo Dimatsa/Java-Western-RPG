@@ -219,7 +219,7 @@ public class Player extends Character implements CameraFollowable {
 			}
 		}
 		
-		dialogue.setInteract(selected != null);
+		dialogue.setInteract(selected != null && selected.shouldDisplay());
 		
 		if(selected != null && input.isKeyDown(KeyEvent.VK_E) && !wasInteracting) {
 			selected.performAction(scene);
@@ -298,5 +298,10 @@ public class Player extends Character implements CameraFollowable {
 		setScene(Scenes.getScenes().getScene("Town"), 500, 200);
 		setDirection(CharacterSprite.DOWN);
 		hp = 10;
+	}
+	
+	public void win() {
+		render.setWin(true);
+		startDialogue("win");
 	}
 }

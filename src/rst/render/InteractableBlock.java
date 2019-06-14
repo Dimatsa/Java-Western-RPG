@@ -53,4 +53,9 @@ public class InteractableBlock extends HittableBlock implements Interactable {
 			scene.removeItem(this);
 		}
 	}
+
+	@Override
+	public boolean shouldDisplay() {
+		return action != null;
+	}
 }

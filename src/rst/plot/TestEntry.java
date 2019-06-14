@@ -1,6 +1,5 @@
 package rst.plot;
 
-import rst.character.CharacterSprite;
 import rst.character.Characters;
 import rst.character.CompoundNpcPath;
 import rst.character.LinearNpcPath;
@@ -19,14 +18,15 @@ public class TestEntry extends PlotEntry {
 	}
 
 	@Override
-	public void onEnd() {
-		((NpcCharacter)Characters.getCharacters().getCharacter("Toby Larkin")).emptyTargets();;
-		Characters.getCharacters().getCharacter("Toby Larkin").setDirection(CharacterSprite.DOWN);
-	}
+	public void onEnd() {}
 
 	@Override
 	public boolean periodic() {
-		return (Characters.getCharacters().getCharacter("Connor Adams")).getHp() <= 0;
+		if(!((NpcCharacter)Characters.getCharacters().getCharacter("Toby Larkin")).isTargetting(Characters.getCharacters().getCharacter("Connor Adams"))) {
+			((NpcCharacter)Characters.getCharacters().getCharacter("Toby Larkin")).setTarget(Characters.getCharacters().getCharacter("Connor Adams"));
+		}
+		
+		return (Characters.getCharacters().getCharacter("Toby Larkin")).getHp() <= 0;
 	}
 
 }
