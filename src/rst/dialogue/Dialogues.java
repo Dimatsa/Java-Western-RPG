@@ -7,7 +7,6 @@ import java.util.function.Consumer;
 import rst.character.Characters;
 import rst.character.Player;
 import rst.plot.PlotLine;
-import rst.scene.Scenes;
 
 public class Dialogues {
 	private static Dialogues dialogues;
