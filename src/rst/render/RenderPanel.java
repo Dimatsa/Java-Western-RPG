@@ -31,6 +31,8 @@ public class RenderPanel extends JPanel {
 	private boolean debug;
 	private boolean wasDebug;
 	
+	private boolean death;
+	
 	public RenderPanel() {
 		setFocusable(true);
 		
@@ -75,6 +77,11 @@ public class RenderPanel extends JPanel {
 			currentScene.render(g, input);
 		}
 		
+		if(death) {
+			g.setColor(new Color(Color.RED.getRed(), Color.RED.getGreen(), Color.RED.getBlue(), 128));
+			g.fillRect(0, 0, Renderable.STANDARD_WIDTH, Renderable.STANDARD_HEIGHT);
+		}
+		
 		if(input.isKeyDown(KeyEvent.VK_F3) && !wasDebug) {
 			wasDebug = true;
 		}
@@ -115,5 +122,9 @@ public class RenderPanel extends JPanel {
 		currentScene.leaveScene();
 		this.currentScene = scene;
 		currentScene.enterScene();
+	}
+	
+	public void setDead(boolean death) {
+		this.death = death;
 	}
 }

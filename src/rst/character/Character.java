@@ -67,7 +67,7 @@ public abstract class Character implements SceneRenderable, Interactable {
 		}
 	}
 	
-	public void damaged(int damage)
+	public void damaged(Scene scene, int damage)
 	{
 		if(damage > 0)
 		{
@@ -75,14 +75,14 @@ public abstract class Character implements SceneRenderable, Interactable {
 			playHurtSound();
 			if(hp < 1)
 			{
-				die();
+				die(scene);
 			}
 		}
 	}
 	
-	public void die()
+	public void die(Scene scene)
 	{
-		
+		scene.removeItem(this);
 	}
 	
 	private void playHurtSound()
@@ -191,7 +191,7 @@ public abstract class Character implements SceneRenderable, Interactable {
 	
 	@Override
 	public void performHit(Scene scene) {
-		damaged(1);
+		damaged(scene, 1);
 	}
 	
 	@Override

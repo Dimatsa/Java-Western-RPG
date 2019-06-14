@@ -189,4 +189,8 @@ public abstract class Scene implements Renderable {
 	public void removeItem(SceneRenderable item) {
 		remove.add(item);
 	}
+	
+	public boolean contains(SceneRenderable item) {
+		return items.contains(item);
+	}
 }

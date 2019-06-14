@@ -269,18 +269,26 @@ public class Player extends Character implements CameraFollowable {
 	
 	public void setScene(Scene newScene, double x, double y) {
 		if(hasPanels()) {
+			render.setDead(false);
+			
+			if(!newScene.contains(this)) {
+				newScene.addItemRender(this);
+			}
+			
 			this.location.x = x;
 			this.location.y = y;
 			
 			render.setScene(newScene);
 		}
-		
 	}
 	
 	@Override
-	public void die() {
-		super.die();
+	public void die(Scene scene) {
+		super.die(scene);
 		
+		render.setDead(true);
+		
+		dialogue.updatePlayer(this);
 		startDialogue("death");
 	}
 	
