@@ -15,7 +15,7 @@ public class Jail extends Scene {
 				"Jail", Characters.getCharacters().getCharacter("Connor Adams"),
 				new InteractableBlock(true, Block.GRID_SIZE * 10, Block.GRID_SIZE * 10, "path", 0, 0).onInteract(new DialogueStarter("testDialogue")),
 				
-				new ScenePortal(Block.GRID_SIZE * 10, Block.GRID_SIZE * 10, "cactus1", -1, 2, "Town", 0, 0));
+				new ScenePortal(Block.GRID_SIZE * 10, Block.GRID_SIZE * 10, "cactus1", -1, 2, "Town", 37, 9));
 
 	}
 }

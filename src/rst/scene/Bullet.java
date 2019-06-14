@@ -29,6 +29,7 @@ public class Bullet implements SceneRenderable, Interactable {
 	public Bullet(double x, double y, double x2, double y2, Impedance source) {
 		texture = AssetRegistry.getTextures().get("cactus2");
 		this.source = source;
+		System.out.println(x2 + " " + y2);
 		
 		double scalar = SPEED / Math.hypot(x2 - x, y2 - y);
 		

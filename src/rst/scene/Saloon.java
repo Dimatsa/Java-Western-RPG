@@ -17,7 +17,7 @@ public class Saloon extends Scene {
 				
 				//Floor
 				
-				new ScenePortal(Block.GRID_SIZE * 10, Block.GRID_SIZE * 10, "cactus1", -1, 4, "Town", 0, 0));
+				new ScenePortal(Block.GRID_SIZE * 10, Block.GRID_SIZE * 10, "cactus1", -1, 4, "Town", 1143, 11));
 
 	}
 }

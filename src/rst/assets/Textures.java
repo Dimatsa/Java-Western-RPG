@@ -32,7 +32,8 @@ public class Textures extends AssetRegistry<Texture>{
 			"greenArrowLeft",
 			"greenArrowDown",
 			"fullheart",
-			"emptyheart"
+			"emptyheart",
+			"saloon"
 
 			
 	};

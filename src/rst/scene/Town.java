@@ -682,12 +682,18 @@ public class Town extends Scene{
 					new Block("railroad" , 50, 60),
 					
 					//Portals
-					new ScenePortal(Block.GRID_SIZE * 60, Block.GRID_SIZE * 40, "greenArrowUp", 20, 20, "Bank", 4, 4),
-					new ScenePortal(Block.GRID_SIZE * 60, Block.GRID_SIZE * 40, "greenArrowUp", 22, 20, "Bar", 4, 4),
-					new ScenePortal(Block.GRID_SIZE * 60, Block.GRID_SIZE * 40, "greenArrowUp", 24, 20, "Hotel", 4, 4),
-					new ScenePortal(Block.GRID_SIZE * 60, Block.GRID_SIZE * 40, "greenArrowUp", 18, 20, "Jail", 4, 4),
-					new ScenePortal(Block.GRID_SIZE * 60, Block.GRID_SIZE * 40, "greenArrowUp", 28, 20, "RailwayStation", 4, 4),
-					new ScenePortal(Block.GRID_SIZE * 60, Block.GRID_SIZE * 40, "greenArrowUp", 16, 20, "Saloon", 4, 4)
+					new Building(Block.GRID_SIZE * 60, Block.GRID_SIZE * 40, "saloon",  29, 5, 9, 6),
+					new Building(Block.GRID_SIZE * 60, Block.GRID_SIZE * 40, "saloon",  40, 5, 9, 6),
+					new Building(Block.GRID_SIZE * 60, Block.GRID_SIZE * 40, "saloon",  51, 5, 9, 6),
+					new Building(Block.GRID_SIZE * 60, Block.GRID_SIZE * 40, "saloon",  18, 6, 9, 6),
+					new Building(Block.GRID_SIZE * 60, Block.GRID_SIZE * 40, "saloon",  7, 5, 9, 6),
+					new Building(Block.GRID_SIZE * 60, Block.GRID_SIZE * 40, "saloon",  51, -2, 9, 6),
+					new ScenePortal(Block.GRID_SIZE * 60, Block.GRID_SIZE * 40, "greenArrowUp", 44, 10, "Bank", 4, 4),
+					new ScenePortal(Block.GRID_SIZE * 60, Block.GRID_SIZE * 40, "greenArrowUp", 55, 10, "Bar", 4, 4),
+					new ScenePortal(Block.GRID_SIZE * 60, Block.GRID_SIZE * 40, "greenArrowUp", 22, 11, "Hotel", 4, 4),
+					new ScenePortal(Block.GRID_SIZE * 60, Block.GRID_SIZE * 40, "greenArrowUp", 11, 10, "Jail", 4, 4),
+					new ScenePortal(Block.GRID_SIZE * 60, Block.GRID_SIZE * 40, "greenArrowUp", 55, 3, "RailwayStation", 4, 4),
+					new ScenePortal(Block.GRID_SIZE * 60, Block.GRID_SIZE * 40, "greenArrowUp", 33, 10, "Saloon", 4, 4)
 
 );
 	
